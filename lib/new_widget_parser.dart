@@ -23,7 +23,7 @@ abstract class NewWidgetParser {
         required String expectedType,
         bool allowNull = true}) {
     typeAssertions = typeAssertions?? TypeAssertions(widgetName);
-    typeAssertions!.typeAssertionDriver(map: map, attribute: attribute, expectedType: expectedType);
+    typeAssertions!.run(map: map, attribute: attribute, expectedType: expectedType);
   }
 
   TypeAssertions? typeAssertions;

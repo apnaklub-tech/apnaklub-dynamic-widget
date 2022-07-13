@@ -15,7 +15,7 @@ class TypeAssertions {
   /// [attribute] is key of [map] on which assertion has to be performed
   /// [expectedType] is expected runtime type
   /// [allowNull] should allow null for this [attribute]
-  void typeAssertionDriver(
+  void run(
       {required Map<String, dynamic> map,
       required String attribute,
       required String expectedType,
@@ -46,7 +46,39 @@ class TypeAssertions {
         condition = map[attribute] == null || map[attribute] is double;
         break;
       case TYPE_STRINGED_MAP:
-        condition = map[attribute] == null || map[attribute] is String || map[attribute] is Map;
+        condition = map[attribute] == null ||
+            map[attribute] is String ||
+            map[attribute] is Map;
+        break;
+      case TYPE_STRINGED_INT:
+        try {
+          if(map[attribute]==null) {
+            condition = true;
+          } else {
+            if (map[attribute] is String) {
+              int.parse(map[attribute]);
+            } else {
+              condition = map[attribute] is int;
+            }
+          }
+        } catch (e) {
+          condition = false;
+        }
+        break;
+      case TYPE_STRINGED_DOUBLE:
+        try {
+          if(map[attribute]==null) {
+            condition = true;
+          } else {
+            if (map[attribute] is String) {
+              double.parse(map[attribute]).toDouble();
+            } else {
+              condition = map[attribute] is double;
+            }
+          }
+        } catch (e) {
+          condition = false;
+        }
         break;
     }
     assert(condition, toWarning(msg));

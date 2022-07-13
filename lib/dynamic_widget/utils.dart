@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:dynamic_widget/assertions/assert_constants.dart';
+import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:flutter/widgets.dart';
@@ -349,57 +351,53 @@ Alignment? parseAlignment(String? alignmentString) {
 const double infinity = 9999999999;
 
 BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
+
   double minWidth = 0.0;
   double maxWidth = double.infinity;
   double minHeight = 0.0;
   double maxHeight = double.infinity;
 
+  var typeAssertions = TypeAssertions("BoxConstraints");
   if (map != null) {
-    if (map.containsKey('minWidth')) {
-      var minWidthValue = map['minWidth']?.toDouble();
 
-      if (minWidthValue != null) {
-        if (minWidthValue >= infinity) {
-          minWidth = double.infinity;
-        } else {
-          minWidth = minWidthValue;
-        }
+    typeAssertions.run(map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(map: map, attribute: 'maxWidth', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(map: map, attribute: 'minHeight', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
+
+    if (map.containsKey('minWidth') && map['minWidth'] != null) {
+      double minWidthValue = double.parse(map['minWidth']);
+      if (minWidthValue >= infinity) {
+        minWidth = double.infinity;
+      } else {
+        minWidth = minWidthValue;
       }
     }
 
-    if (map.containsKey('maxWidth')) {
-      var maxWidthValue = map['maxWidth']?.toDouble();
-
-      if (maxWidthValue != null) {
-        if (maxWidthValue >= infinity) {
-          maxWidth = double.infinity;
-        } else {
-          maxWidth = maxWidthValue;
-        }
+    if (map.containsKey('maxWidth') && map['maxWidth'] != null) {
+      var maxWidthValue = double.parse(map['maxWidth']);
+      if (maxWidthValue >= infinity) {
+        maxWidth = double.infinity;
+      } else {
+        maxWidth = maxWidthValue;
       }
     }
 
-    if (map.containsKey('minHeight')) {
-      var minHeightValue = map['minHeight']?.toDouble();
-
-      if (minHeightValue != null) {
-        if (minHeightValue >= infinity) {
-          minHeight = double.infinity;
-        } else {
-          minHeight = minHeightValue;
-        }
+    if (map.containsKey('minHeight') && map['minHeight'] != null) {
+      var minHeightValue = double.parse(map['minHeight']);
+      if (minHeightValue >= infinity) {
+        minHeight = double.infinity;
+      } else {
+        minHeight = minHeightValue;
       }
     }
 
-    if (map.containsKey('maxHeight')) {
-      var maxHeightValue = map['maxHeight']?.toDouble();
-
-      if (maxHeightValue != null) {
-        if (maxHeightValue >= infinity) {
-          maxHeight = double.infinity;
-        } else {
-          maxHeight = maxHeightValue;
-        }
+    if (map.containsKey('maxHeight') && map['maxHeight'] != null) {
+      var maxHeightValue = double.parse(map['maxHeight']);
+      if (maxHeightValue >= infinity) {
+        maxHeight = double.infinity;
+      } else {
+        maxHeight = maxHeightValue;
       }
     }
   }
