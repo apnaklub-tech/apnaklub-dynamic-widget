@@ -7,7 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
+import '../../new_widget_parser.dart';
+
 class ListViewWidgetParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {

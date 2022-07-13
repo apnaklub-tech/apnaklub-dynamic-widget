@@ -2,7 +2,14 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
+import '../../new_widget_parser.dart';
+
 class RaisedButtonParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
@@ -79,6 +86,11 @@ class RaisedButtonParser extends NewWidgetParser {
 }
 
 class ElevatedButtonParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
     var realWidget = widget as ElevatedButton;
@@ -172,6 +184,13 @@ class ElevatedButtonParser extends NewWidgetParser {
 }
 
 class TextButtonParser extends NewWidgetParser {
+
+
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
     var realWidget = widget as TextButton;

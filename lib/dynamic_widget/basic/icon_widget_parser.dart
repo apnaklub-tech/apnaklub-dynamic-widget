@@ -3,7 +3,14 @@ import 'package:dynamic_widget/dynamic_widget/icons_helper.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
+import '../../new_widget_parser.dart';
+
 class IconWidgetParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {

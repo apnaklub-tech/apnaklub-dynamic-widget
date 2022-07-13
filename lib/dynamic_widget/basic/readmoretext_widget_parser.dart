@@ -2,9 +2,15 @@ import 'package:dynamic_widget/apnaklub_widgets/readmoretext.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../new_widget_parser.dart';
 import '../utils.dart';
 
 class ReadMoreTextParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
     var readMoreText = widget as ReadMoreText;
