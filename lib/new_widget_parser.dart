@@ -1,5 +1,6 @@
 
-import 'package:dynamic_widget/constants.dart';
+import 'package:dynamic_widget/assertions/assert_constants.dart';
+import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dynamic_widget.dart';
@@ -21,47 +22,11 @@ abstract class NewWidgetParser {
         required String attribute,
         required String expectedType,
         bool allowNull = true}) {
-
-    if(!allowNull && map[attribute] == null) {
-      assert(false, toWarning("${widgetName}WidgetParser: For $attribute null is not allowed"));
-      return;
-    }
-
-    String msg =
-        "${widgetName}WidgetParser: Expecting $attribute as type of $expectedType but found ${map[attribute].runtimeType}";
-    bool condition = true;
-
-
-    switch (expectedType) {
-      case TYPE_STRING:
-        {
-          condition = map[attribute] == null || map[attribute] is String;
-          break;
-        }
-      case TYPE_MAP:
-        {
-          condition = allowNull
-              ? map[attribute] == null || map[attribute] is Map
-              : map[attribute] is Map;
-          break;
-        }
-      case TYPE_INT:
-        {
-          condition = allowNull
-              ? map[attribute] == null || map[attribute] is int
-              : map[attribute] is Map;
-          break;
-        }
-      case TYPE_DOUBLE:
-        {
-          condition = allowNull
-              ? map[attribute] == null || map[attribute] is double
-              : map[attribute] is Map;
-          break;
-        }
-    }
-    assert(condition, toWarning(msg));
+    typeAssertions = typeAssertions?? TypeAssertions(widgetName);
+    typeAssertions!.typeAssertionDriver(map: map, attribute: attribute, expectedType: expectedType);
   }
+
+  TypeAssertions? typeAssertions;
 
 
   /// called before parse method, do all assertions checks here. Call [typeAssertionDriver] function from this.
