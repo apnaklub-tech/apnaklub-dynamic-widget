@@ -126,21 +126,21 @@ class DynamicWidgetBuilder {
   static Widget? build(
       String json, BuildContext buildContext, EventListener? listener) {
     initDefaultParsersIfNess();
-    // try {
-    var map = jsonDecode(json);
-    if (listener == null) listener = EventListener();
-    listener.clickListener = listener.clickListener == null
-        ? NonResponseWidgetClickListener()
-        : listener.clickListener;
-    var widget = buildFromMap(map, buildContext, listener);
-    return widget;
-    // } catch (e) {
-    //   print('--' * 100);
-    //   print(json);
-    //   print(e.toString());
-    //   print('--' * 100);
-    //   throw e;
-    // }
+    try {
+      var map = jsonDecode(json);
+      if (listener == null) listener = EventListener();
+      listener.clickListener = listener.clickListener == null
+          ? NonResponseWidgetClickListener()
+          : listener.clickListener;
+      var widget = buildFromMap(map, buildContext, listener);
+      return widget;
+    } on FormatException catch (e) {
+      print("DynamicWidgetBuilder.build - Invalid JSON - $e");
+      throw e;
+    } catch (e) {
+      print(e);
+      throw e;
+    }
   }
 
   static Widget? buildFromMap(Map<String, dynamic>? map,
@@ -176,6 +176,8 @@ class DynamicWidgetBuilder {
     initDefaultParsersIfNess();
     List<Widget> rt = [];
     for (var value in values) {
+      assert(value is Map<String, dynamic>,
+          "Build Widgets: Expecting Map<String, dynamic> but found ${value.runtimeType} at index ${values.indexOf(value)}");
       var buildFromMap2 = buildFromMap(value, buildContext, listener);
       if (buildFromMap2 != null) {
         rt.add(buildFromMap2);
