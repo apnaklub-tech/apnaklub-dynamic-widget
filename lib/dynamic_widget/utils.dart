@@ -1220,6 +1220,12 @@ Map<String, dynamic>? exportBorderSide(BorderSide borderSide) {
 BorderSide parseBorderSide(Map<String, dynamic>? map) {
   if (map == null) return BorderSide.none;
   if (!map.containsKey('color')) return BorderSide.none;
+
+  var typeAssertions = TypeAssertions("BorderSide");
+  typeAssertions.run(map: map, attribute: 'color', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
+  typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_INT);
+
   return BorderSide(
     color: parseHexColor(map['color'])!,
     width: map['width'] ?? 0,
@@ -1254,6 +1260,10 @@ String exportRadius(Radius radius) {
 Radius parseRadius(String radius) {
   final values = radius.split(':');
   if (values.length == 2) {
+    var typeAssertions = TypeAssertions('Radius');
+    typeAssertions.assertDouble(values[0]);
+    typeAssertions.assertDouble(values[1]);
+
     return Radius.elliptical(double.parse(values[0]), double.parse(values[1]));
   } else {
     return Radius.zero;
