@@ -10,6 +10,48 @@ class TypeAssertions {
     return '\x1B[31m$s\x1B[0m';
   }
 
+  void assertInt(dynamic v) {
+    String msg =
+      "$widgetName: Expecting int as type, but found ${v.runtimeType}";
+
+  bool condition = true;
+    try {
+      if(v==null) {
+        condition = true;
+      } else {
+        if (v is String) {
+          int.parse(v);
+        } else {
+          condition = v is int;
+        }
+      }
+    } catch (e) {
+      condition = false;
+    }
+    assert(condition, toWarning(msg));
+  }
+
+  void assertDouble(dynamic v) {
+    String msg =
+        "$widgetName: Expecting double as type, but found ${v.runtimeType}";
+
+    bool condition = true;
+    try {
+      if(v==null) {
+        condition = true;
+      } else {
+        if (v is String) {
+          double.parse(v);
+        } else {
+          condition = v is double;
+        }
+      }
+    } catch (e) {
+      condition = false;
+    }
+    assert(condition, toWarning(msg));
+  }
+
   /// Assert type check of values of [map] at current level
   /// runs assertions on given [map].
   /// [attribute] is key of [map] on which assertion has to be performed

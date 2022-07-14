@@ -366,34 +366,31 @@ BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
     typeAssertions.run(map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
 
     if (map.containsKey('minWidth') && map['minWidth'] != null) {
-      double minWidthValue = double.parse(map['minWidth']);
+      double minWidthValue = double.parse(map['minWidth'].toString());
       if (minWidthValue >= infinity) {
         minWidth = double.infinity;
       } else {
         minWidth = minWidthValue;
       }
     }
-
     if (map.containsKey('maxWidth') && map['maxWidth'] != null) {
-      var maxWidthValue = double.parse(map['maxWidth']);
+      var maxWidthValue = double.parse(map['maxWidth'].toString());
       if (maxWidthValue >= infinity) {
         maxWidth = double.infinity;
       } else {
         maxWidth = maxWidthValue;
       }
     }
-
     if (map.containsKey('minHeight') && map['minHeight'] != null) {
-      var minHeightValue = double.parse(map['minHeight']);
+      var minHeightValue = double.parse(map['minHeight'].toString());
       if (minHeightValue >= infinity) {
         minHeight = double.infinity;
       } else {
         minHeight = minHeightValue;
       }
     }
-
     if (map.containsKey('maxHeight') && map['maxHeight'] != null) {
-      var maxHeightValue = double.parse(map['maxHeight']);
+      var maxHeightValue = double.parse(map['maxHeight'].toString());
       if (maxHeightValue >= infinity) {
         maxHeight = double.infinity;
       } else {
@@ -401,7 +398,6 @@ BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
       }
     }
   }
-
   return BoxConstraints(
     minWidth: minWidth,
     maxWidth: maxWidth,
@@ -417,6 +413,11 @@ EdgeInsetsGeometry? parseEdgeInsetsGeometry(String? edgeInsetsGeometryString) {
     return null;
   }
   var values = edgeInsetsGeometryString.split(",");
+
+  var typeAssertions = TypeAssertions("EdgeInsetsGeometry");
+  for(var value in values) {
+    typeAssertions.assertDouble(value);
+  }
   return EdgeInsets.only(
       left: double.parse(values[0]),
       top: double.parse(values[1]),
