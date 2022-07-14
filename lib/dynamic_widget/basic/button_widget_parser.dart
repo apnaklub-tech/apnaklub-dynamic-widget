@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,15 @@ import '../../new_widget_parser.dart';
 class RaisedButtonParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'disabledColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'disabledElevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'disabledTextColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'splashColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
@@ -88,7 +97,15 @@ class RaisedButtonParser extends NewWidgetParser {
 class ElevatedButtonParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
@@ -188,7 +205,15 @@ class TextButtonParser extends NewWidgetParser {
 
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
