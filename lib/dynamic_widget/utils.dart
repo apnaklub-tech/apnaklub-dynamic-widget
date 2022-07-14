@@ -275,6 +275,16 @@ TextStyle? parseTextStyle(Map<String, dynamic>? map) {
   if (map == null) {
     return null;
   }
+
+  var typeAssertions = TypeAssertions('TextStyle');
+  typeAssertions.run(map: map, attribute: 'color', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'debugLabel', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'decoration', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'fontFamily', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'fontSize', expectedType: TYPE_DOUBLE);
+  typeAssertions.run(map: map, attribute: 'fontWeight', expectedType: TYPE_STRING);
+  typeAssertions.run(map: map, attribute: 'fontStyle', expectedType: TYPE_STRING);
+
   //TODO: more properties need to be implemented, such as decorationColor, decorationStyle, wordSpacing and so on.
   String? color = map['color'];
   String? debugLabel = map['debugLabel'];
