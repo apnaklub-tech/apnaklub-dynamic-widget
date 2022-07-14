@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,18 @@ import '../../new_widget_parser.dart';
 class ListViewWidgetParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'reverse', expectedType: TYPE_BOOL);
+    typeAssertionDriver(map: map, attribute: 'shrinkWrap', expectedType: TYPE_BOOL);
+    typeAssertionDriver(map: map, attribute: 'cacheExtent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'itemExtent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'pageSize', expectedType: TYPE_INT);
+    typeAssertionDriver(map: map, attribute: 'loadMoreUrl', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'isDemo', expectedType: TYPE_BOOL);
+    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
+    typeAssertionDriver(map: map, attribute: 'tempChild', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'dataKey', expectedType: TYPE_STRING);
   }
 
   @override

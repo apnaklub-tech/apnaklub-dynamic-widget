@@ -85,6 +85,9 @@ class TypeAssertions {
       case TYPE_MAP:
         condition = map[attribute] == null || map[attribute] is Map;
         break;
+      case TYPE_LIST:
+        condition = map[attribute] == null || map[attribute] is List;
+        break;
       case TYPE_INT:
         condition = map[attribute] == null || map[attribute] is int;
         break;
