@@ -2,6 +2,7 @@ import 'assert_constants.dart';
 
 class TypeAssertions {
   String widgetName;
+  String subWidget = '';
 
   TypeAssertions(this.widgetName);
 
@@ -12,7 +13,7 @@ class TypeAssertions {
 
   void assertInt(dynamic v) {
     String msg =
-      "$widgetName: Expecting int as type, but found ${v.runtimeType}";
+      "$widgetName:$subWidget: Expecting int as type, but found ${v.runtimeType}";
 
   bool condition = true;
     try {
@@ -33,7 +34,7 @@ class TypeAssertions {
 
   void assertDouble(dynamic v) {
     String msg =
-        "$widgetName: Expecting double as type, but found ${v.runtimeType}";
+        "$widgetName:$subWidget: Expecting double as type, but found ${v.runtimeType}";
 
     bool condition = true;
     try {
@@ -66,15 +67,18 @@ class TypeAssertions {
       assert(
           false,
           toWarning(
-              "${widgetName}WidgetParser: For $attribute null is not allowed"));
+              "${widgetName}WidgetParser:$subWidget: For $attribute null is not allowed"));
       return;
     }
 
     String msg =
-        "${widgetName}WidgetParser: Expecting $attribute as type of $expectedType but found ${map[attribute].runtimeType}";
+        "${widgetName}WidgetParser:$subWidget: Expecting $attribute as type of $expectedType but found ${map[attribute].runtimeType}";
     bool condition = true;
 
     switch (expectedType) {
+      case TYPE_BOOL:
+        condition = map[attribute] == null || map[attribute] is bool;
+        break;
       case TYPE_STRING:
         condition = map[attribute] == null || map[attribute] is String;
         break;

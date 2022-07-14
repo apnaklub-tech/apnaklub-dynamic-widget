@@ -266,6 +266,15 @@ class EventListener {
   ClickListener? clickListener;
   Function(String, String)? onTextChange;
   Map<String, TextEditingController>? textEditingController;
+
+  EventListener(
+      {Map<String, TextEditingController>? textEditingController,
+      Function(String, String)? onTextChange})
+      : this.textEditingController = textEditingController ?? {} {
+    this.onTextChange = onTextChange ?? f;
+  }
+
+  void f(String s, String v) {}
 }
 
 class NonResponseWidgetClickListener implements ClickListener {
