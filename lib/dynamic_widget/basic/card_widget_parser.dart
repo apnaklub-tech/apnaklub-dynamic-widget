@@ -3,7 +3,14 @@ import 'package:dynamic_widget/dynamic_widget/common/rounded_rectangle_border_pa
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
+import '../../new_widget_parser.dart';
+
 class CardParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   String get widgetName => 'Card';
 

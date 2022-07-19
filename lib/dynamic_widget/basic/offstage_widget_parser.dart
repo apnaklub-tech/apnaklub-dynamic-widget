@@ -1,7 +1,14 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../new_widget_parser.dart';
+
 class OffstageWidgetParser extends NewWidgetParser {
+  @override
+  void assertionChecks(Map<String, dynamic> map) {
+    // TODO: implement assertionChecks
+  }
+
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
     Offstage realWidget = widget as Offstage;
