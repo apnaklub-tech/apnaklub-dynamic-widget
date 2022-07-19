@@ -779,6 +779,10 @@ Rect? parseRect(String? fromLTRBString) {
     return null;
   }
   var strings = fromLTRBString.split(',');
+  var typeAssertions = TypeAssertions("Rect");
+  strings.forEach((element) {
+    typeAssertions.assertDouble(element);
+  });
   return Rect.fromLTRB(double.parse(strings[0]), double.parse(strings[1]),
       double.parse(strings[2]), double.parse(strings[3]));
 }
