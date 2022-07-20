@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,11 @@ import '../../new_widget_parser.dart';
 class AppBarWidgetParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'title', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'leading', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'actions', expectedType: TYPE_LIST);
+    typeAssertionDriver(map: map, attribute: 'centerTitle', expectedType: TYPE_BOOL);
+    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutter/widgets.dart';
 
@@ -6,7 +7,8 @@ import '../../new_widget_parser.dart';
 class AspectRatioWidgetParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'aspectRatio', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
