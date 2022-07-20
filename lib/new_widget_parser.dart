@@ -28,10 +28,26 @@ abstract class NewWidgetParser {
 
   TypeAssertions? typeAssertions;
 
+  ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
+
 
   /// called before parse method, do all assertions checks here. Call [typeAssertionDriver] function from this.
   void assertionChecks(Map<String, dynamic> map);
 
+
+  Widget parseWithValueNotifier(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener? listener) {
+    assertionChecks(map);
+    valueNotifier = ValueNotifier(map);
+
+    String? id = map["id"];
+    if(id != null)
+      listener?.controller?[id] = valueNotifier;
+
+    return ValueListenableBuilder(valueListenable: valueNotifier, builder: (context, value, child) {
+      return parse(map, buildContext, listener);
+    });
+  }
 
   /// parse the json map into a flutter widget.
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,

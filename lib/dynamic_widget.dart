@@ -178,9 +178,7 @@ class DynamicWidgetBuilder {
       Map<String, dynamic> map,
       BuildContext buildContext,
       EventListener? listener) {
-    // assertion checks should be called before parse method of parser.
-    parser.assertionChecks(map);
-    return parser.parse(map, buildContext, listener);
+    return parser.parseWithValueNotifier(map, buildContext, listener);
   }
 
   static List<Widget> buildWidgets(List<dynamic> values,
@@ -268,15 +266,16 @@ abstract class ClickListener {
   void onClicked(String? event);
 }
 
+
 class EventListener {
   ClickListener? clickListener;
   Function(String, String)? onTextChange;
-  Map<String, TextEditingController>? textEditingController;
+  Map<String, ValueNotifier<Map<String, dynamic>>>? controller;
 
   EventListener(
-      {Map<String, TextEditingController>? textEditingController,
-      Function(String, String)? onTextChange})
-      : this.textEditingController = textEditingController ?? {} {
+      {Map<String, ValueNotifier<Map<String, dynamic>>>? controller,
+        Function(String, String)? onTextChange})
+      : this.controller = controller ?? {} {
     this.onTextChange = onTextChange ?? f;
   }
 
