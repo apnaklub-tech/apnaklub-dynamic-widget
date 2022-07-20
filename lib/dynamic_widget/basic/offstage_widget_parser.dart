@@ -10,12 +10,12 @@ class OffstageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     Offstage realWidget = widget as Offstage;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "offstage": realWidget.offstage,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

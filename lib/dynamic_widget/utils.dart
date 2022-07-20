@@ -315,7 +315,7 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
     "color": textStyle.color != null
         ? textStyle.color!.value.toRadixString(16)
         : null,
-    "debugLabel": textStyle.debugLabel,
+    //"debugLabel": textStyle.debugLabel.toString(),
     "decoration": exportTextDecoration(textStyle.decoration),
     "fontSize": textStyle.fontSize,
     "fontFamily": textStyle.fontFamily,
@@ -1113,14 +1113,14 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
 }
 
 Map<String, dynamic>? exportDropCap(
-    DropCap? dropCap, BuildContext? buildContext) {
+    DropCap? dropCap, BuildContext? buildContext, String id) {
   if (dropCap == null) {
     return null;
   }
   return <String, dynamic>{
     "width": dropCap.width,
     "height": dropCap.height,
-    "child": DynamicWidgetBuilder.export(dropCap.child, buildContext),
+    "child": DynamicWidgetBuilder.export(dropCap.child, buildContext, id),
   };
 }
 

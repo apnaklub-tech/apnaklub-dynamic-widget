@@ -62,23 +62,23 @@ class ListTileWidgetParser extends NewWidgetParser {
   String get widgetName => "ListTile";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as ListTile;
     var contentPadding = realWidget.contentPadding as EdgeInsets?;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "isThreeLine": realWidget.isThreeLine,
       "leading": realWidget.leading != null
-          ? DynamicWidgetBuilder.export(realWidget.leading, buildContext)
+          ? DynamicWidgetBuilder.export(realWidget.leading, buildContext, id)
           : null,
       "title": realWidget.title != null
-          ? DynamicWidgetBuilder.export(realWidget.title, buildContext)
+          ? DynamicWidgetBuilder.export(realWidget.title, buildContext, id)
           : null,
       "subtitle": realWidget.subtitle != null
-          ? DynamicWidgetBuilder.export(realWidget.subtitle, buildContext)
+          ? DynamicWidgetBuilder.export(realWidget.subtitle, buildContext, id)
           : null,
       "trailing": realWidget.trailing != null
-          ? DynamicWidgetBuilder.export(realWidget.trailing, buildContext)
+          ? DynamicWidgetBuilder.export(realWidget.trailing, buildContext, id)
           : null,
       "dense": realWidget.dense,
       "contentPadding": contentPadding != null

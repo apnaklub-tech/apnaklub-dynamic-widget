@@ -28,15 +28,15 @@ class PaddingWidgetParser extends NewWidgetParser {
   String get widgetName => "Padding";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Padding;
     var padding = realWidget.padding as EdgeInsets;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "padding": padding != null
           ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
           : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

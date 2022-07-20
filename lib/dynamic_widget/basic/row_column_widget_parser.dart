@@ -57,9 +57,9 @@ class RowWidgetParser extends NewWidgetParser {
   String get widgetName => "Row";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Row;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Row",
       "crossAxisAlignment":
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
@@ -78,7 +78,7 @@ class RowWidgetParser extends NewWidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
     };
   }
 
@@ -138,9 +138,9 @@ class ColumnWidgetParser extends NewWidgetParser {
   String get widgetName => "Column";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Column;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Column",
       "crossAxisAlignment":
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
@@ -159,7 +159,7 @@ class ColumnWidgetParser extends NewWidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
     };
   }
 

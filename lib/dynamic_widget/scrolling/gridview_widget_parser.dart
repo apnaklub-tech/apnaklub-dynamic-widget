@@ -70,7 +70,7 @@ class GridViewWidgetParser extends NewWidgetParser {
   String get widgetName => "GridView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as GridViewWidget;
     String scrollDirection = "vertical";
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -78,7 +78,7 @@ class GridViewWidgetParser extends NewWidgetParser {
     }
 
     var padding = realWidget._params.padding as EdgeInsets?;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "GridView",
       "scrollDirection": scrollDirection,
       "crossAxisCount": realWidget._params.crossAxisCount,
@@ -95,7 +95,7 @@ class GridViewWidgetParser extends NewWidgetParser {
       "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
       "isDemo": realWidget._params.isDemo ?? false,
       "children": DynamicWidgetBuilder.exportWidgets(
-          realWidget._params.children!, buildContext)
+          realWidget._params.children!, buildContext, id)
     };
   }
 

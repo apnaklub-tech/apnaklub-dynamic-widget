@@ -45,7 +45,7 @@ abstract class NewWidgetParser {
   String get widgetName;
 
   /// export the runtime widget to json
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext);
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id);
 
   /// match current widget
   Type get widgetType;

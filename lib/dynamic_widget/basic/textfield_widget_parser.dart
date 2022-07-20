@@ -47,11 +47,11 @@ class TextFieldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     TextField realWidget = widget as TextField;
     return {
       "type": widgetName,
-      "id": "put-unique-id-here",
+      "id": id,
       "inputDecoration": exportInputDecoration(realWidget.decoration),
       "textAlign": exportTextAlign(realWidget.textAlign),
       "cursorColor": exportHexColor(realWidget.cursorColor),

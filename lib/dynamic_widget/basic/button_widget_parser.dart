@@ -60,11 +60,11 @@ class RaisedButtonParser extends NewWidgetParser {
   String get widgetName => "RaisedButton";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "color": realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
@@ -86,7 +86,7 @@ class RaisedButtonParser extends NewWidgetParser {
       "textColor": realWidget.textColor != null
           ? realWidget.textColor!.value.toRadixString(16)
           : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 
@@ -109,7 +109,7 @@ class ElevatedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     var realWidget = widget as ElevatedButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -135,7 +135,7 @@ class ElevatedButtonParser extends NewWidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "foregroundColor": color != null ? color.value.toRadixString(16) : null,
       "backgroundColor": backgroundColor != null
@@ -148,7 +148,7 @@ class ElevatedButtonParser extends NewWidgetParser {
       "elevation": elevation,
       "padding": exportEdgeInsetsGeometry(edgeInsetsGeometry),
       "textStyle": exportTextStyle(textStyle2),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 
@@ -217,7 +217,7 @@ class TextButtonParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     var realWidget = widget as TextButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -243,7 +243,7 @@ class TextButtonParser extends NewWidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    var map = <String, dynamic>{
+    var map = <String, dynamic>{ "id":id,
       "type": widgetName,
       "foregroundColor": color != null ? color.value.toRadixString(16) : null,
       "backgroundColor": backgroundColor != null
@@ -256,7 +256,7 @@ class TextButtonParser extends NewWidgetParser {
       "elevation": elevation,
       "padding": exportEdgeInsetsGeometry(edgeInsetsGeometry),
       "textStyle": exportTextStyle(textStyle2),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
     return map;
   }

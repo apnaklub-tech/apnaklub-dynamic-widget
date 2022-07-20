@@ -74,12 +74,12 @@ class ContainerWidgetParser extends NewWidgetParser {
   String get widgetName => "Container";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Container;
     var padding = realWidget.padding as EdgeInsets?;
     var margin = realWidget.margin as EdgeInsets?;
     var constraints = realWidget.constraints;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "alignment": realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)
@@ -99,7 +99,7 @@ class ContainerWidgetParser extends NewWidgetParser {
           : null,
       "constraints":
           constraints != null ? exportConstraints(constraints) : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

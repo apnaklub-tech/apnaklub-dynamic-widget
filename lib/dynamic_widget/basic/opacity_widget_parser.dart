@@ -26,13 +26,13 @@ class OpacityWidgetParser extends NewWidgetParser {
   String get widgetName => "Opacity";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Opacity;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "opacity": realWidget.opacity,
       "alwaysIncludeSemantics": realWidget.alwaysIncludeSemantics,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

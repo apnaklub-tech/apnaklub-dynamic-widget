@@ -78,11 +78,11 @@ class TextWidgetParser extends NewWidgetParser {
   String get widgetName => "Text";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Text;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{
-        "type": "Text",
+      return <String, dynamic>{ "id":id,
+      "type": "Text",
         "data": realWidget.data,
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -97,8 +97,8 @@ class TextWidgetParser extends NewWidgetParser {
       };
     } else {
       var parser = TextSpanParser();
-      return <String, dynamic>{
-        "type": "Text",
+      return <String, dynamic>{ "id":id,
+      "type": "Text",
         "textSpan": parser.export(realWidget.textSpan as TextSpan),
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)

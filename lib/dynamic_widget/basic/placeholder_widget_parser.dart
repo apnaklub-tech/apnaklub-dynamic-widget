@@ -32,9 +32,9 @@ class PlaceholderWidgetParser extends NewWidgetParser {
   String get widgetName => "Placeholder";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Placeholder;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "color": realWidget.color != null
           ? realWidget.color.value.toRadixString(16)

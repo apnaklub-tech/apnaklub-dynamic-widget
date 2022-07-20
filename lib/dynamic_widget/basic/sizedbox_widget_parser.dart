@@ -32,7 +32,7 @@ class ExpandedSizedBoxWidgetParser extends NewWidgetParser {
   String get widgetName => "ExpandedSizedBox";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     throw UnimplementedError();
   }
 
@@ -64,13 +64,13 @@ class SizedBoxWidgetParser extends NewWidgetParser {
   String get widgetName => "SizedBox";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as SizedBox;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "SizedBox",
       "width": realWidget.width,
       "height": realWidget.height,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

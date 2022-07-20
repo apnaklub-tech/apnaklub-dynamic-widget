@@ -37,9 +37,9 @@ class IconWidgetParser extends NewWidgetParser {
   String get widgetName => "Icon";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Icon;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "data": exportIconGuessFavorMaterial(realWidget.icon),
       "size": realWidget.size,

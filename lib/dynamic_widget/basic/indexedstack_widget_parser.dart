@@ -30,9 +30,9 @@ class IndexedStackWidgetParser extends NewWidgetParser {
   String get widgetName => "IndexedStack";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as IndexedStack;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "index": realWidget.index,
       "alignment": realWidget.alignment != null
@@ -42,7 +42,7 @@ class IndexedStackWidgetParser extends NewWidgetParser {
           ? exportTextDirection(realWidget.textDirection)
           : null,
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id)
     };
   }
 

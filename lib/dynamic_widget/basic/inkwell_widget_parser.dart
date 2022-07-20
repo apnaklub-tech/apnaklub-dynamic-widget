@@ -41,12 +41,12 @@ class InkwellWidgetParser extends NewWidgetParser {
   String get widgetName => "Inkwell";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as InkWell;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 

@@ -50,11 +50,11 @@ class SelectableTextWidgetParser extends NewWidgetParser {
   String get widgetName => "SelectableText";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as SelectableText;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{
-        "type": "SelectableText",
+      return <String, dynamic>{ "id":id,
+      "type": "SelectableText",
         "data": realWidget.data,
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -65,8 +65,8 @@ class SelectableTextWidgetParser extends NewWidgetParser {
       };
     } else {
       var parser = SelectableTextSpanParser();
-      return <String, dynamic>{
-        "type": "SelectableText",
+      return <String, dynamic>{ "id":id,
+      "type": "SelectableText",
         "textSpan": parser.export(realWidget.textSpan!),
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)

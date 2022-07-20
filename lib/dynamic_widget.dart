@@ -50,6 +50,7 @@ import 'dynamic_widget/basic/rotatedbox_widget_parser.dart';
 import 'new_widget_parser.dart';
 
 class DynamicWidgetBuilder {
+
   static final Logger log = Logger('DynamicWidget');
 
   static final _parsers = [
@@ -198,11 +199,13 @@ class DynamicWidgetBuilder {
   }
 
   static Map<String, dynamic>? export(
-      Widget? widget, BuildContext? buildContext) {
+      Widget? widget, BuildContext? buildContext, String id, {bool shouldEscapeIdChange = false}) {
     initDefaultParsersIfNess();
     var parser = _findMatchedWidgetParserForExport(widget);
     if (parser != null) {
-      return parser.export(widget, buildContext);
+      if(!shouldEscapeIdChange)
+        id = id.isEmpty? "1" : "${id}_1";
+      return parser.export(widget, buildContext, id);
     }
     log.warning(
         "Can't find NewWidgetParser for Type ${widget.runtimeType} to export.");
@@ -210,11 +213,14 @@ class DynamicWidgetBuilder {
   }
 
   static List<Map<String, dynamic>?> exportWidgets(
-      List<Widget?> widgets, BuildContext? buildContext) {
+      List<Widget?> widgets, BuildContext? buildContext, String id) {
     initDefaultParsersIfNess();
     List<Map<String, dynamic>?> rt = [];
+    int i = 0;
     for (var widget in widgets) {
-      rt.add(export(widget, buildContext));
+      i++;
+      String temp = id.isEmpty? "1" : "${id}_$i";
+      rt.add(export(widget, buildContext, temp, shouldEscapeIdChange: true));
     }
     return rt;
   }

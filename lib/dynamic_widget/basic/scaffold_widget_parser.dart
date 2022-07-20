@@ -13,15 +13,15 @@ class ScaffoldWidgetParser extends NewWidgetParser {
 
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Scaffold;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
-      "body": DynamicWidgetBuilder.export(realWidget.body, buildContext),
-      "appBar": DynamicWidgetBuilder.export(realWidget.appBar, buildContext),
+      "body": DynamicWidgetBuilder.export(realWidget.body, buildContext, id),
+      "appBar": DynamicWidgetBuilder.export(realWidget.appBar, buildContext, id),
       "floatingActionButton": DynamicWidgetBuilder.export(
-          realWidget.floatingActionButton, buildContext),
+          realWidget.floatingActionButton, buildContext, id),
       "backgroundColor": realWidget.backgroundColor != null
           ? realWidget.backgroundColor!.value.toRadixString(16)
           : null,

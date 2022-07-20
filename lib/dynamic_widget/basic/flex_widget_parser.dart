@@ -44,9 +44,9 @@ class FlexWidgetParser extends NewWidgetParser {
   String get widgetName => "Flex";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Flex;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "direction":
           realWidget.direction == Axis.horizontal ? "horizontal" : "vertical",
@@ -67,7 +67,7 @@ class FlexWidgetParser extends NewWidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
     };
   }
 

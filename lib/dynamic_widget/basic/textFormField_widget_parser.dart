@@ -11,7 +11,7 @@ class TextFormFieldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     try {
       print("======================== 1");
       TextFormField textFormField = widget as TextFormField;
@@ -24,7 +24,7 @@ class TextFormFieldWidgetParser extends NewWidgetParser {
       print("======================== 3");
       return {
         "type": widgetName,
-        "id": "put-unique-id-here",
+        "id": id,
         "decoration": exportInputDecoration(realWidget.decoration),
         "textAlign": exportTextAlign(realWidget.textAlign),
         "cursorColor": exportHexColor(realWidget.cursorColor),

@@ -59,10 +59,10 @@ class DropCapTextParser extends NewWidgetParser {
   String get widgetName => "DropCapText";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as DropCapText;
     var dropCapPadding = realWidget.dropCapPadding;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "data": realWidget.data,
       "selectable": realWidget.selectable,
@@ -70,7 +70,7 @@ class DropCapTextParser extends NewWidgetParser {
       "style": exportTextStyle(realWidget.style),
       "dropCapStyle": exportTextStyle(realWidget.dropCapStyle),
       "textAlign": exportTextAlign(realWidget.textAlign),
-      "dropCap": exportDropCap(realWidget.dropCap, buildContext),
+      "dropCap": exportDropCap(realWidget.dropCap, buildContext, id),
       "dropCapPadding": dropCapPadding != null
           ? "${dropCapPadding.left},${dropCapPadding.top},${dropCapPadding.right},${dropCapPadding.bottom}"
           : null,

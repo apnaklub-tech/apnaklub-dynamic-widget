@@ -99,7 +99,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
   String get widgetName => "AssetImage";
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
     if (_isMatchAssetImageType(widget)) {
       var realWidget = widget as Image;
       late AssetImage assetImage;
@@ -109,7 +109,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
         var t = realWidget.image as ResizeImage;
         assetImage = t.imageProvider as AssetImage;
       }
-      return <String, dynamic>{
+      return <String, dynamic>{ "id":id,
         "type": widgetName,
         "name": assetImage.assetName,
         "semanticLabel": realWidget.semanticLabel,
@@ -149,8 +149,8 @@ class AssetImageWidgetParser extends NewWidgetParser {
         var t = realWidget.image as ResizeImage;
         exactAssetImage = t.imageProvider as ExactAssetImage;
       }
-      return <String, dynamic>{
-        "type": widgetName,
+      return <String, dynamic>{ "id":id,
+      "type": widgetName,
         "name": exactAssetImage.assetName,
         "semanticLabel": realWidget.semanticLabel,
         "excludeFromSemantics": realWidget.excludeFromSemantics,
@@ -311,7 +311,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
   String get widgetName => "NetworkImage";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Image;
     late NetworkImage networkImage;
     if (realWidget.image is NetworkImage) {
@@ -320,7 +320,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
       var t = realWidget.image as ResizeImage;
       networkImage = t.imageProvider as NetworkImage;
     }
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "src": networkImage.url,
       "semanticLabel": realWidget.semanticLabel,

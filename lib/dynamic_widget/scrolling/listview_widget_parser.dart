@@ -71,7 +71,7 @@ class ListViewWidgetParser extends NewWidgetParser {
   String get widgetName => "ListView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = "vertical";
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -80,8 +80,8 @@ class ListViewWidgetParser extends NewWidgetParser {
 
     var padding = realWidget._params.padding as EdgeInsets?;
     var tempChild =
-        DynamicWidgetBuilder.export(widget._params.tempChild, buildContext);
-    return <String, dynamic>{
+        DynamicWidgetBuilder.export(widget._params.tempChild, buildContext, id);
+    return <String, dynamic>{ "id":id,
       "type": "ListView",
       "scrollDirection": scrollDirection,
       "reverse": realWidget._params.reverse ?? false,
@@ -95,7 +95,7 @@ class ListViewWidgetParser extends NewWidgetParser {
       "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
       "isDemo": realWidget._params.isDemo ?? false,
       "children": DynamicWidgetBuilder.exportWidgets(
-          realWidget._params.children ?? [], buildContext),
+          realWidget._params.children ?? [], buildContext, id),
       "tempChild": tempChild,
       "dataKey": realWidget._params.dataKey,
     };

@@ -29,9 +29,9 @@ class PositionedWidgetParser extends NewWidgetParser {
   String get widgetName => "Positioned";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Positioned;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Positioned",
       "top": realWidget.top ?? null,
       "right": realWidget.right ?? null,
@@ -39,7 +39,7 @@ class PositionedWidgetParser extends NewWidgetParser {
       "left": realWidget.left ?? null,
       "width": realWidget.width ?? null,
       "height": realWidget.height ?? null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
   }
 
@@ -76,9 +76,9 @@ class StackWidgetParser extends NewWidgetParser {
   String get widgetName => "Stack";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Stack;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Stack",
       "alignment": realWidget.alignment is AlignmentDirectional
           ? exportAlignmentDirectional(
@@ -88,7 +88,7 @@ class StackWidgetParser extends NewWidgetParser {
       "fit": exportStackFit(realWidget.fit),
       "clipBehavior": exportClipBehavior(realWidget.clipBehavior),
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id)
     };
   }
 

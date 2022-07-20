@@ -16,7 +16,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as SingleChildScrollView;
     String scrollDirection = "vertical";
     if (realWidget.scrollDirection == Axis.horizontal) {
@@ -25,7 +25,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
 
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "scrollDirection": scrollDirection,
       "reverse": realWidget.reverse,
@@ -33,7 +33,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
           ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
           : null,
       "clipBehavior":exportClip(realWidget.clipBehavior),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id),
     };
   }
 

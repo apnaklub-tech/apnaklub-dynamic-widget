@@ -18,7 +18,7 @@ class CardParser extends NewWidgetParser {
   Type get widgetType => Card;
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     if (widget != null && widget is Card) {
       final EdgeInsets? margin = widget.margin as EdgeInsets?;
       final String? color =
@@ -36,7 +36,7 @@ class CardParser extends NewWidgetParser {
           : null;
       final bool semanticContainer = widget.semanticContainer;
       final Map<String, dynamic>? childMap =
-          DynamicWidgetBuilder.export(widget.child, buildContext);
+          DynamicWidgetBuilder.export(widget.child, buildContext, id);
       final Map<String, dynamic>? shape;
       if (widget.shape != null && widget.shape is RoundedRectangleBorder) {
         shape = RoundedRectangleBorderParser.export(
@@ -56,7 +56,7 @@ class CardParser extends NewWidgetParser {
       map['semanticContainer'] = semanticContainer;
       if (childMap != null) map['child'] = childMap;
       if (shape != null) map['shape'] = shape;
-
+      map["id"] = id;
       return map;
     }
   }

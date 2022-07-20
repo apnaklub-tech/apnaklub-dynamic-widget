@@ -27,14 +27,15 @@ class AlignWidgetParser extends NewWidgetParser {
   String get widgetName => "Align";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Align;
     Map<String, dynamic> json = {
+      "id": id,
       "type": widgetName,
       "alignment": exportAlignment(realWidget.alignment as Alignment?),
       "widthFactor": realWidget.widthFactor,
       "heightFactor": realWidget.heightFactor,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
     };
     return json;
   }

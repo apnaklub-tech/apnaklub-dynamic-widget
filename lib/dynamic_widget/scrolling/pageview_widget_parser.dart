@@ -31,20 +31,20 @@ class PageViewWidgetParser extends NewWidgetParser {
   String get widgetName => "PageView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as PageView;
     String scrollDirection = "vertical";
     if (realWidget.scrollDirection == Axis.horizontal) {
       scrollDirection = "horizontal";
     }
     var children = realWidget.childrenDelegate as SliverChildListDelegate;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "PageView",
       "scrollDirection": scrollDirection,
       "reverse": realWidget.reverse,
       "pageSnapping": realWidget.pageSnapping,
       "children":
-          DynamicWidgetBuilder.exportWidgets(children.children, buildContext)
+          DynamicWidgetBuilder.exportWidgets(children.children, buildContext, id)
     };
   }
 

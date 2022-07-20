@@ -11,21 +11,22 @@ class AppBarWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as AppBar;
-
+    id = id + "appbar";
     return <String, dynamic>{
+      "id":id,
       "type": widgetName,
       "title": realWidget.title == null
           ? null
-          : DynamicWidgetBuilder.export(realWidget.title, buildContext),
+          : DynamicWidgetBuilder.export(realWidget.title, buildContext, id),
       "leading": realWidget.leading == null
           ? null
-          : DynamicWidgetBuilder.export(realWidget.leading, buildContext),
+          : DynamicWidgetBuilder.export(realWidget.leading, buildContext, id),
       "actions": realWidget.actions == null
           ? null
           : DynamicWidgetBuilder.exportWidgets(
-              realWidget.actions!, buildContext),
+              realWidget.actions!, buildContext, id),
       "centerTitle": realWidget.centerTitle,
       "backgroundColor": realWidget.backgroundColor == null
           ? null

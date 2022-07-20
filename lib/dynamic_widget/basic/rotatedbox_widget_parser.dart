@@ -11,12 +11,12 @@ class RotatedBoxWidgetParser extends NewWidgetParser {
 
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as RotatedBox;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "quarterTurns": realWidget.quarterTurns,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id),
     };
   }
 
