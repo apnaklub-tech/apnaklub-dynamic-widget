@@ -1,12 +1,11 @@
-
 import 'package:dynamic_widget/assertions/type_assertions.dart';
-import 'package:dynamic_widget/dynamic_value_notifier.dart';
+import 'package:dynamic_widget/utils/dynamic_value_notifier.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dynamic_widget.dart';
 
 abstract class WidgetParser {
-
   /// convert a string to be logged in red color
   String toWarning(String s) {
     return '\x1B[31m$s\x1B[0m';
@@ -19,37 +18,38 @@ abstract class WidgetParser {
   /// [allowNull] should allow null for this [attribute]
   void typeAssertionDriver(
       {required Map<String, dynamic> map,
-        required String attribute,
-        required String expectedType,
-        bool allowNull = true}) {
-    typeAssertions = typeAssertions?? TypeAssertions(widgetName);
-    typeAssertions!.run(map: map, attribute: attribute, expectedType: expectedType);
+      required String attribute,
+      required String expectedType,
+      bool allowNull = true}) {
+    typeAssertions = typeAssertions ?? TypeAssertions(widgetName);
+    typeAssertions!
+        .run(map: map, attribute: attribute, expectedType: expectedType);
   }
 
   TypeAssertions? typeAssertions;
   DynamicValueNotifier valueNotifier = DynamicValueNotifier();
+  Map<String, State> map = {};
 
   /// called before parse method, do all assertions checks here. Call [typeAssertionDriver] function from this.
   void assertionChecks(Map<String, dynamic> map);
 
-
   /// parse the json map into a flutter widget.
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
-
     assertionChecks(map);
 
     String? id = map["id"];
 
-    if(id != null) {
+    if (id != null) {
       /// wrap widget inside [ValueListenableBuilder] only when their is ID
       /// because then only it is going to be accessible
       valueNotifier = DynamicValueNotifier(value: map);
-      listener?.controller?[id] = valueNotifier;
+      listener?.controller?[id]?.valueNotifier = valueNotifier;
       return ValueListenableBuilder(
-          valueListenable: valueNotifier, builder: (context, value, child) {
-        return build(map, buildContext, listener);
-      });
+          valueListenable: valueNotifier,
+          builder: (context, value, child) {
+            return build(map, buildContext, listener);
+          });
     }
     return build(map, buildContext, listener);
   }
@@ -65,7 +65,8 @@ abstract class WidgetParser {
   String get widgetName;
 
   /// export the runtime widget to json
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id);
+  Map<String, dynamic>? export(
+      Widget? widget, BuildContext? buildContext, String id);
 
   /// match current widget
   Type get widgetType;

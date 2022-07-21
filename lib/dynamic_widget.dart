@@ -2,7 +2,7 @@ library dynamic_widget;
 
 import 'dart:convert';
 
-import 'package:dynamic_widget/dynamic_value_notifier.dart';
+import 'package:dynamic_widget/utils/dynamic_value_notifier.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/align_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/appbar_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/aspectratio_widget_parser.dart';
@@ -42,6 +42,7 @@ import 'package:dynamic_widget/dynamic_widget/scrolling/gridview_widget_parser.d
 import 'package:dynamic_widget/dynamic_widget/scrolling/listview_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/pageview_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/single_child_scroll_view_widget_parser.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
@@ -238,34 +239,5 @@ class DynamicWidgetBuilder {
       print('--' * 100);
       throw e;
     }
-  }
-}
-
-abstract class ClickListener {
-  void onClicked(String? event);
-}
-
-class EventListener {
-  ClickListener? clickListener;
-  Function(String, String)? onTextChange;
-  Map<String, DynamicValueNotifier>? controller;
-
-  EventListener(
-      {Map<String, DynamicValueNotifier>? controller,
-        Function(String, String)? onTextChange})
-      : this.controller = controller ?? {} {
-    this.onTextChange = onTextChange ?? f;
-  }
-
-  void f(String s, String v) {}
-}
-
-class NonResponseWidgetClickListener implements ClickListener {
-  static final Logger log = Logger('NonResponseWidgetClickListener');
-
-  @override
-  void onClicked(String? event) {
-    log.info("receiver click event: " + event!);
-    print("receiver click event: " + event);
   }
 }

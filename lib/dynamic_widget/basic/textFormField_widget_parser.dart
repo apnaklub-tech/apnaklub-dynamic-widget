@@ -1,4 +1,5 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +42,11 @@ class TextFormFieldWidgetParser extends WidgetParser {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
+
+    listener?.controller?[id]?.textEditingController = textEditingController;
     try {
       return TextFormField(
-        //controller: listener.textEditingController![id],
+        controller: textEditingController,
         onChanged: (text) => listener?.onTextChange!(id, text),
 
         // Key? key,

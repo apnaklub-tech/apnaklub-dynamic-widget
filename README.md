@@ -60,7 +60,7 @@ Alternatively, your editor might support `flutter packages get`. Check the docs 
 #### 3. Import it
 Now in your Dart code, you can use:
 ```dart
-import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 ```
 
 ## Get started
@@ -68,6 +68,7 @@ You should use `DynamicWidgetBuilder().build` method to covert a json string int
 
 ```dart
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 class PreviewPage extends StatelessWidget {
   final String jsonString;
 
@@ -110,6 +111,7 @@ This is a RaisedButton widget parser.
 ```dart
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 
 class RaisedButtonParser extends WidgetParser {

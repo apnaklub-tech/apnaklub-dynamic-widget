@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:demo/widget_json.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/dynamic_widget_json_exportor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -573,7 +574,7 @@ class PreviewPage extends StatelessWidget {
 
   Future<Widget?> _buildWidget(BuildContext context) async {
     return DynamicWidgetBuilder.build(
-        jsonString, context, new DefaultClickListener());
+        jsonString, context, EventListener());
   }
 }
 

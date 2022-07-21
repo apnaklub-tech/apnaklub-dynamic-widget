@@ -1,5 +1,6 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -64,9 +65,9 @@ class TextFieldWidgetParser extends WidgetParser {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
-
+    listener?.controller?[id]?.textEditingController = textEditingController;
     return TextField(
-      //controller: listener.textEditingController![id],
+      controller: textEditingController,
       onChanged: (text) => listener?.onTextChange!= null? listener?.onTextChange!(id, text) : null,
 
       // Key? key,
