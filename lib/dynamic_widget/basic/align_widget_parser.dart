@@ -3,6 +3,7 @@ import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../assertions/assert_constants.dart';
 import '../../widget_parser.dart';
 
 class AlignWidgetParser extends WidgetParser {
