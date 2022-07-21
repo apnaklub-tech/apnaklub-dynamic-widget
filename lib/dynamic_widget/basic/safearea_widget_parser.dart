@@ -13,7 +13,7 @@ class SafeAreaWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     var left = map.containsKey("left") ? map["left"] : true;
     var right = map.containsKey("right") ? map["right"] : true;
     var top = map.containsKey("top") ? map["top"] : true;

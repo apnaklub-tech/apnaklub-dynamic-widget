@@ -40,7 +40,7 @@ class SingleChildScrollViewParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -50,6 +50,7 @@ class SingleChildScrollViewParser extends WidgetParser {
     var clipBehaviorString = map['clipBehavior'];
 
     try{
+      child = getChild(child, map, buildContext, listener);
       return SingleChildScrollView(
       reverse: map.containsKey('reverse') ? map['reverse'] : false,
       clipBehavior: parseClipBehavior(clipBehaviorString),
@@ -57,11 +58,7 @@ class SingleChildScrollViewParser extends WidgetParser {
           ? parseEdgeInsetsGeometry(map["padding"])
           : EdgeInsets.zero,
       scrollDirection: scrollDirection,
-      child: DynamicWidgetBuilder.buildFromMap(
-        map['child'],
-        buildContext,
-        listener,
-      ),
+      child: child
     );}catch(e){
       print('--' * 100);
       print(map);
@@ -69,6 +66,15 @@ class SingleChildScrollViewParser extends WidgetParser {
       print('--' * 100);
       throw e;
     }
+  }
+
+  Widget? getChild(Widget? child, Map<String, dynamic> map, BuildContext buildContext, EventListener listener) {
+    child = DynamicWidgetBuilder.buildFromMap(
+      map['child'],
+      buildContext,
+      listener,
+    );
+    return child;
   }
 
   @override

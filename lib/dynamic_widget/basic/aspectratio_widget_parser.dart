@@ -12,7 +12,7 @@ class AspectRatioWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return AspectRatio(
       aspectRatio: map["aspectRatio"]?.toDouble(),
       child: DynamicWidgetBuilder.buildFromMap(

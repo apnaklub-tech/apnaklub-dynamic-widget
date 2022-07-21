@@ -12,7 +12,7 @@ class OpacityWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Opacity(
       opacity: map["opacity"]?.toDouble(),
       alwaysIncludeSemantics: map.containsKey("alwaysIncludeSemantics")

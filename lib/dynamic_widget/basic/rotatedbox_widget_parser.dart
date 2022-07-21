@@ -23,7 +23,7 @@ class RotatedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return RotatedBox(
       quarterTurns: map['quarterTurns'],
       child: DynamicWidgetBuilder.buildFromMap(

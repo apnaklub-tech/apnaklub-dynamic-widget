@@ -13,7 +13,7 @@ class ClipRRectWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     var radius = map['borderRadius'].toString().split(",");
     double topLeft = double.parse(radius[0]);
     double topRight = double.parse(radius[1]);

@@ -13,7 +13,7 @@ class InkwellWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
     try {

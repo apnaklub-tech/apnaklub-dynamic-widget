@@ -48,14 +48,14 @@ abstract class WidgetParser {
       return ValueListenableBuilder<Map<String, dynamic>>(
           valueListenable: v,
           builder: (context, value, child) {
-            return build(value, buildContext, listener);
+            return build(value, buildContext, listener, child: child);
           });
     }
     return build(map, buildContext, listener);
   }
 
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener);
+      EventListener listener, {Widget? child});
 
   /// the widget type name for example:
   /// {"type" : "Text", "data" : "Denny"}

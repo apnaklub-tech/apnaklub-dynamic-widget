@@ -14,7 +14,7 @@ class ExpandedSizedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     try {
       return SizedBox.expand(
         child: DynamicWidgetBuilder.buildFromMap(
@@ -52,7 +52,7 @@ class SizedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return SizedBox(
       width: map["width"],
       height: map["height"],

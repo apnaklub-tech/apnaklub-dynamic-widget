@@ -56,7 +56,7 @@ class ReadMoreTextParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     // delimiter not implemented
     // delimiter = _kEllipsis + ' ', is default
 

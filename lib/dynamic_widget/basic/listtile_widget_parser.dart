@@ -14,7 +14,7 @@ class ListTileWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     bool isThreeLine =
         map.containsKey("isThreeLine") ? map["isThreeLine"] : false;
     EdgeInsetsGeometry? contentPadding = map.containsKey("contentPadding")

@@ -13,7 +13,7 @@ class WrapWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Wrap(
       direction: map.containsKey("direction")
           ? parseAxis(map["direction"])

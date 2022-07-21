@@ -12,7 +12,7 @@ class ExpandedWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Expanded(
       child: DynamicWidgetBuilder.buildFromMap(
           map["child"], buildContext, listener)!,

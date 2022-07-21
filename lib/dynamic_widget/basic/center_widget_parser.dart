@@ -12,7 +12,7 @@ class CenterWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Center(
       widthFactor: map.containsKey("widthFactor")
           ? map["widthFactor"]?.toDouble()

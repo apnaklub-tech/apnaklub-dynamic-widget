@@ -36,7 +36,7 @@ class AppBarWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     var appBarWidget = AppBar(
       title: map.containsKey("title")
           ? DynamicWidgetBuilder.buildFromMap(

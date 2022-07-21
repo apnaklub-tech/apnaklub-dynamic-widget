@@ -28,7 +28,7 @@ class LimitedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return LimitedBox(
       maxWidth: map.containsKey("maxWidth") ? map['maxWidth'] : double.infinity,
       maxHeight:

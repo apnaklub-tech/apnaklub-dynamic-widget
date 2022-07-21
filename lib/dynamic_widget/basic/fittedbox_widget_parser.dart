@@ -13,7 +13,7 @@ class FittedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return FittedBox(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!

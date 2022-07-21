@@ -29,7 +29,7 @@ class DividerWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Divider(
       height: map["height"],
       thickness: map["thickness"],

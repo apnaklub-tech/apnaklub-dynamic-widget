@@ -8,7 +8,7 @@ import '../../widget_parser.dart';
 class AlignWidgetParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Align(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!

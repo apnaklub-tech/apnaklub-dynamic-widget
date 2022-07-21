@@ -21,7 +21,7 @@ class RowWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     try {
       return Row(
         crossAxisAlignment: map.containsKey('crossAxisAlignment')
@@ -102,7 +102,7 @@ class ColumnWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     try {
       return Column(
         crossAxisAlignment: map.containsKey('crossAxisAlignment')

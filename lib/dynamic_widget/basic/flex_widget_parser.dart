@@ -13,7 +13,7 @@ class FlexWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Flex(
       direction: map.containsKey("direction")
           ? parseAxis(map["direction"])

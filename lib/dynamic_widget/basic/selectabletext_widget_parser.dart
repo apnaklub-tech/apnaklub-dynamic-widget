@@ -14,7 +14,7 @@ class SelectableTextWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     int? maxLines = map['maxLines'];

@@ -15,7 +15,7 @@ class PaddingWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Padding(
       padding: map.containsKey("padding")
           ? parseEdgeInsetsGeometry(map["padding"])!

@@ -22,7 +22,7 @@ class RaisedButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 
@@ -155,7 +155,7 @@ class ElevatedButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 
@@ -264,7 +264,7 @@ class TextButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 

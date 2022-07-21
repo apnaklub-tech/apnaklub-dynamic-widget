@@ -12,7 +12,7 @@ class BaselineWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Baseline(
       baseline: map["baseline"]?.toDouble(),
       baselineType: map["baselineType"] == "alphabetic"

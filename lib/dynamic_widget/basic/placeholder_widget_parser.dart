@@ -13,7 +13,7 @@ class PlaceholderWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     return Placeholder(
       color: map.containsKey('color')
           ? parseHexColor(map['color'])!

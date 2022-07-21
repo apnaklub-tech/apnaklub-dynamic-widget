@@ -16,7 +16,7 @@ class FlexibleWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener) {
+      EventListener listener, {Widget? child}) {
     Map<String, dynamic>? childMap = map['child'];
     Widget? child = childMap == null
         ? null
