@@ -41,6 +41,6 @@ class VisibilityWidgetParser extends NewWidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'visible', expectedType: TYPE_BOOL);
+    typeAssertionDriver(map: map, attribute: 'visible', expectedType: TYPE_BOOL, allowNull: false);
   }
 }
