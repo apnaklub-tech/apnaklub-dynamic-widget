@@ -10,7 +10,6 @@ import '../utils.dart';
 class ReadMoreTextParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'trimExpandedText', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'trimCollapsedText', expectedType: TYPE_STRING);

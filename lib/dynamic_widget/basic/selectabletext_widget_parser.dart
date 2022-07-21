@@ -1,3 +1,5 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
+import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
@@ -9,7 +11,12 @@ import '../../widget_parser.dart';
 class SelectableTextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'maxLines', expectedType: TYPE_INT);
+    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textSpan', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'style', expectedType: TYPE_MAP);
   }
 
   @override
@@ -89,6 +96,9 @@ class SelectableTextWidgetParser extends WidgetParser {
 
 class SelectableTextSpanParser {
   TextSpan parse(Map<String, dynamic> map, EventListener listener) {
+    var typeAssertions = TypeAssertions("SelectableTextSpanParser");
+    typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
+    typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_MAP);
     String? clickEvent = map.containsKey("recognizer") ? map['recognizer'] : "";
     var textSpan = TextSpan(
         text: map['text'],

@@ -4,11 +4,20 @@ import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
+import '../../assertions/assert_constants.dart';
 
 class WrapWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'direction', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'spacing', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'runAlignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'runSpacing', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'crossAxisAlignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'verticalDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
   }
 
   @override

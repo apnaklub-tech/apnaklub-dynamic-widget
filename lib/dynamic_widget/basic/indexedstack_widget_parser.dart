@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
@@ -8,7 +9,10 @@ import '../../widget_parser.dart';
 class IndexedStackWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'index', expectedType: TYPE_INT);
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
   }
 
   @override

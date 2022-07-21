@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
@@ -8,7 +9,13 @@ import '../../widget_parser.dart';
 class PositionedWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
+    typeAssertionDriver(map: map, attribute: 'top', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'right', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'bottom', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'left', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
   }
 
   @override
@@ -51,7 +58,11 @@ class PositionedWidgetParser extends WidgetParser {
 class StackWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: "alignment", expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: "textDirection", expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: "fit", expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: "clipBehavior", expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: "children", expectedType: TYPE_LIST);
   }
 
   @override

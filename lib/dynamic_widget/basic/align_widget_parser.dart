@@ -7,6 +7,14 @@ import '../../widget_parser.dart';
 
 class AlignWidgetParser extends WidgetParser {
   @override
+  void assertionChecks(Map<String, dynamic> map) {
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'widthFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'heightFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
+  }
+
+  @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Align(
@@ -43,9 +51,4 @@ class AlignWidgetParser extends WidgetParser {
 
   @override
   Type get widgetType => Align;
-
-  @override
-  void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
-  }
 }

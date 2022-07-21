@@ -1,3 +1,4 @@
+import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,11 @@ import '../utils.dart';
 class DividerWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    // TODO: implement assertionChecks
+    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'thickness', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'indent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'endIndent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
   }
 
   @override
