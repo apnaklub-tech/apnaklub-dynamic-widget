@@ -48,7 +48,7 @@ class TextFieldWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     TextField realWidget = widget as TextField;
     return {
       "type": widgetName,
@@ -61,7 +61,7 @@ class TextFieldWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();

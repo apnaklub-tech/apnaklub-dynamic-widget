@@ -1102,7 +1102,7 @@ String exportDropCapPosition(DropCapPosition? dropCapPosition) {
 }
 
 DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
-    EventListener? listener) {
+    EventListener listener) {
   if (map == null) {
     return null;
   }
@@ -1115,14 +1115,14 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
 }
 
 Map<String, dynamic>? exportDropCap(
-    DropCap? dropCap, BuildContext? buildContext, String id) {
+    DropCap? dropCap, BuildContext? buildContext, int id) {
   if (dropCap == null) {
     return null;
   }
   return <String, dynamic>{
     "width": dropCap.width,
     "height": dropCap.height,
-    "child": DynamicWidgetBuilder.export(dropCap.child, buildContext, id),
+    "child": DynamicWidgetBuilder.export(dropCap.child, buildContext),
   };
 }
 
@@ -1284,4 +1284,9 @@ Radius parseRadius(String radius) {
   } else {
     return Radius.zero;
   }
+}
+
+/// convert a string to be logged in red color
+String toWarning(String s) {
+  return '\x1B[31m$s\x1B[0m';
 }

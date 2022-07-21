@@ -25,7 +25,7 @@ class TextWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     String? overflow = map['overflow'];
@@ -79,12 +79,8 @@ class TextWidgetParser extends WidgetParser {
   String get widgetName => "Text";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Text;
-    String s = realWidget.data.toString();
-    if(s.length > 10)
-      s = s.substring(0, 10);
-    id = id + s;
     if (realWidget.textSpan == null) {
       return <String, dynamic>{ "id":id,
       "type": "Text",
@@ -127,7 +123,7 @@ class TextWidgetParser extends WidgetParser {
 }
 
 class TextSpanParser {
-  TextSpan parse(Map<String, dynamic> map, EventListener? listener) {
+  TextSpan parse(Map<String, dynamic> map, EventListener listener) {
 
     var typeAssertions = TypeAssertions('TextSpanParser');
     typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
@@ -160,7 +156,7 @@ class TextSpanParser {
   }
 
   void parseChildren(
-      TextSpan textSpan, List<dynamic> childrenSpan, EventListener? listener) {
+      TextSpan textSpan, List<dynamic> childrenSpan, EventListener listener) {
     for (var childmap in childrenSpan) {
       textSpan.children!.add(parse(childmap, listener));
     }

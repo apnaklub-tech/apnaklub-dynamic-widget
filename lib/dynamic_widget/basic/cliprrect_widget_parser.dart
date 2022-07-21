@@ -13,7 +13,7 @@ class ClipRRectWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var radius = map['borderRadius'].toString().split(",");
     double topLeft = double.parse(radius[0]);
     double topRight = double.parse(radius[1]);
@@ -36,7 +36,7 @@ class ClipRRectWidgetParser extends WidgetParser {
   String get widgetName => "ClipRRect";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ClipRRect;
     var borderRadius = realWidget.borderRadius!;
     return <String, dynamic>{ "id":id,
@@ -44,7 +44,7 @@ class ClipRRectWidgetParser extends WidgetParser {
       "borderRadius":
           "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
       "clipBehavior": exportClipBehavior(realWidget.clipBehavior),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

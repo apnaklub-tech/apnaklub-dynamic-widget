@@ -13,7 +13,7 @@ class PlaceholderWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Placeholder(
       color: map.containsKey('color')
           ? parseHexColor(map['color'])!
@@ -33,7 +33,7 @@ class PlaceholderWidgetParser extends WidgetParser {
   String get widgetName => "Placeholder";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Placeholder;
     return <String, dynamic>{ "id":id,
       "type": widgetName,

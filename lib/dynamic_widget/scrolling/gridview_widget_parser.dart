@@ -18,7 +18,7 @@ class GridViewWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -71,7 +71,7 @@ class GridViewWidgetParser extends WidgetParser {
   String get widgetName => "GridView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as GridViewWidget;
     String scrollDirection = "vertical";
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -96,7 +96,7 @@ class GridViewWidgetParser extends WidgetParser {
       "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
       "isDemo": realWidget._params.isDemo ?? false,
       "children": DynamicWidgetBuilder.exportWidgets(
-          realWidget._params.children!, buildContext, id)
+          realWidget._params.children!, buildContext)
     };
   }
 
@@ -154,7 +154,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
       var jsonString =
           _params.isDemo! ? await fakeRequest() : await doRequest();
       var buildWidgets = DynamicWidgetBuilder.buildWidgets(
-          jsonDecode(jsonString), widget._buildContext, null);
+          jsonDecode(jsonString), widget._buildContext, EventListener());
       setState(() {
         if (buildWidgets.isEmpty) {
           loadCompleted = true;

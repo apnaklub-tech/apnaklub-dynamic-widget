@@ -32,7 +32,7 @@ class ContainerWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     Alignment? alignment = parseAlignment(map['alignment']);
     Color? color = parseHexColor(map['color']);
     BoxConstraints? constraints = parseBoxConstraints(map['constraints']);
@@ -75,7 +75,7 @@ class ContainerWidgetParser extends WidgetParser {
   String get widgetName => "Container";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Container;
     var padding = realWidget.padding as EdgeInsets?;
     var margin = realWidget.margin as EdgeInsets?;
@@ -100,7 +100,7 @@ class ContainerWidgetParser extends WidgetParser {
           : null,
       "constraints":
           constraints != null ? exportConstraints(constraints) : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

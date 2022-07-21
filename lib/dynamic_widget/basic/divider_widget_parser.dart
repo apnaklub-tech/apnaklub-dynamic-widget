@@ -13,7 +13,7 @@ class DividerWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     Divider realWidget = widget as Divider;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
@@ -29,7 +29,7 @@ class DividerWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Divider(
       height: map["height"],
       thickness: map["thickness"],

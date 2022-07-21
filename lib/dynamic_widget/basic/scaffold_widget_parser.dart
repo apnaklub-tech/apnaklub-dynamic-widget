@@ -14,15 +14,15 @@ class ScaffoldWidgetParser extends WidgetParser {
 
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Scaffold;
 
     return <String, dynamic>{ "id":id,
       "type": widgetName,
-      "body": DynamicWidgetBuilder.export(realWidget.body, buildContext, id),
-      "appBar": DynamicWidgetBuilder.export(realWidget.appBar, buildContext, id),
+      "body": DynamicWidgetBuilder.export(realWidget.body, buildContext),
+      "appBar": DynamicWidgetBuilder.export(realWidget.appBar, buildContext),
       "floatingActionButton": DynamicWidgetBuilder.export(
-          realWidget.floatingActionButton, buildContext, id),
+          realWidget.floatingActionButton, buildContext),
       "backgroundColor": realWidget.backgroundColor != null
           ? realWidget.backgroundColor!.value.toRadixString(16)
           : null,
@@ -31,7 +31,7 @@ class ScaffoldWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var scaffoldWidget = Scaffold(
       appBar: map.containsKey("appBar")
           ? DynamicWidgetBuilder.buildFromMap(

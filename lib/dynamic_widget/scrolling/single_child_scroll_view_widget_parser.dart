@@ -17,7 +17,7 @@ class SingleChildScrollViewParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SingleChildScrollView;
     String scrollDirection = "vertical";
     if (realWidget.scrollDirection == Axis.horizontal) {
@@ -34,13 +34,13 @@ class SingleChildScrollViewParser extends WidgetParser {
           ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
           : null,
       "clipBehavior":exportClip(realWidget.clipBehavior),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id),
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
     };
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {

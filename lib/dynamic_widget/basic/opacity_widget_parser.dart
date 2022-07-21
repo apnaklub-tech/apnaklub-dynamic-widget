@@ -12,7 +12,7 @@ class OpacityWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Opacity(
       opacity: map["opacity"]?.toDouble(),
       alwaysIncludeSemantics: map.containsKey("alwaysIncludeSemantics")
@@ -27,13 +27,13 @@ class OpacityWidgetParser extends WidgetParser {
   String get widgetName => "Opacity";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Opacity;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
       "opacity": realWidget.opacity,
       "alwaysIncludeSemantics": realWidget.alwaysIncludeSemantics,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

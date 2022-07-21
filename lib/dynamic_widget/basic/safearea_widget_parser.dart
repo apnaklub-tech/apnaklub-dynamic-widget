@@ -13,7 +13,7 @@ class SafeAreaWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var left = map.containsKey("left") ? map["left"] : true;
     var right = map.containsKey("right") ? map["right"] : true;
     var top = map.containsKey("top") ? map["top"] : true;
@@ -40,7 +40,7 @@ class SafeAreaWidgetParser extends WidgetParser {
   String get widgetName => "SafeArea";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SafeArea;
     var minimum = realWidget.minimum;
     return <String, dynamic>{ "id":id,
@@ -53,7 +53,7 @@ class SafeAreaWidgetParser extends WidgetParser {
           ? "${minimum.left},${minimum.top},${minimum.right},${minimum.bottom}"
           : null,
       "maintainBottomViewPadding": realWidget.maintainBottomViewPadding,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

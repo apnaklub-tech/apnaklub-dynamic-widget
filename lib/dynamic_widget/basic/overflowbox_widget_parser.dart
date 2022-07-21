@@ -12,7 +12,7 @@ class OverflowBoxWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     OverflowBox realWidget = widget as OverflowBox;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
@@ -21,13 +21,13 @@ class OverflowBoxWidgetParser extends WidgetParser {
       "maxWidth": realWidget.maxWidth,
       "minHeight": realWidget.minHeight,
       "maxHeight": realWidget.maxHeight,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return OverflowBox(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!

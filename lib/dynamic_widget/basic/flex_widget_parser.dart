@@ -13,7 +13,7 @@ class FlexWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Flex(
       direction: map.containsKey("direction")
           ? parseAxis(map["direction"])
@@ -45,7 +45,7 @@ class FlexWidgetParser extends WidgetParser {
   String get widgetName => "Flex";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Flex;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
@@ -68,7 +68,7 @@ class FlexWidgetParser extends WidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }
 

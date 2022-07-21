@@ -22,7 +22,7 @@ class RaisedButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 
@@ -61,7 +61,7 @@ class RaisedButtonParser extends WidgetParser {
   String get widgetName => "RaisedButton";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
@@ -87,7 +87,7 @@ class RaisedButtonParser extends WidgetParser {
       "textColor": realWidget.textColor != null
           ? realWidget.textColor!.value.toRadixString(16)
           : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
@@ -149,13 +149,13 @@ class ElevatedButtonParser extends WidgetParser {
       "elevation": elevation,
       "padding": exportEdgeInsetsGeometry(edgeInsetsGeometry),
       "textStyle": exportTextStyle(textStyle2),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 
@@ -257,14 +257,14 @@ class TextButtonParser extends WidgetParser {
       "elevation": elevation,
       "padding": exportEdgeInsetsGeometry(edgeInsetsGeometry),
       "textStyle": exportTextStyle(textStyle2),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
     return map;
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
 

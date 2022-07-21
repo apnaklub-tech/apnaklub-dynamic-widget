@@ -21,7 +21,7 @@ class RowWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     try {
       return Row(
         crossAxisAlignment: map.containsKey('crossAxisAlignment')
@@ -58,7 +58,7 @@ class RowWidgetParser extends WidgetParser {
   String get widgetName => "Row";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Row;
     return <String, dynamic>{ "id":id,
       "type": "Row",
@@ -79,7 +79,7 @@ class RowWidgetParser extends WidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }
 
@@ -102,7 +102,7 @@ class ColumnWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     try {
       return Column(
         crossAxisAlignment: map.containsKey('crossAxisAlignment')
@@ -139,7 +139,7 @@ class ColumnWidgetParser extends WidgetParser {
   String get widgetName => "Column";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Column;
     return <String, dynamic>{ "id":id,
       "type": "Column",
@@ -160,7 +160,7 @@ class ColumnWidgetParser extends WidgetParser {
               ? "down"
               : "up",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id),
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }
 

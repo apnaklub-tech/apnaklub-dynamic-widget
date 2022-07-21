@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:demo/widget_json.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
-import 'package:dynamic_widget/dynamic_widget/basic/dynamic_widget_json_exportor.dart';
+import 'package:dynamic_widget/utils/dynamic_widget_json_exporter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -528,7 +528,7 @@ class PreviewPage extends StatelessWidget {
 
   PreviewPage(this.jsonString);
 
-  late DynamicWidgetJsonExportor? _exportor;
+  late DynamicWidgetJsonExporter? _exportor;
 
   @override
   Widget build(BuildContext context) {
@@ -548,7 +548,7 @@ class PreviewPage extends StatelessWidget {
                   print(snapshot.error);
                 }
                 return snapshot.hasData
-                    ? _exportor = DynamicWidgetJsonExportor(
+                    ? _exportor = DynamicWidgetJsonExporter(
                         child: snapshot.data,
                       )
                     : Text("Loading...");
@@ -607,7 +607,7 @@ class _JSONExporterState extends State<JSONExporter> {
           child: Column(
             children: [
               Expanded(
-                child: DynamicWidgetJsonExportor(
+                child: DynamicWidgetJsonExporter(
                   key: key,
                   child: Stack(
                     alignment: Alignment.topLeft,
@@ -627,7 +627,7 @@ class _JSONExporterState extends State<JSONExporter> {
                   child: Text("Export"),
                   onPressed: () {
                     var exportor =
-                        key.currentWidget as DynamicWidgetJsonExportor;
+                        key.currentWidget as DynamicWidgetJsonExporter;
                     var exportJsonString = exportor.exportJsonString();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:

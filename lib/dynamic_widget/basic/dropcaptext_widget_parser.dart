@@ -15,7 +15,7 @@ class DropCapTextParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return DropCapText(
       data: map.containsKey('data') ? map['data'] : null,
       selectable: map.containsKey('selectable') ? map['selectable'] : false,
@@ -60,7 +60,7 @@ class DropCapTextParser extends WidgetParser {
   String get widgetName => "DropCapText";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as DropCapText;
     var dropCapPadding = realWidget.dropCapPadding;
     return <String, dynamic>{ "id":id,

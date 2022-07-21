@@ -8,7 +8,7 @@ import '../../widget_parser.dart';
 class AlignWidgetParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Align(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!
@@ -28,7 +28,7 @@ class AlignWidgetParser extends WidgetParser {
   String get widgetName => "Align";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Align;
     Map<String, dynamic> json = {
       "id": id,
@@ -36,7 +36,7 @@ class AlignWidgetParser extends WidgetParser {
       "alignment": exportAlignment(realWidget.alignment as Alignment?),
       "widthFactor": realWidget.widthFactor,
       "heightFactor": realWidget.heightFactor,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
     return json;
   }

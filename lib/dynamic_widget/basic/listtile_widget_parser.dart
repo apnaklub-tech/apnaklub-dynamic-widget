@@ -14,7 +14,7 @@ class ListTileWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     bool isThreeLine =
         map.containsKey("isThreeLine") ? map["isThreeLine"] : false;
     EdgeInsetsGeometry? contentPadding = map.containsKey("contentPadding")
@@ -63,23 +63,23 @@ class ListTileWidgetParser extends WidgetParser {
   String get widgetName => "ListTile";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ListTile;
     var contentPadding = realWidget.contentPadding as EdgeInsets?;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
       "isThreeLine": realWidget.isThreeLine,
       "leading": realWidget.leading != null
-          ? DynamicWidgetBuilder.export(realWidget.leading, buildContext, id)
+          ? DynamicWidgetBuilder.export(realWidget.leading, buildContext)
           : null,
       "title": realWidget.title != null
-          ? DynamicWidgetBuilder.export(realWidget.title, buildContext, id)
+          ? DynamicWidgetBuilder.export(realWidget.title, buildContext)
           : null,
       "subtitle": realWidget.subtitle != null
-          ? DynamicWidgetBuilder.export(realWidget.subtitle, buildContext, id)
+          ? DynamicWidgetBuilder.export(realWidget.subtitle, buildContext)
           : null,
       "trailing": realWidget.trailing != null
-          ? DynamicWidgetBuilder.export(realWidget.trailing, buildContext, id)
+          ? DynamicWidgetBuilder.export(realWidget.trailing, buildContext)
           : null,
       "dense": realWidget.dense,
       "contentPadding": contentPadding != null

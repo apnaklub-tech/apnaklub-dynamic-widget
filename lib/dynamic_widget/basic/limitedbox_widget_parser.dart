@@ -12,7 +12,7 @@ class LimitedBoxWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     LimitedBox realWidget = widget as LimitedBox;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
@@ -22,13 +22,13 @@ class LimitedBoxWidgetParser extends WidgetParser {
       "maxHeight": realWidget.maxHeight == double.infinity
           ? infinity
           : realWidget.maxHeight,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return LimitedBox(
       maxWidth: map.containsKey("maxWidth") ? map['maxWidth'] : double.infinity,
       maxHeight:

@@ -37,7 +37,7 @@ class CardParser extends WidgetParser {
           : null;
       final bool semanticContainer = widget.semanticContainer;
       final Map<String, dynamic>? childMap =
-          DynamicWidgetBuilder.export(widget.child, buildContext, id);
+          DynamicWidgetBuilder.export(widget.child, buildContext);
       final Map<String, dynamic>? shape;
       if (widget.shape != null && widget.shape is RoundedRectangleBorder) {
         shape = RoundedRectangleBorderParser.export(
@@ -64,7 +64,7 @@ class CardParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     final Color? color = parseHexColor(map['color']);
     final Color? shadowColor = parseHexColor(map['shadowColor']);
     final double? elevation = map['elevation'];

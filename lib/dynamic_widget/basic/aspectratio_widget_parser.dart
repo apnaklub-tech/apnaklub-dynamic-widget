@@ -12,7 +12,7 @@ class AspectRatioWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return AspectRatio(
       aspectRatio: map["aspectRatio"]?.toDouble(),
       child: DynamicWidgetBuilder.buildFromMap(
@@ -24,12 +24,12 @@ class AspectRatioWidgetParser extends WidgetParser {
   String get widgetName => "AspectRatio";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as AspectRatio;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
       "aspectRatio": realWidget.aspectRatio,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

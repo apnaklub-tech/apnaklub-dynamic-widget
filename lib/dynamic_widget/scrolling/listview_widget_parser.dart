@@ -30,7 +30,7 @@ class ListViewWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -72,7 +72,7 @@ class ListViewWidgetParser extends WidgetParser {
   String get widgetName => "ListView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = "vertical";
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -81,7 +81,7 @@ class ListViewWidgetParser extends WidgetParser {
 
     var padding = realWidget._params.padding as EdgeInsets?;
     var tempChild =
-        DynamicWidgetBuilder.export(widget._params.tempChild, buildContext, id);
+        DynamicWidgetBuilder.export(widget._params.tempChild, buildContext);
     return <String, dynamic>{ "id":id,
       "type": "ListView",
       "scrollDirection": scrollDirection,
@@ -96,7 +96,7 @@ class ListViewWidgetParser extends WidgetParser {
       "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
       "isDemo": realWidget._params.isDemo ?? false,
       "children": DynamicWidgetBuilder.exportWidgets(
-          realWidget._params.children ?? [], buildContext, id),
+          realWidget._params.children ?? [], buildContext),
       "tempChild": tempChild,
       "dataKey": realWidget._params.dataKey,
     };
@@ -155,7 +155,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       var jsonString =
           _params.isDemo! ? await fakeRequest() : await doRequest();
       var buildWidgets = DynamicWidgetBuilder.buildWidgets(
-          jsonDecode(jsonString), widget._buildContext, null);
+          jsonDecode(jsonString), widget._buildContext, EventListener());
       setState(() {
         if (buildWidgets.isEmpty) {
           loadCompleted = true;

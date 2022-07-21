@@ -30,7 +30,7 @@ class AssetImageWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String name = map['name'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -100,7 +100,7 @@ class AssetImageWidgetParser extends WidgetParser {
   String get widgetName => "AssetImage";
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     if (_isMatchAssetImageType(widget)) {
       var realWidget = widget as Image;
       late AssetImage assetImage;
@@ -242,7 +242,7 @@ class NetworkImageWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String src = map['src'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -312,7 +312,7 @@ class NetworkImageWidgetParser extends WidgetParser {
   String get widgetName => "NetworkImage";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Image;
     late NetworkImage networkImage;
     if (realWidget.image is NetworkImage) {

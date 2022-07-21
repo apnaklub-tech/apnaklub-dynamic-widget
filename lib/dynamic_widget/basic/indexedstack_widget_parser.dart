@@ -13,7 +13,7 @@ class IndexedStackWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return IndexedStack(
       index: map.containsKey("index") ? map["index"] : 0,
       alignment: map.containsKey("alignment")
@@ -31,7 +31,7 @@ class IndexedStackWidgetParser extends WidgetParser {
   String get widgetName => "IndexedStack";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as IndexedStack;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
@@ -43,7 +43,7 @@ class IndexedStackWidgetParser extends WidgetParser {
           ? exportTextDirection(realWidget.textDirection)
           : null,
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id)
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
     };
   }
 

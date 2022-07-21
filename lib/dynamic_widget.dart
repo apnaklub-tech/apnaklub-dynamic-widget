@@ -52,8 +52,9 @@ import 'dynamic_widget/basic/rotatedbox_widget_parser.dart';
 import 'widget_parser.dart';
 
 class DynamicWidgetBuilder {
-
   static final Logger log = Logger('DynamicWidget');
+
+  static int mID = 0;
 
   static final _parsers = [
     ContainerWidgetParser(),
@@ -128,7 +129,7 @@ class DynamicWidgetBuilder {
   }
 
   static Widget? build(
-      String json, BuildContext buildContext, EventListener? listener) {
+      String json, BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     try {
       var map = jsonDecode(json);
@@ -148,7 +149,7 @@ class DynamicWidgetBuilder {
   }
 
   static Widget? buildFromMap(Map<String, dynamic>? map,
-      BuildContext buildContext, EventListener? listener) {
+      BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     try {
       if (map == null) {
@@ -175,16 +176,13 @@ class DynamicWidgetBuilder {
     }
   }
 
-  static Widget getParsedWidget(
-      WidgetParser parser,
-      Map<String, dynamic> map,
-      BuildContext buildContext,
-      EventListener? listener) {
+  static Widget getParsedWidget(WidgetParser parser, Map<String, dynamic> map,
+      BuildContext buildContext, EventListener listener) {
     return parser.parse(map, buildContext, listener);
   }
 
   static List<Widget> buildWidgets(List<dynamic> values,
-      BuildContext buildContext, EventListener? listener) {
+      BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     List<Widget> rt = [];
     for (var value in values) {
@@ -199,13 +197,12 @@ class DynamicWidgetBuilder {
   }
 
   static Map<String, dynamic>? export(
-      Widget? widget, BuildContext? buildContext, String id, {bool shouldEscapeIdChange = false}) {
+      Widget? widget, BuildContext? buildContext) {
     initDefaultParsersIfNess();
     var parser = _findMatchedWidgetParserForExport(widget);
     if (parser != null) {
-      if(!shouldEscapeIdChange)
-        id = id.isEmpty? "1" : "${id}_1";
-      return parser.export(widget, buildContext, id);
+      mID++;
+      return parser.export(widget, buildContext, mID);
     }
     log.warning(
         "Can't find NewWidgetParser for Type ${widget.runtimeType} to export.");
@@ -213,14 +210,11 @@ class DynamicWidgetBuilder {
   }
 
   static List<Map<String, dynamic>?> exportWidgets(
-      List<Widget?> widgets, BuildContext? buildContext, String id) {
+      List<Widget?> widgets, BuildContext? buildContext) {
     initDefaultParsersIfNess();
     List<Map<String, dynamic>?> rt = [];
-    int i = 0;
     for (var widget in widgets) {
-      i++;
-      String temp = id.isEmpty? "1" : "${id}_$i";
-      rt.add(export(widget, buildContext, temp, shouldEscapeIdChange: true));
+      rt.add(export(widget, buildContext));
     }
     return rt;
   }

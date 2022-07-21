@@ -11,18 +11,18 @@ class OffstageWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     Offstage realWidget = widget as Offstage;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
       "offstage": realWidget.offstage,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Offstage(
       offstage: map.containsKey("offstage") ? map['offstage'] : true,
       child: DynamicWidgetBuilder.buildFromMap(

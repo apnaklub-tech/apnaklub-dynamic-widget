@@ -9,10 +9,10 @@ abstract class ClickListener {
 class EventListener {
   ClickListener? clickListener;
   Function(String, String)? onTextChange;
-  Map<String, WidgetModel>? controller;
+  Map<int, WidgetModel> controller;
 
   EventListener(
-      {Map<String, WidgetModel>? controller,
+      {Map<int, WidgetModel>? controller,
         Function(String, String)? onTextChange})
       : this.controller = controller ?? {} {
     this.onTextChange = onTextChange ?? f;

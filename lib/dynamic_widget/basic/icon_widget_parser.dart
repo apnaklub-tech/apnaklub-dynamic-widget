@@ -19,7 +19,7 @@ class IconWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Icon(
       map.containsKey('data')
           ? getIconUsingPrefix(name: map['data'])
@@ -38,7 +38,7 @@ class IconWidgetParser extends WidgetParser {
   String get widgetName => "Icon";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Icon;
     return <String, dynamic>{ "id":id,
       "type": widgetName,

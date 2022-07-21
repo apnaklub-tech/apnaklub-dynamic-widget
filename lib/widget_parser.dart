@@ -1,9 +1,8 @@
 import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/utils/dynamic_value_notifier.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
+import 'package:dynamic_widget/utils/widget_model.dart';
 import 'package:flutter/widgets.dart';
-
-import 'dynamic_widget.dart';
 
 abstract class WidgetParser {
   /// convert a string to be logged in red color
@@ -27,35 +26,36 @@ abstract class WidgetParser {
   }
 
   TypeAssertions? typeAssertions;
-  DynamicValueNotifier valueNotifier = DynamicValueNotifier();
-  Map<String, State> map = {};
 
   /// called before parse method, do all assertions checks here. Call [typeAssertionDriver] function from this.
   void assertionChecks(Map<String, dynamic> map);
 
   /// parse the json map into a flutter widget.
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     assertionChecks(map);
 
-    String? id = map["id"];
+    int? id = map["id"];
 
     if (id != null) {
       /// wrap widget inside [ValueListenableBuilder] only when their is ID
       /// because then only it is going to be accessible
-      valueNotifier = DynamicValueNotifier(value: map);
-      listener?.controller?[id]?.valueNotifier = valueNotifier;
-      return ValueListenableBuilder(
-          valueListenable: valueNotifier,
+      DynamicValueNotifier v = DynamicValueNotifier(value: map);
+      var widgetModel = WidgetModel();
+      widgetModel.valueNotifier = v;
+      listener.controller[id] = widgetModel;
+
+      return ValueListenableBuilder<Map<String, dynamic>>(
+          valueListenable: v,
           builder: (context, value, child) {
-            return build(map, buildContext, listener);
+            return build(value, buildContext, listener);
           });
     }
     return build(map, buildContext, listener);
   }
 
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener);
+      EventListener listener);
 
   /// the widget type name for example:
   /// {"type" : "Text", "data" : "Denny"}
@@ -66,7 +66,7 @@ abstract class WidgetParser {
 
   /// export the runtime widget to json
   Map<String, dynamic>? export(
-      Widget? widget, BuildContext? buildContext, String id);
+      Widget? widget, BuildContext? buildContext, int id);
 
   /// match current widget
   Type get widgetType;

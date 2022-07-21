@@ -13,7 +13,7 @@ class PositionedWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Positioned(
       child: DynamicWidgetBuilder.buildFromMap(
           map["child"], buildContext, listener)!,
@@ -30,7 +30,7 @@ class PositionedWidgetParser extends WidgetParser {
   String get widgetName => "Positioned";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Positioned;
     return <String, dynamic>{ "id":id,
       "type": "Positioned",
@@ -40,7 +40,7 @@ class PositionedWidgetParser extends WidgetParser {
       "left": realWidget.left ?? null,
       "width": realWidget.width ?? null,
       "height": realWidget.height ?? null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
@@ -56,7 +56,7 @@ class StackWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Stack(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!
@@ -77,7 +77,7 @@ class StackWidgetParser extends WidgetParser {
   String get widgetName => "Stack";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Stack;
     return <String, dynamic>{ "id":id,
       "type": "Stack",
@@ -89,7 +89,7 @@ class StackWidgetParser extends WidgetParser {
       "fit": exportStackFit(realWidget.fit),
       "clipBehavior": exportClipBehavior(realWidget.clipBehavior),
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id)
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
     };
   }
 

@@ -12,7 +12,7 @@ class CenterWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Center(
       widthFactor: map.containsKey("widthFactor")
           ? map["widthFactor"]?.toDouble()
@@ -29,13 +29,13 @@ class CenterWidgetParser extends WidgetParser {
   String get widgetName => "Center";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Center;
     return <String, dynamic>{ "id":id,
       "type": widgetName,
       "widthFactor": realWidget.widthFactor,
       "heightFactor": realWidget.heightFactor,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext, id)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

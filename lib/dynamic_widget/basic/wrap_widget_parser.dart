@@ -13,7 +13,7 @@ class WrapWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     return Wrap(
       direction: map.containsKey("direction")
           ? parseAxis(map["direction"])
@@ -45,7 +45,7 @@ class WrapWidgetParser extends WidgetParser {
   String get widgetName => "Wrap";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Wrap;
     return <String, dynamic>{ "id":id,
       "type": "Wrap",
@@ -63,7 +63,7 @@ class WrapWidgetParser extends WidgetParser {
       "verticalDirection":
           realWidget.verticalDirection == VerticalDirection.up ? "up" : "down",
       "children":
-          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext, id)
+          DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
     };
   }
 

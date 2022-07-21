@@ -14,7 +14,7 @@ class SelectableTextWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     int? maxLines = map['maxLines'];
@@ -51,7 +51,7 @@ class SelectableTextWidgetParser extends WidgetParser {
   String get widgetName => "SelectableText";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SelectableText;
     if (realWidget.textSpan == null) {
       return <String, dynamic>{ "id":id,
@@ -88,7 +88,7 @@ class SelectableTextWidgetParser extends WidgetParser {
 }
 
 class SelectableTextSpanParser {
-  TextSpan parse(Map<String, dynamic> map, EventListener? listener) {
+  TextSpan parse(Map<String, dynamic> map, EventListener listener) {
     String? clickEvent = map.containsKey("recognizer") ? map['recognizer'] : "";
     var textSpan = TextSpan(
         text: map['text'],
@@ -107,7 +107,7 @@ class SelectableTextSpanParser {
   }
 
   void parseChildren(
-      TextSpan textSpan, List<dynamic> childrenSpan, EventListener? listener) {
+      TextSpan textSpan, List<dynamic> childrenSpan, EventListener listener) {
     for (var childmap in childrenSpan) {
       textSpan.children!.add(parse(childmap, listener));
     }

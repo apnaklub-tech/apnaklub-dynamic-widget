@@ -12,7 +12,7 @@ class PageViewWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+      EventListener listener) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -32,7 +32,7 @@ class PageViewWidgetParser extends WidgetParser {
   String get widgetName => "PageView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as PageView;
     String scrollDirection = "vertical";
     if (realWidget.scrollDirection == Axis.horizontal) {
@@ -45,7 +45,7 @@ class PageViewWidgetParser extends WidgetParser {
       "reverse": realWidget.reverse,
       "pageSnapping": realWidget.pageSnapping,
       "children":
-          DynamicWidgetBuilder.exportWidgets(children.children, buildContext, id)
+          DynamicWidgetBuilder.exportWidgets(children.children, buildContext)
     };
   }
 
