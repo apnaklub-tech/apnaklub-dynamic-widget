@@ -294,7 +294,6 @@ class EventListener {
   ClickListener? clickListener;
   Function(String, String)? onTextChange;
   Map<String, TextEditingController>? textEditingController;
-  Map<String, ValueNotifier<Object?>>? valueListenable;
 
   EventListener(
       {Map<String, TextEditingController>? textEditingController,

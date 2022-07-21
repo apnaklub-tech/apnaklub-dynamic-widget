@@ -1,4 +1,3 @@
-
 import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:flutter/widgets.dart';
 
