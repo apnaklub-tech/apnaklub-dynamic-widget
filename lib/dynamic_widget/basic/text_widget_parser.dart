@@ -5,9 +5,9 @@ import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class TextWidgetParser extends NewWidgetParser {
+class TextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
@@ -23,7 +23,7 @@ class TextWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
@@ -80,6 +80,10 @@ class TextWidgetParser extends NewWidgetParser {
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, String id) {
     var realWidget = widget as Text;
+    String s = realWidget.data.toString();
+    if(s.length > 10)
+      s = s.substring(0, 10);
+    id = id + s;
     if (realWidget.textSpan == null) {
       return <String, dynamic>{ "id":id,
       "type": "Text",

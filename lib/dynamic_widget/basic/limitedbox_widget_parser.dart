@@ -2,9 +2,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class LimitedBoxWidgetParser extends NewWidgetParser {
+class LimitedBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
@@ -26,7 +26,7 @@ class LimitedBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     return LimitedBox(
       maxWidth: map.containsKey("maxWidth") ? map['maxWidth'] : double.infinity,

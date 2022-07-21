@@ -3,9 +3,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class PaddingWidgetParser extends NewWidgetParser {
+class PaddingWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
@@ -13,7 +13,7 @@ class PaddingWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     return Padding(
       padding: map.containsKey("padding")

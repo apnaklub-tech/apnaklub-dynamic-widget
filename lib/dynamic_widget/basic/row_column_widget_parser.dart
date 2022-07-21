@@ -3,9 +3,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class RowWidgetParser extends NewWidgetParser {
+class RowWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'crossAxisAlignment', expectedType: TYPE_STRING);
@@ -19,7 +19,7 @@ class RowWidgetParser extends NewWidgetParser {
 
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     try {
       return Row(
@@ -86,7 +86,7 @@ class RowWidgetParser extends NewWidgetParser {
   Type get widgetType => Row;
 }
 
-class ColumnWidgetParser extends NewWidgetParser {
+class ColumnWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'crossAxisAlignment', expectedType: TYPE_STRING);
@@ -100,7 +100,7 @@ class ColumnWidgetParser extends NewWidgetParser {
 
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     try {
       return Column(

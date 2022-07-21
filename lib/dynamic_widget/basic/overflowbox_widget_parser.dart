@@ -2,9 +2,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class OverflowBoxWidgetParser extends NewWidgetParser {
+class OverflowBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
@@ -25,7 +25,7 @@ class OverflowBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     return OverflowBox(
       alignment: map.containsKey("alignment")

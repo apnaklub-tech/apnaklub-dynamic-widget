@@ -2,6 +2,7 @@ library dynamic_widget;
 
 import 'dart:convert';
 
+import 'package:dynamic_widget/dynamic_value_notifier.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/align_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/appbar_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/aspectratio_widget_parser.dart';
@@ -47,7 +48,7 @@ import 'package:logging/logging.dart';
 import 'dynamic_widget/basic/cliprrect_widget_parser.dart';
 import 'dynamic_widget/basic/overflowbox_widget_parser.dart';
 import 'dynamic_widget/basic/rotatedbox_widget_parser.dart';
-import 'new_widget_parser.dart';
+import 'widget_parser.dart';
 
 class DynamicWidgetBuilder {
 
@@ -104,12 +105,12 @@ class DynamicWidgetBuilder {
     TextFormFieldWidgetParser(),
   ];
 
-  static final _widgetNameParserMap = <String, NewWidgetParser>{};
+  static final _widgetNameParserMap = <String, WidgetParser>{};
 
   static bool _defaultParserInited = false;
 
   // use this method for adding your custom widget parser
-  static void addParser(NewWidgetParser parser) {
+  static void addParser(WidgetParser parser) {
     log.info(
         "add custom widget parser, make sure you don't overwirte the widget type.");
     _parsers.add(parser);
@@ -174,11 +175,11 @@ class DynamicWidgetBuilder {
   }
 
   static Widget getParsedWidget(
-      NewWidgetParser parser,
+      WidgetParser parser,
       Map<String, dynamic> map,
       BuildContext buildContext,
       EventListener? listener) {
-    return parser.parseWithValueNotifier(map, buildContext, listener);
+    return parser.parse(map, buildContext, listener);
   }
 
   static List<Widget> buildWidgets(List<dynamic> values,
@@ -223,7 +224,7 @@ class DynamicWidgetBuilder {
     return rt;
   }
 
-  static NewWidgetParser? _findMatchedWidgetParserForExport(Widget? widget) {
+  static WidgetParser? _findMatchedWidgetParserForExport(Widget? widget) {
     try {
       for (var parser in _parsers) {
         if (parser.matchWidgetForExport(widget)) {
@@ -240,40 +241,17 @@ class DynamicWidgetBuilder {
   }
 }
 
-/// extends this class to make a Flutter widget parser.
-abstract class WidgetParser {
-  /// parse the json map into a flutter widget.
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener);
-
-  /// the widget type name for example:
-  /// {"type" : "Text", "data" : "Denny"}
-  /// if you want to make a flutter Text widget, you should implement this
-  /// method return "Text", for more details, please see
-  /// @TextWidgetParser
-  String get widgetName;
-
-  /// export the runtime widget to json
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext);
-
-  /// match current widget
-  Type get widgetType;
-
-  bool matchWidgetForExport(Widget? widget) => widget.runtimeType == widgetType;
-}
-
 abstract class ClickListener {
   void onClicked(String? event);
 }
 
-
 class EventListener {
   ClickListener? clickListener;
   Function(String, String)? onTextChange;
-  Map<String, ValueNotifier<Map<String, dynamic>>>? controller;
+  Map<String, DynamicValueNotifier>? controller;
 
   EventListener(
-      {Map<String, ValueNotifier<Map<String, dynamic>>>? controller,
+      {Map<String, DynamicValueNotifier>? controller,
         Function(String, String)? onTextChange})
       : this.controller = controller ?? {} {
     this.onTextChange = onTextChange ?? f;

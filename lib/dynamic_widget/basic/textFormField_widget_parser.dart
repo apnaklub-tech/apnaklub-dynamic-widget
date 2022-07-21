@@ -2,9 +2,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class TextFormFieldWidgetParser extends NewWidgetParser {
+class TextFormFieldWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
@@ -36,18 +36,15 @@ class TextFormFieldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
-    listener!.textEditingController?.putIfAbsent(id, () {
-      return textEditingController;
-    });
     try {
       return TextFormField(
-        controller: listener.textEditingController![id],
-        onChanged: (text) => listener.onTextChange!(id, text),
+        //controller: listener.textEditingController![id],
+        onChanged: (text) => listener?.onTextChange!(id, text),
 
         // Key? key,
         // FocusNode? focusNode,

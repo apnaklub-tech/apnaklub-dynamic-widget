@@ -1,11 +1,11 @@
 
-import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
+import 'package:dynamic_widget/dynamic_value_notifier.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dynamic_widget.dart';
 
-abstract class NewWidgetParser {
+abstract class WidgetParser {
 
   /// convert a string to be logged in red color
   String toWarning(String s) {
@@ -27,30 +27,34 @@ abstract class NewWidgetParser {
   }
 
   TypeAssertions? typeAssertions;
-
-  ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
-
+  DynamicValueNotifier valueNotifier = DynamicValueNotifier();
 
   /// called before parse method, do all assertions checks here. Call [typeAssertionDriver] function from this.
   void assertionChecks(Map<String, dynamic> map);
 
 
-  Widget parseWithValueNotifier(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
-    assertionChecks(map);
-    valueNotifier = ValueNotifier(map);
-
-    String? id = map["id"];
-    if(id != null)
-      listener?.controller?[id] = valueNotifier;
-
-    return ValueListenableBuilder(valueListenable: valueNotifier, builder: (context, value, child) {
-      return parse(map, buildContext, listener);
-    });
-  }
-
   /// parse the json map into a flutter widget.
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener? listener) {
+
+    assertionChecks(map);
+
+    String? id = map["id"];
+
+    if(id != null) {
+      /// wrap widget inside [ValueListenableBuilder] only when their is ID
+      /// because then only it is going to be accessible
+      valueNotifier = DynamicValueNotifier(value: map);
+      listener?.controller?[id] = valueNotifier;
+      return ValueListenableBuilder(
+          valueListenable: valueNotifier, builder: (context, value, child) {
+        return build(map, buildContext, listener);
+      });
+    }
+    return build(map, buildContext, listener);
+  }
+
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener);
 
   /// the widget type name for example:

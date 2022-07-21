@@ -5,9 +5,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class AssetImageWidgetParser extends NewWidgetParser {
+class AssetImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'name', expectedType: TYPE_STRING);
@@ -28,7 +28,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String name = map['name'];
     String? semanticLabel =
@@ -218,7 +218,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
       _isMatchAssetImageType(widget) || _isMatchExactAssetImageType(widget);
 }
 
-class NetworkImageWidgetParser extends NewWidgetParser {
+class NetworkImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'src', expectedType: TYPE_STRING);
@@ -240,7 +240,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String src = map['src'];
     String? semanticLabel =

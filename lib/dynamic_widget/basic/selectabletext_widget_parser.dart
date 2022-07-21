@@ -3,16 +3,16 @@ import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class SelectableTextWidgetParser extends NewWidgetParser {
+class SelectableTextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];

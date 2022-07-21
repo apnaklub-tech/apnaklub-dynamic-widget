@@ -4,9 +4,9 @@ import 'package:dynamic_widget/dynamic_widget/boxdecoration_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class ContainerWidgetParser extends NewWidgetParser {
+class ContainerWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(
@@ -30,7 +30,7 @@ class ContainerWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     Alignment? alignment = parseAlignment(map['alignment']);
     Color? color = parseHexColor(map['color']);

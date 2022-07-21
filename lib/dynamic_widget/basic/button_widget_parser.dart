@@ -3,9 +3,9 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class RaisedButtonParser extends NewWidgetParser {
+class RaisedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
@@ -20,7 +20,7 @@ class RaisedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
@@ -94,7 +94,7 @@ class RaisedButtonParser extends NewWidgetParser {
   Type get widgetType => RaisedButton;
 }
 
-class ElevatedButtonParser extends NewWidgetParser {
+class ElevatedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
@@ -153,7 +153,7 @@ class ElevatedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
@@ -200,7 +200,7 @@ class ElevatedButtonParser extends NewWidgetParser {
   Type get widgetType => ElevatedButton;
 }
 
-class TextButtonParser extends NewWidgetParser {
+class TextButtonParser extends WidgetParser {
 
 
   @override
@@ -262,7 +262,7 @@ class TextButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
     String? clickEvent =
         map.containsKey("click_event") ? map['click_event'] : "";
