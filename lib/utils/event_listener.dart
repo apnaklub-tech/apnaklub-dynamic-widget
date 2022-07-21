@@ -2,7 +2,7 @@ import 'package:dynamic_widget/utils/widget_model.dart';
 import 'package:logging/logging.dart';
 
 abstract class ClickListener {
-  void onClicked(String? event);
+  void onClicked(int? event);
 }
 
 
@@ -26,8 +26,8 @@ class NonResponseWidgetClickListener implements ClickListener {
   static final Logger log = Logger('NonResponseWidgetClickListener');
 
   @override
-  void onClicked(String? event) {
-    log.info("receiver click event: " + event!);
-    print("receiver click event: " + event);
+  void onClicked(int? event) {
+    log.info("receiver click event: $event");
+    print("receiver click event: $event");
   }
 }

@@ -64,8 +64,7 @@ class AssetImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =
-        map.containsKey("click_event") ? map['click_event'] : "";
+    int clickEvent =map['id'];
 
     var widget = Image.asset(
       name,
@@ -85,7 +84,7 @@ class AssetImageWidgetParser extends WidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null && clickEvent.isNotEmpty)) {
+    if (listener != null && (clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -276,8 +275,7 @@ class NetworkImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =
-        map.containsKey("click_event") ? map['click_event'] : "";
+    int clickEvent =map['id'];
 
     var widget = Image.network(
       src,
@@ -297,7 +295,7 @@ class NetworkImageWidgetParser extends WidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null && clickEvent.isNotEmpty)) {
+    if (listener != null && (clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);

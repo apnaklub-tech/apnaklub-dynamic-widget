@@ -99,7 +99,7 @@ class SelectableTextSpanParser {
     var typeAssertions = TypeAssertions("SelectableTextSpanParser");
     typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
     typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_MAP);
-    String? clickEvent = map.containsKey("recognizer") ? map['recognizer'] : "";
+    int clickEvent =map['id'];
     var textSpan = TextSpan(
         text: map['text'],
         style: parseTextStyle(map['style']),

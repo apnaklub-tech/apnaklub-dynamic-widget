@@ -48,8 +48,7 @@ class ListTileWidgetParser extends WidgetParser {
         ? DynamicWidgetBuilder.buildFromMap(
             map["trailing"], buildContext, listener)
         : null;
-    String? tapEvent = map.containsKey("tapEvent") ? map["tapEvent"] : null;
-
+    int clickEvent =map['id'];
     return ListTile(
       isThreeLine: isThreeLine,
       leading: leading,
@@ -60,8 +59,8 @@ class ListTileWidgetParser extends WidgetParser {
       contentPadding: contentPadding,
       enabled: enabled,
       onTap: () {
-        if (listener != null && tapEvent != null) {
-          listener.clickListener!.onClicked(tapEvent);
+        if (listener != null && clickEvent != null) {
+          listener.clickListener!.onClicked(clickEvent);
         }
       },
       selected: selected,

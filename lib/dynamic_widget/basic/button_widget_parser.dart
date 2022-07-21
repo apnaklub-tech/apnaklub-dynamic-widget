@@ -23,9 +23,7 @@ class RaisedButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
-
+    int clickEvent =map['id'];
     var raisedButton = RaisedButton(
       color: map.containsKey('color') ? parseHexColor(map['color']) : null,
       disabledColor: map.containsKey('disabledColor')
@@ -156,12 +154,11 @@ class ElevatedButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
+    int clickEvent =map['id'];
 
     return ElevatedButton(
       onPressed: () {
-        listener!.clickListener!.onClicked(clickEvent);
+        listener.clickListener!.onClicked(clickEvent);
       },
       style: ButtonStyle(
         foregroundColor: map.containsKey('foregroundColor')
@@ -265,8 +262,7 @@ class TextButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
+    int clickEvent =map['id'];
 
     return TextButton(
       onPressed: () {
