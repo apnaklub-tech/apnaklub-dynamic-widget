@@ -8,8 +8,7 @@ class VisibilityWidgetParser extends NewWidgetParser {
   @override
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       EventListener? listener) {
-    String? visibleString = map['visible'] as String;
-    bool visible = visibleString.parseBool() ?? true;
+    bool? visible = map['visible'];
     Map<String, dynamic>? childMap = map['child'];
     
     Widget? child = DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
@@ -17,7 +16,7 @@ class VisibilityWidgetParser extends NewWidgetParser {
     // Assert child as not null.
 
     return Visibility(
-      visible: visible,
+      visible: visible ?? true,
       child: child ?? const SizedBox(),
     );
   }

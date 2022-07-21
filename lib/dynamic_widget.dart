@@ -169,12 +169,8 @@ class DynamicWidgetBuilder {
   }
 
   static Widget? buildFromMap(Map<String, dynamic>? map,
-      BuildContext buildContext, EventListener? listener,
-      {Widget? child}) {
+      BuildContext buildContext, EventListener? listener,) {
     initDefaultParsersIfNess();
-    if (child != null) {
-      return child;
-    }
     try {
       if (map == null) {
         return null;
@@ -196,7 +192,7 @@ class DynamicWidgetBuilder {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
