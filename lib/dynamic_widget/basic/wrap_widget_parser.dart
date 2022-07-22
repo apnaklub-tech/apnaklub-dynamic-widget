@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../widget_parser.dart';
 import '../../assertions/assert_constants.dart';
-import '../../new_widget_parser.dart';
 
-class WrapWidgetParser extends NewWidgetParser {
+class WrapWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'direction', expectedType: TYPE_STRING);
@@ -20,8 +21,8 @@ class WrapWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Wrap(
       direction: map.containsKey("direction")
           ? parseAxis(map["direction"])
@@ -53,9 +54,9 @@ class WrapWidgetParser extends NewWidgetParser {
   String get widgetName => "Wrap";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Wrap;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Wrap",
       "direction":
           realWidget.direction == Axis.horizontal ? "horizontal" : "vertical",

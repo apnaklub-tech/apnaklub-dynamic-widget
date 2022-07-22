@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class InkwellWidgetParser extends NewWidgetParser {
+class InkwellWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'splashColor', expectedType: TYPE_STRING);
@@ -13,10 +14,9 @@ class InkwellWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
-    String? clickEvent =
-        map.containsKey("click_event") ? map['click_event'] : "";
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
+    int clickEvent =map['id'];
     try {
       var inkwell = InkWell(
         splashColor: map.containsKey('splashColor')
@@ -43,10 +43,10 @@ class InkwellWidgetParser extends NewWidgetParser {
   String get widgetName => "Inkwell";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as InkWell;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };

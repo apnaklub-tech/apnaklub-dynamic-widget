@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class OverflowBoxWidgetParser extends NewWidgetParser {
+class OverflowBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
@@ -17,9 +18,9 @@ class OverflowBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     OverflowBox realWidget = widget as OverflowBox;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "alignment": exportAlignment(realWidget.alignment as Alignment?),
       "minWidth": realWidget.minWidth,
@@ -31,8 +32,8 @@ class OverflowBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return OverflowBox(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!

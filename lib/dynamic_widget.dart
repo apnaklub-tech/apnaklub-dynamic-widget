@@ -2,6 +2,7 @@ library dynamic_widget;
 
 import 'dart:convert';
 
+import 'package:dynamic_widget/utils/dynamic_value_notifier.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/align_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/appbar_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/aspectratio_widget_parser.dart';
@@ -36,19 +37,20 @@ import 'package:dynamic_widget/dynamic_widget/basic/stack_positioned_widgets_par
 import 'package:dynamic_widget/dynamic_widget/basic/textFormField_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/text_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/textfield_widget_parser.dart';
-import 'package:dynamic_widget/dynamic_widget/basic/visiblity_widget_parser.dart';
+import 'package:dynamic_widget/dynamic_widget/basic/visibility_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/wrap_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/gridview_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/listview_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/pageview_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/single_child_scroll_view_widget_parser.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
 import 'dynamic_widget/basic/cliprrect_widget_parser.dart';
 import 'dynamic_widget/basic/overflowbox_widget_parser.dart';
 import 'dynamic_widget/basic/rotatedbox_widget_parser.dart';
-import 'new_widget_parser.dart';
+import 'widget_parser.dart';
 
 extension BoolParsing on String {
   bool parseBoolStrict() {
@@ -74,6 +76,8 @@ extension BoolParsing on String {
 
 class DynamicWidgetBuilder {
   static final Logger log = Logger('DynamicWidget');
+
+  static int mID = 0;
 
   static final _parsers = [
     ContainerWidgetParser(),
@@ -127,12 +131,12 @@ class DynamicWidgetBuilder {
     VisibilityWidgetParser(),
   ];
 
-  static final _widgetNameParserMap = <String, NewWidgetParser>{};
+  static final _widgetNameParserMap = <String, WidgetParser>{};
 
   static bool _defaultParserInited = false;
 
   // use this method for adding your custom widget parser
-  static void addParser(NewWidgetParser parser) {
+  static void addParser(WidgetParser parser) {
     log.info(
         "add custom widget parser, make sure you don't overwirte the widget type.");
     _parsers.add(parser);
@@ -149,7 +153,7 @@ class DynamicWidgetBuilder {
   }
 
   static Widget? build(
-      String json, BuildContext buildContext, EventListener? listener) {
+      String json, BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     try {
       var map = jsonDecode(json);
@@ -169,7 +173,7 @@ class DynamicWidgetBuilder {
   }
 
   static Widget? buildFromMap(Map<String, dynamic>? map,
-      BuildContext buildContext, EventListener? listener,) {
+      BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     try {
       if (map == null) {
@@ -196,18 +200,13 @@ class DynamicWidgetBuilder {
     }
   }
 
-  static Widget getParsedWidget(
-      NewWidgetParser parser,
-      Map<String, dynamic> map,
-      BuildContext buildContext,
-      EventListener? listener) {
-    // assertion checks should be called before parse method of parser.
-    parser.assertionChecks(map);
+  static Widget getParsedWidget(WidgetParser parser, Map<String, dynamic> map,
+      BuildContext buildContext, EventListener listener) {
     return parser.parse(map, buildContext, listener);
   }
 
   static List<Widget> buildWidgets(List<dynamic> values,
-      BuildContext buildContext, EventListener? listener) {
+      BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     List<Widget> rt = [];
     for (var value in values) {
@@ -226,7 +225,8 @@ class DynamicWidgetBuilder {
     initDefaultParsersIfNess();
     var parser = _findMatchedWidgetParserForExport(widget);
     if (parser != null) {
-      return parser.export(widget, buildContext);
+      mID++;
+      return parser.export(widget, buildContext, mID);
     }
     log.warning(
         "Can't find NewWidgetParser for Type ${widget.runtimeType} to export.");
@@ -243,7 +243,7 @@ class DynamicWidgetBuilder {
     return rt;
   }
 
-  static NewWidgetParser? _findMatchedWidgetParserForExport(Widget? widget) {
+  static WidgetParser? _findMatchedWidgetParserForExport(Widget? widget) {
     try {
       for (var parser in _parsers) {
         if (parser.matchWidgetForExport(widget)) {
@@ -257,56 +257,5 @@ class DynamicWidgetBuilder {
       print('--' * 100);
       throw e;
     }
-  }
-}
-
-/// extends this class to make a Flutter widget parser.
-abstract class WidgetParser {
-  /// parse the json map into a flutter widget.
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener);
-
-  /// the widget type name for example:
-  /// {"type" : "Text", "data" : "Denny"}
-  /// if you want to make a flutter Text widget, you should implement this
-  /// method return "Text", for more details, please see
-  /// @TextWidgetParser
-  String get widgetName;
-
-  /// export the runtime widget to json
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext);
-
-  /// match current widget
-  Type get widgetType;
-
-  bool matchWidgetForExport(Widget? widget) => widget.runtimeType == widgetType;
-}
-
-abstract class ClickListener {
-  void onClicked(String? event);
-}
-
-class EventListener {
-  ClickListener? clickListener;
-  Function(String, String)? onTextChange;
-  Map<String, TextEditingController>? textEditingController;
-
-  EventListener(
-      {Map<String, TextEditingController>? textEditingController,
-      Function(String, String)? onTextChange})
-      : this.textEditingController = textEditingController ?? {} {
-    this.onTextChange = onTextChange ?? f;
-  }
-
-  void f(String s, String v) {}
-}
-
-class NonResponseWidgetClickListener implements ClickListener {
-  static final Logger log = Logger('NonResponseWidgetClickListener');
-
-  @override
-  void onClicked(String? event) {
-    log.info("receiver click event: " + event!);
-    print("receiver click event: " + event);
   }
 }

@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class TextFieldWidgetParser extends NewWidgetParser {
+class TextFieldWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     String inputDe = 'inputDecoration';
@@ -47,11 +48,11 @@ class TextFieldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     TextField realWidget = widget as TextField;
     return {
       "type": widgetName,
-      "id": "put-unique-id-here",
+      "id": id,
       "inputDecoration": exportInputDecoration(realWidget.decoration),
       "textAlign": exportTextAlign(realWidget.textAlign),
       "cursorColor": exportHexColor(realWidget.cursorColor),
@@ -59,17 +60,15 @@ class TextFieldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
-    listener!.textEditingController?.putIfAbsent(id, () {
-      return textEditingController;
-    });
+    listener?.controller?[id]?.textEditingController = textEditingController;
     return TextField(
-      controller: listener.textEditingController![id],
-      onChanged: (text) => listener.onTextChange!= null? listener.onTextChange!(id, text) : null,
+      controller: textEditingController,
+      onChanged: (text) => listener?.onTextChange!= null? listener?.onTextChange!(id, text) : null,
 
       // Key? key,
       // FocusNode? focusNode,

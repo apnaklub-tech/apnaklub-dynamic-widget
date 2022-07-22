@@ -2,12 +2,13 @@ import 'dart:ui';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class AssetImageWidgetParser extends NewWidgetParser {
+class AssetImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'name', expectedType: TYPE_STRING);
@@ -28,8 +29,8 @@ class AssetImageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     String name = map['name'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -63,8 +64,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =
-        map.containsKey("click_event") ? map['click_event'] : "";
+    int clickEvent =map['id'];
 
     var widget = Image.asset(
       name,
@@ -84,7 +84,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null && clickEvent.isNotEmpty)) {
+    if (listener != null && (clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -99,7 +99,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
   String get widgetName => "AssetImage";
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     if (_isMatchAssetImageType(widget)) {
       var realWidget = widget as Image;
       late AssetImage assetImage;
@@ -109,7 +109,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
         var t = realWidget.image as ResizeImage;
         assetImage = t.imageProvider as AssetImage;
       }
-      return <String, dynamic>{
+      return <String, dynamic>{ "id":id,
         "type": widgetName,
         "name": assetImage.assetName,
         "semanticLabel": realWidget.semanticLabel,
@@ -149,8 +149,8 @@ class AssetImageWidgetParser extends NewWidgetParser {
         var t = realWidget.image as ResizeImage;
         exactAssetImage = t.imageProvider as ExactAssetImage;
       }
-      return <String, dynamic>{
-        "type": widgetName,
+      return <String, dynamic>{ "id":id,
+      "type": widgetName,
         "name": exactAssetImage.assetName,
         "semanticLabel": realWidget.semanticLabel,
         "excludeFromSemantics": realWidget.excludeFromSemantics,
@@ -218,7 +218,7 @@ class AssetImageWidgetParser extends NewWidgetParser {
       _isMatchAssetImageType(widget) || _isMatchExactAssetImageType(widget);
 }
 
-class NetworkImageWidgetParser extends NewWidgetParser {
+class NetworkImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'src', expectedType: TYPE_STRING);
@@ -240,8 +240,8 @@ class NetworkImageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     String src = map['src'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -275,8 +275,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =
-        map.containsKey("click_event") ? map['click_event'] : "";
+    int clickEvent =map['id'];
 
     var widget = Image.network(
       src,
@@ -296,7 +295,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null && clickEvent.isNotEmpty)) {
+    if (listener != null && (clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -311,7 +310,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
   String get widgetName => "NetworkImage";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Image;
     late NetworkImage networkImage;
     if (realWidget.image is NetworkImage) {
@@ -320,7 +319,7 @@ class NetworkImageWidgetParser extends NewWidgetParser {
       var t = realWidget.image as ResizeImage;
       networkImage = t.imageProvider as NetworkImage;
     }
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "src": networkImage.url,
       "semanticLabel": realWidget.semanticLabel,

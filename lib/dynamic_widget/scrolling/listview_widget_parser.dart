@@ -3,14 +3,15 @@ import 'dart:convert';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class ListViewWidgetParser extends NewWidgetParser {
+class ListViewWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
@@ -28,8 +29,8 @@ class ListViewWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -71,7 +72,7 @@ class ListViewWidgetParser extends NewWidgetParser {
   String get widgetName => "ListView";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = "vertical";
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -81,7 +82,7 @@ class ListViewWidgetParser extends NewWidgetParser {
     var padding = realWidget._params.padding as EdgeInsets?;
     var tempChild =
         DynamicWidgetBuilder.export(widget._params.tempChild, buildContext);
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "ListView",
       "scrollDirection": scrollDirection,
       "reverse": realWidget._params.reverse ?? false,
@@ -154,7 +155,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       var jsonString =
           _params.isDemo! ? await fakeRequest() : await doRequest();
       var buildWidgets = DynamicWidgetBuilder.buildWidgets(
-          jsonDecode(jsonString), widget._buildContext, null);
+          jsonDecode(jsonString), widget._buildContext, EventListener());
       setState(() {
         if (buildWidgets.isEmpty) {
           loadCompleted = true;

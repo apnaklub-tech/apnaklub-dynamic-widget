@@ -1,12 +1,13 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class ScaffoldWidgetParser extends NewWidgetParser {
+class ScaffoldWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'body', expectedType: TYPE_MAP);
@@ -17,10 +18,10 @@ class ScaffoldWidgetParser extends NewWidgetParser {
 
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Scaffold;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "body": DynamicWidgetBuilder.export(realWidget.body, buildContext),
       "appBar": DynamicWidgetBuilder.export(realWidget.appBar, buildContext),
@@ -33,8 +34,8 @@ class ScaffoldWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     var scaffoldWidget = Scaffold(
       appBar: map.containsKey("appBar")
           ? DynamicWidgetBuilder.buildFromMap(

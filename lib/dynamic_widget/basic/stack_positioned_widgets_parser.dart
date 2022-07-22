@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class PositionedWidgetParser extends NewWidgetParser {
+class PositionedWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
@@ -18,8 +19,8 @@ class PositionedWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Positioned(
       child: DynamicWidgetBuilder.buildFromMap(
           map["child"], buildContext, listener)!,
@@ -36,9 +37,9 @@ class PositionedWidgetParser extends NewWidgetParser {
   String get widgetName => "Positioned";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Positioned;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Positioned",
       "top": realWidget.top ?? null,
       "right": realWidget.right ?? null,
@@ -54,7 +55,7 @@ class PositionedWidgetParser extends NewWidgetParser {
   Type get widgetType => Positioned;
 }
 
-class StackWidgetParser extends NewWidgetParser {
+class StackWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: "alignment", expectedType: TYPE_STRING);
@@ -65,8 +66,8 @@ class StackWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Stack(
       alignment: map.containsKey("alignment")
           ? parseAlignment(map["alignment"])!
@@ -87,9 +88,9 @@ class StackWidgetParser extends NewWidgetParser {
   String get widgetName => "Stack";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Stack;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "Stack",
       "alignment": realWidget.alignment is AlignmentDirectional
           ? exportAlignmentDirectional(

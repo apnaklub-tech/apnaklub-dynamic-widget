@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class ClipRRectWidgetParser extends NewWidgetParser {
+class ClipRRectWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'borderRadius', expectedType: TYPE_STRING);
@@ -14,8 +15,8 @@ class ClipRRectWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     var radius = map['borderRadius'].toString().split(",");
     double topLeft = double.parse(radius[0]);
     double topRight = double.parse(radius[1]);
@@ -38,10 +39,10 @@ class ClipRRectWidgetParser extends NewWidgetParser {
   String get widgetName => "ClipRRect";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ClipRRect;
     var borderRadius = realWidget.borderRadius!;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "borderRadius":
           "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",

@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class PlaceholderWidgetParser extends NewWidgetParser {
+class PlaceholderWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
@@ -15,8 +16,8 @@ class PlaceholderWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Placeholder(
       color: map.containsKey('color')
           ? parseHexColor(map['color'])!
@@ -36,9 +37,9 @@ class PlaceholderWidgetParser extends NewWidgetParser {
   String get widgetName => "Placeholder";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Placeholder;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "color": realWidget.color != null
           ? realWidget.color.value.toRadixString(16)

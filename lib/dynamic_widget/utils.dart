@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:flutter/widgets.dart';
 
@@ -315,7 +317,7 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
     "color": textStyle.color != null
         ? textStyle.color!.value.toRadixString(16)
         : null,
-    "debugLabel": textStyle.debugLabel,
+    //"debugLabel": textStyle.debugLabel.toString(),
     "decoration": exportTextDecoration(textStyle.decoration),
     "fontSize": textStyle.fontSize,
     "fontFamily": textStyle.fontFamily,
@@ -1100,7 +1102,7 @@ String exportDropCapPosition(DropCapPosition? dropCapPosition) {
 }
 
 DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
-    EventListener? listener) {
+    EventListener listener) {
   if (map == null) {
     return null;
   }
@@ -1113,7 +1115,7 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
 }
 
 Map<String, dynamic>? exportDropCap(
-    DropCap? dropCap, BuildContext? buildContext) {
+    DropCap? dropCap, BuildContext? buildContext, int id) {
   if (dropCap == null) {
     return null;
   }
@@ -1282,4 +1284,9 @@ Radius parseRadius(String radius) {
   } else {
     return Radius.zero;
   }
+}
+
+/// convert a string to be logged in red color
+String toWarning(String s) {
+  return '\x1B[31m$s\x1B[0m';
 }

@@ -1,12 +1,13 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/common/rounded_rectangle_border_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class CardParser extends NewWidgetParser {
+class CardParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
@@ -27,7 +28,7 @@ class CardParser extends NewWidgetParser {
   Type get widgetType => Card;
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     if (widget != null && widget is Card) {
       final EdgeInsets? margin = widget.margin as EdgeInsets?;
       final String? color =
@@ -65,14 +66,14 @@ class CardParser extends NewWidgetParser {
       map['semanticContainer'] = semanticContainer;
       if (childMap != null) map['child'] = childMap;
       if (shape != null) map['shape'] = shape;
-
+      map["id"] = id;
       return map;
     }
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     final Color? color = parseHexColor(map['color']);
     final Color? shadowColor = parseHexColor(map['shadowColor']);
     final double? elevation = map['elevation'];

@@ -1,12 +1,13 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/icons_helper.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class IconWidgetParser extends NewWidgetParser {
+class IconWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
@@ -17,8 +18,8 @@ class IconWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Icon(
       map.containsKey('data')
           ? getIconUsingPrefix(name: map['data'])
@@ -37,9 +38,9 @@ class IconWidgetParser extends NewWidgetParser {
   String get widgetName => "Icon";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Icon;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "data": exportIconGuessFavorMaterial(realWidget.icon),
       "size": realWidget.size,

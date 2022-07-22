@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class DropCapTextParser extends NewWidgetParser {
+class DropCapTextParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
@@ -13,8 +14,8 @@ class DropCapTextParser extends NewWidgetParser {
 
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return DropCapText(
       data: map.containsKey('data') ? map['data'] : null,
       selectable: map.containsKey('selectable') ? map['selectable'] : false,
@@ -59,10 +60,10 @@ class DropCapTextParser extends NewWidgetParser {
   String get widgetName => "DropCapText";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as DropCapText;
     var dropCapPadding = realWidget.dropCapPadding;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "data": realWidget.data,
       "selectable": realWidget.selectable,
@@ -70,7 +71,7 @@ class DropCapTextParser extends NewWidgetParser {
       "style": exportTextStyle(realWidget.style),
       "dropCapStyle": exportTextStyle(realWidget.dropCapStyle),
       "textAlign": exportTextAlign(realWidget.textAlign),
-      "dropCap": exportDropCap(realWidget.dropCap, buildContext),
+      "dropCap": exportDropCap(realWidget.dropCap, buildContext, id),
       "dropCapPadding": dropCapPadding != null
           ? "${dropCapPadding.left},${dropCapPadding.top},${dropCapPadding.right},${dropCapPadding.bottom}"
           : null,

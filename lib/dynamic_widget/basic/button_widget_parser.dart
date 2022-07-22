@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class RaisedButtonParser extends NewWidgetParser {
+class RaisedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
@@ -20,11 +21,9 @@ class RaisedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
-
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
+    int clickEvent =map['id'];
     var raisedButton = RaisedButton(
       color: map.containsKey('color') ? parseHexColor(map['color']) : null,
       disabledColor: map.containsKey('disabledColor')
@@ -60,11 +59,11 @@ class RaisedButtonParser extends NewWidgetParser {
   String get widgetName => 'RaisedButton';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       'type': widgetName,
       'color': realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
@@ -94,7 +93,7 @@ class RaisedButtonParser extends NewWidgetParser {
   Type get widgetType => RaisedButton;
 }
 
-class ElevatedButtonParser extends NewWidgetParser {
+class ElevatedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
@@ -109,7 +108,7 @@ class ElevatedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     var realWidget = widget as ElevatedButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -135,7 +134,7 @@ class ElevatedButtonParser extends NewWidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -153,14 +152,13 @@ class ElevatedButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
+    int clickEvent =map['id'];
 
     return ElevatedButton(
       onPressed: () {
-        listener!.clickListener!.onClicked(clickEvent);
+        listener.clickListener!.onClicked(clickEvent);
       },
       style: ButtonStyle(
         foregroundColor: map.containsKey('foregroundColor')
@@ -200,7 +198,7 @@ class ElevatedButtonParser extends NewWidgetParser {
   Type get widgetType => ElevatedButton;
 }
 
-class TextButtonParser extends NewWidgetParser {
+class TextButtonParser extends WidgetParser {
 
 
   @override
@@ -217,7 +215,7 @@ class TextButtonParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
     var realWidget = widget as TextButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -243,7 +241,7 @@ class TextButtonParser extends NewWidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    var map = <String, dynamic>{
+    var map = <String, dynamic>{ "id":id,
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -262,10 +260,9 @@ class TextButtonParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
-    String? clickEvent =
-        map.containsKey('click_event') ? map['click_event'] : '';
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
+    int clickEvent =map['id'];
 
     return TextButton(
       onPressed: () {

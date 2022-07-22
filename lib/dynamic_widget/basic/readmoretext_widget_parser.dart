@@ -1,12 +1,13 @@
 import 'package:dynamic_widget/apnaklub_widgets/readmoretext.dart';
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 import '../utils.dart';
 
-class ReadMoreTextParser extends NewWidgetParser {
+class ReadMoreTextParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
@@ -28,9 +29,10 @@ class ReadMoreTextParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var readMoreText = widget as ReadMoreText;
     return {
+      'id':id,
       'type': widgetName,
       'data': readMoreText.data,
       'trimExpandedText': readMoreText.trimExpandedText,
@@ -52,8 +54,8 @@ class ReadMoreTextParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     // delimiter not implemented
     // delimiter = _kEllipsis + ' ', is default
 

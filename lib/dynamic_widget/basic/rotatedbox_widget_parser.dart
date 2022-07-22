@@ -1,10 +1,11 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class RotatedBoxWidgetParser extends NewWidgetParser {
+class RotatedBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'quarterTurns', expectedType: TYPE_INT);
@@ -13,9 +14,9 @@ class RotatedBoxWidgetParser extends NewWidgetParser {
 
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as RotatedBox;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "quarterTurns": realWidget.quarterTurns,
       "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
@@ -23,8 +24,8 @@ class RotatedBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return RotatedBox(
       quarterTurns: map['quarterTurns'],
       child: DynamicWidgetBuilder.buildFromMap(

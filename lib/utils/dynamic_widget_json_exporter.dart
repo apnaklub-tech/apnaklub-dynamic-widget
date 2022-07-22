@@ -1,14 +1,15 @@
 import 'dart:convert';
 
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
-class DynamicWidgetJsonExportor extends StatelessWidget {
+class DynamicWidgetJsonExporter extends StatelessWidget {
   final Widget? child;
 
   final GlobalKey globalKey = GlobalKey();
 
-  DynamicWidgetJsonExportor({
+  DynamicWidgetJsonExporter({
     this.child,
     Key? key,
   }) : super(key: key);
@@ -24,6 +25,7 @@ class DynamicWidgetJsonExportor extends StatelessWidget {
   String exportJsonString() {
     String rt = "failed to export";
     globalKey.currentContext!.visitChildElements((element) {
+      DynamicWidgetBuilder.mID = 0;
       rt = jsonEncode(DynamicWidgetBuilder.export(element.widget, null));
     });
     return rt;

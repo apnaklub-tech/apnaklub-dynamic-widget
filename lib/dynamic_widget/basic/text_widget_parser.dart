@@ -1,13 +1,14 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class TextWidgetParser extends NewWidgetParser {
+class TextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
@@ -23,8 +24,8 @@ class TextWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     String? overflow = map['overflow'];
@@ -78,11 +79,11 @@ class TextWidgetParser extends NewWidgetParser {
   String get widgetName => "Text";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Text;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{
-        "type": "Text",
+      return <String, dynamic>{ "id":id,
+      "type": "Text",
         "data": realWidget.data,
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -97,8 +98,8 @@ class TextWidgetParser extends NewWidgetParser {
       };
     } else {
       var parser = TextSpanParser();
-      return <String, dynamic>{
-        "type": "Text",
+      return <String, dynamic>{ "id":id,
+      "type": "Text",
         "textSpan": parser.export(realWidget.textSpan as TextSpan),
         "textAlign": realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -122,14 +123,13 @@ class TextWidgetParser extends NewWidgetParser {
 }
 
 class TextSpanParser {
-  TextSpan parse(Map<String, dynamic> map, EventListener? listener) {
+  TextSpan parse(Map<String, dynamic> map, EventListener listener) {
 
     var typeAssertions = TypeAssertions('TextSpanParser');
     typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
     typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_MAP);
     typeAssertions.run(map: map, attribute: 'children', expectedType: TYPE_LIST);
-
-    String? clickEvent = map.containsKey("recognizer") ? map['recognizer'] : "";
+    int clickEvent =map['id'];
     var textSpan = TextSpan(
         text: map['text'],
         style: parseTextStyle(map['style']),
@@ -155,7 +155,7 @@ class TextSpanParser {
   }
 
   void parseChildren(
-      TextSpan textSpan, List<dynamic> childrenSpan, EventListener? listener) {
+      TextSpan textSpan, List<dynamic> childrenSpan, EventListener listener) {
     for (var childmap in childrenSpan) {
       textSpan.children!.add(parse(childmap, listener));
     }

@@ -1,19 +1,20 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
 //Creates a box that will become as large as its parent allows.
-class ExpandedSizedBoxWidgetParser extends NewWidgetParser {
+class ExpandedSizedBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     // TODO: implement assertionChecks
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     try {
       return SizedBox.expand(
         child: DynamicWidgetBuilder.buildFromMap(
@@ -32,7 +33,7 @@ class ExpandedSizedBoxWidgetParser extends NewWidgetParser {
   String get widgetName => "ExpandedSizedBox";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     throw UnimplementedError();
   }
 
@@ -41,7 +42,7 @@ class ExpandedSizedBoxWidgetParser extends NewWidgetParser {
   Type get widgetType => UnimplementedType;
 }
 
-class SizedBoxWidgetParser extends NewWidgetParser {
+class SizedBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
@@ -50,8 +51,8 @@ class SizedBoxWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return SizedBox(
       width: map["width"],
       height: map["height"],
@@ -64,9 +65,9 @@ class SizedBoxWidgetParser extends NewWidgetParser {
   String get widgetName => "SizedBox";
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SizedBox;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": "SizedBox",
       "width": realWidget.width,
       "height": realWidget.height,

@@ -2,12 +2,13 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../assertions/assert_constants.dart';
-import '../../new_widget_parser.dart';
+import '../../utils/event_listener.dart';
+import '../../widget_parser.dart';
 
-class VisibilityWidgetParser extends NewWidgetParser {
+class VisibilityWidgetParser extends WidgetParser {
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     bool? visible = map['visible'];
     Map<String, dynamic>? childMap = map['child'];
     
@@ -25,9 +26,10 @@ class VisibilityWidgetParser extends NewWidgetParser {
   String get widgetName => 'Visibility';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Visibility;
     return <String, dynamic>{
+      'id': id,
       'type': widgetName,
       'visible': realWidget.visible,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)

@@ -1,10 +1,11 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class OffstageWidgetParser extends NewWidgetParser {
+class OffstageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'offstage', expectedType: TYPE_BOOL);
@@ -12,9 +13,9 @@ class OffstageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     Offstage realWidget = widget as Offstage;
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "offstage": realWidget.offstage,
       "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
@@ -22,8 +23,8 @@ class OffstageWidgetParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     return Offstage(
       offstage: map.containsKey("offstage") ? map['offstage'] : true,
       child: DynamicWidgetBuilder.buildFromMap(

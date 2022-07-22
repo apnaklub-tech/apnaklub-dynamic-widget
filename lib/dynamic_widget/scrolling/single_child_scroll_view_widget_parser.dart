@@ -1,11 +1,12 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../new_widget_parser.dart';
+import '../../widget_parser.dart';
 
-class SingleChildScrollViewParser extends NewWidgetParser {
+class SingleChildScrollViewParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
@@ -16,7 +17,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SingleChildScrollView;
     String scrollDirection = "vertical";
     if (realWidget.scrollDirection == Axis.horizontal) {
@@ -25,7 +26,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
 
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{
+    return <String, dynamic>{ "id":id,
       "type": widgetName,
       "scrollDirection": scrollDirection,
       "reverse": realWidget.reverse,
@@ -38,8 +39,8 @@ class SingleChildScrollViewParser extends NewWidgetParser {
   }
 
   @override
-  Widget parse(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener? listener) {
+  Widget build(Map<String, dynamic> map, BuildContext buildContext,
+      EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey("scrollDirection") &&
         "horizontal" == map["scrollDirection"]) {
@@ -49,6 +50,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
     var clipBehaviorString = map['clipBehavior'];
 
     try{
+      child = getChild(child, map, buildContext, listener);
       return SingleChildScrollView(
       reverse: map.containsKey('reverse') ? map['reverse'] : false,
       clipBehavior: parseClipBehavior(clipBehaviorString),
@@ -56,11 +58,7 @@ class SingleChildScrollViewParser extends NewWidgetParser {
           ? parseEdgeInsetsGeometry(map["padding"])
           : EdgeInsets.zero,
       scrollDirection: scrollDirection,
-      child: DynamicWidgetBuilder.buildFromMap(
-        map['child'],
-        buildContext,
-        listener,
-      ),
+      child: child
     );}catch(e){
       print('--' * 100);
       print(map);
@@ -68,6 +66,15 @@ class SingleChildScrollViewParser extends NewWidgetParser {
       print('--' * 100);
       throw e;
     }
+  }
+
+  Widget? getChild(Widget? child, Map<String, dynamic> map, BuildContext buildContext, EventListener listener) {
+    child = DynamicWidgetBuilder.buildFromMap(
+      map['child'],
+      buildContext,
+      listener,
+    );
+    return child;
   }
 
   @override
