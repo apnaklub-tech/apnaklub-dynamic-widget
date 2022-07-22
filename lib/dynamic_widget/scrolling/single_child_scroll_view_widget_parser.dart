@@ -17,7 +17,7 @@ class SingleChildScrollViewParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as SingleChildScrollView;
     String scrollDirection = 'vertical';
     if (realWidget.scrollDirection == Axis.horizontal) {

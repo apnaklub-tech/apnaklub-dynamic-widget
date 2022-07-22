@@ -14,7 +14,8 @@ class ExpandedSizedBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     try {
       return SizedBox.expand(
         child: DynamicWidgetBuilder.buildFromMap(
@@ -33,7 +34,8 @@ class ExpandedSizedBoxWidgetParser extends WidgetParser {
   String get widgetName => 'ExpandedSizedBox';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     throw UnimplementedError();
   }
 
@@ -45,14 +47,17 @@ class ExpandedSizedBoxWidgetParser extends WidgetParser {
 class SizedBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return SizedBox(
       width: map['width'],
       height: map['height'],
@@ -65,9 +70,11 @@ class SizedBoxWidgetParser extends WidgetParser {
   String get widgetName => 'SizedBox';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as SizedBox;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id,
       'type': 'SizedBox',
       'width': realWidget.width,
       'height': realWidget.height,

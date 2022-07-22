@@ -54,7 +54,7 @@ class WrapWidgetParser extends WidgetParser {
   String get widgetName => 'Wrap';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Wrap;
     return <String, dynamic>{ 'id':id,
       'type': 'Wrap',

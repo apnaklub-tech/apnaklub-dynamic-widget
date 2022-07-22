@@ -31,7 +31,7 @@ class FittedBoxWidgetParser extends WidgetParser {
   String get widgetName => 'FittedBox';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as FittedBox;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

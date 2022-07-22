@@ -16,7 +16,7 @@ class InkwellWidgetParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
     try {
       var inkwell = InkWell(
         splashColor: map.containsKey('splashColor')
@@ -43,7 +43,7 @@ class InkwellWidgetParser extends WidgetParser {
   String get widgetName => 'Inkwell';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as InkWell;
 
     return <String, dynamic>{ 'id':id,

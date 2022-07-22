@@ -26,7 +26,7 @@ class ExpandedWidgetParser extends WidgetParser {
   String get widgetName => 'Expanded';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Expanded;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

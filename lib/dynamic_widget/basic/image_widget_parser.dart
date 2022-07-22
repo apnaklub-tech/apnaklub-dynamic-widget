@@ -62,7 +62,7 @@ class AssetImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
 
     var widget = Image.asset(
       name,
@@ -97,7 +97,7 @@ class AssetImageWidgetParser extends WidgetParser {
   String get widgetName => 'AssetImage';
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
     if (_isMatchAssetImageType(widget)) {
       var realWidget = widget as Image;
       late AssetImage assetImage;
@@ -273,7 +273,7 @@ class NetworkImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
 
     var widget = Image.network(
       src,
@@ -308,7 +308,7 @@ class NetworkImageWidgetParser extends WidgetParser {
   String get widgetName => 'NetworkImage';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Image;
     late NetworkImage networkImage;
     if (realWidget.image is NetworkImage) {

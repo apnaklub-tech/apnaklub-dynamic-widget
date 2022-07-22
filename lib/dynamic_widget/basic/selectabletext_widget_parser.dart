@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -11,16 +11,21 @@ class SelectableTextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'maxLines', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textSpan', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'maxLines', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textSpan', expectedType: TYPE_MAP);
     typeAssertionDriver(map: map, attribute: 'style', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     int? maxLines = map['maxLines'];
@@ -57,11 +62,13 @@ class SelectableTextWidgetParser extends WidgetParser {
   String get widgetName => 'SelectableText';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as SelectableText;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{ 'id':id,
-      'type': 'SelectableText',
+      return <String, dynamic>{
+        'id': id,
+        'type': 'SelectableText',
         'data': realWidget.data,
         'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -72,8 +79,9 @@ class SelectableTextWidgetParser extends WidgetParser {
       };
     } else {
       var parser = SelectableTextSpanParser();
-      return <String, dynamic>{ 'id':id,
-      'type': 'SelectableText',
+      return <String, dynamic>{
+        'id': id,
+        'type': 'SelectableText',
         'textSpan': parser.export(realWidget.textSpan!),
         'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -90,7 +98,6 @@ class SelectableTextWidgetParser extends WidgetParser {
 
   @override
   Type get widgetType => SelectableText;
-
 }
 
 class SelectableTextSpanParser {
@@ -98,7 +105,7 @@ class SelectableTextSpanParser {
     var typeAssertions = TypeAssertions('SelectableTextSpanParser');
     typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
     typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_MAP);
-    int clickEvent =map['id'];
+    String? clickEvent = map['id'];
     var textSpan = TextSpan(
         text: map['text'],
         style: parseTextStyle(map['style']),

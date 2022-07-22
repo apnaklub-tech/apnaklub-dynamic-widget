@@ -30,7 +30,7 @@ class BaselineWidgetParser extends WidgetParser {
   String get widgetName => 'Baseline';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Baseline;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

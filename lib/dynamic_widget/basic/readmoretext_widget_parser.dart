@@ -28,7 +28,7 @@ class ReadMoreTextParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
     var readMoreText = widget as ReadMoreText;
     return {
       'id':id,

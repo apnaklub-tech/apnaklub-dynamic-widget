@@ -48,7 +48,7 @@ class ContainerWidgetParser extends WidgetParser {
 
   @override
   Map<String, dynamic> export(
-      Widget? widget, BuildContext? buildContext, int id) {
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as IfElseWidget;
     return <String, dynamic>{
       'type': widgetName,

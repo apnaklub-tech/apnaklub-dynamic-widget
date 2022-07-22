@@ -35,7 +35,7 @@ class FlexibleWidgetParser extends WidgetParser {
   String get widgetName => 'Flexible';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Flexible;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

@@ -15,7 +15,7 @@ class LimitedBoxWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     LimitedBox realWidget = widget as LimitedBox;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

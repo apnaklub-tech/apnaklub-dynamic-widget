@@ -23,7 +23,7 @@ class RaisedButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
     var raisedButton = RaisedButton(
       color: map.containsKey('color') ? parseHexColor(map['color']) : null,
       disabledColor: map.containsKey('disabledColor')
@@ -59,7 +59,7 @@ class RaisedButtonParser extends WidgetParser {
   String get widgetName => 'RaisedButton';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
@@ -108,7 +108,7 @@ class ElevatedButtonParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, id) {
     var realWidget = widget as ElevatedButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -154,7 +154,7 @@ class ElevatedButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
 
     return ElevatedButton(
       onPressed: () {
@@ -215,7 +215,7 @@ class TextButtonParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, id) {
     var realWidget = widget as TextButton;
     var color = realWidget.style?.foregroundColor != null
         ? realWidget.style?.foregroundColor
@@ -262,7 +262,7 @@ class TextButtonParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
 
     return TextButton(
       onPressed: () {

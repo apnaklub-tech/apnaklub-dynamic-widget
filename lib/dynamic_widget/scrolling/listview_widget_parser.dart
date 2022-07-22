@@ -71,7 +71,7 @@ class ListViewWidgetParser extends WidgetParser {
   String get widgetName => 'ListView';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = 'vertical';
     if (realWidget._params.scrollDirection == Axis.horizontal) {

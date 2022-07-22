@@ -40,11 +40,11 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
   if (decoration == null) {
     return null;
   }
-  var border = decoration.border as Border;
+  var border = decoration.border as Border?;
   BorderSide? bottom = decoration.border?.bottom;
   BorderSide? top = decoration.border?.top;
-  BorderSide? left = border.left;
-  BorderSide? right = border.right;
+  BorderSide? left = border?.left;
+  BorderSide? right = border?.right;
   // TODO: Implement Image when needed
   // NetworkImage image = decoration.image as NetworkImage;
   // var right = decoration.border?.;
@@ -57,8 +57,8 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
         ? {
             'bottom': bottom != null ? exportBorderSide(bottom) : null,
             'top': top != null ? exportBorderSide(top) : null,
-            'left': bottom != null ? exportBorderSide(left) : null,
-            'right': bottom != null ? exportBorderSide(right) : null,
+            'left': left != null ? exportBorderSide(left) : null,
+            'right': right != null ? exportBorderSide(right) : null,
           }
         : null,
     'borderRadius': exportBorderRadius(decoration.borderRadius as BorderRadius)

@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,20 +11,29 @@ class TextWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'overflow', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'maxLines', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'semanticsLabel', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'softWrap', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textScaleFactor', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'textSpan', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'overflow', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'maxLines', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'semanticsLabel', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'softWrap', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textScaleFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'textSpan', expectedType: TYPE_MAP);
     typeAssertionDriver(map: map, attribute: 'style', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     String? data = map['data'];
     String? textAlignString = map['textAlign'];
     String? overflow = map['overflow'];
@@ -78,11 +87,13 @@ class TextWidgetParser extends WidgetParser {
   String get widgetName => 'Text';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Text;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{ 'id':id,
-      'type': 'Text',
+      return <String, dynamic>{
+        'id': id,
+        'type': 'Text',
         'data': realWidget.data,
         'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -97,8 +108,9 @@ class TextWidgetParser extends WidgetParser {
       };
     } else {
       var parser = TextSpanParser();
-      return <String, dynamic>{ 'id':id,
-      'type': 'Text',
+      return <String, dynamic>{
+        'id': id,
+        'type': 'Text',
         'textSpan': parser.export(realWidget.textSpan as TextSpan),
         'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
@@ -123,12 +135,12 @@ class TextWidgetParser extends WidgetParser {
 
 class TextSpanParser {
   TextSpan parse(Map<String, dynamic> map, EventListener listener) {
-
     var typeAssertions = TypeAssertions('TextSpanParser');
     typeAssertions.run(map: map, attribute: 'text', expectedType: TYPE_STRING);
     typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_MAP);
-    typeAssertions.run(map: map, attribute: 'children', expectedType: TYPE_LIST);
-    int clickEvent =map['id'];
+    typeAssertions.run(
+        map: map, attribute: 'children', expectedType: TYPE_LIST);
+    String? clickEvent = map['id'];
     var textSpan = TextSpan(
         text: map['text'],
         style: parseTextStyle(map['style']),

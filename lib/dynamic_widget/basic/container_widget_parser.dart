@@ -44,7 +44,7 @@ class ContainerWidgetParser extends WidgetParser {
         ? null
         : DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
 
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
     var containerWidget = Container(
       alignment: alignment,
       padding: padding,
@@ -73,7 +73,7 @@ class ContainerWidgetParser extends WidgetParser {
   String get widgetName => 'Container';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Container;
     var padding = realWidget.padding as EdgeInsets?;
     var margin = realWidget.margin as EdgeInsets?;

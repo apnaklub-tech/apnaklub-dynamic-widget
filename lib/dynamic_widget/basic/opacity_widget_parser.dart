@@ -30,7 +30,7 @@ class OpacityWidgetParser extends WidgetParser {
   String get widgetName => 'Opacity';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Opacity;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

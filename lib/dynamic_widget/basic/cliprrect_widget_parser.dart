@@ -39,7 +39,7 @@ class ClipRRectWidgetParser extends WidgetParser {
   String get widgetName => 'ClipRRect';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as ClipRRect;
     var borderRadius = realWidget.borderRadius!;
     return <String, dynamic>{ 'id':id,

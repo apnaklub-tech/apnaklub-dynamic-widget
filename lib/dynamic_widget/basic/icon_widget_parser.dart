@@ -37,7 +37,7 @@ class IconWidgetParser extends WidgetParser {
   String get widgetName => 'Icon';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Icon;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

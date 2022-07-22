@@ -21,11 +21,11 @@ class DynamicWidgetJsonExporter extends StatelessWidget {
     );
   }
 
-  String exportJsonString() {
+  String exportJsonString(BuildContext buildContext) {
     String rt = 'failed to export';
     globalKey.currentContext!.visitChildElements((element) {
       DynamicWidgetBuilder.mID = 0;
-      rt = jsonEncode(DynamicWidgetBuilder.export(element.widget, null));
+      rt = jsonEncode(DynamicWidgetBuilder.export(element.widget, buildContext));
     });
     return rt;
   }

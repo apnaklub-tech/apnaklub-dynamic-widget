@@ -16,7 +16,7 @@ class DividerWidgetParser extends WidgetParser {
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
     Divider realWidget = widget as Divider;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

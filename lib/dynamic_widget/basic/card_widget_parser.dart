@@ -28,7 +28,7 @@ class CardParser extends WidgetParser {
   Type get widgetType => Card;
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, id) {
+  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, id) {
     if (widget != null && widget is Card) {
       final EdgeInsets? margin = widget.margin as EdgeInsets?;
       final String? color =

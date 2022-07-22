@@ -35,7 +35,7 @@ abstract class WidgetParser {
       EventListener listener) {
     assertionChecks(map);
 
-    int? id = map['id'];
+    String? id = map['id'];
 
     if (id != null) {
       /// wrap widget inside [ValueListenableBuilder] only when their is ID
@@ -66,7 +66,7 @@ abstract class WidgetParser {
 
   /// export the runtime widget to json
   Map<String, dynamic>? export(
-      Widget? widget, BuildContext? buildContext, int id);
+      Widget? widget, BuildContext buildContext, int id);
 
   /// match current widget
   Type get widgetType;

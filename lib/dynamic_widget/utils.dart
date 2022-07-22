@@ -1105,7 +1105,7 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
 }
 
 Map<String, dynamic>? exportDropCap(
-    DropCap? dropCap, BuildContext? buildContext, int id) {
+    DropCap? dropCap, BuildContext buildContext, int id) {
   if (dropCap == null) {
     return null;
   }

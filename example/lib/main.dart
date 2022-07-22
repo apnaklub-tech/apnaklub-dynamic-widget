@@ -555,7 +555,7 @@ class PreviewPage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              var exportJsonString = _exportor?.exportJsonString();
+              var exportJsonString = _exportor?.exportJsonString(context);
               if (exportJsonString != null)
                 Navigator.push(
                     context,
@@ -626,7 +626,7 @@ class _JSONExporterState extends State<JSONExporter> {
                   onPressed: () {
                     var exportor =
                         key.currentWidget as DynamicWidgetJsonExporter;
-                    var exportJsonString = exportor.exportJsonString();
+                    var exportJsonString = exportor.exportJsonString(context);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
                             Text('json string was exported to editor page.')));

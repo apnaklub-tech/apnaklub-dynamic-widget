@@ -26,7 +26,7 @@ class AspectRatioWidgetParser extends WidgetParser {
   String get widgetName => 'AspectRatio';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as AspectRatio;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

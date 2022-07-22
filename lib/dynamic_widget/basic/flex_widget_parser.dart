@@ -53,7 +53,7 @@ class FlexWidgetParser extends WidgetParser {
   String get widgetName => 'Flex';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Flex;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

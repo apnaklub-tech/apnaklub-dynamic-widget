@@ -47,7 +47,7 @@ class ListTileWidgetParser extends WidgetParser {
         ? DynamicWidgetBuilder.buildFromMap(
             map['trailing'], buildContext, listener)
         : null;
-    int clickEvent =map['id'];
+    String? clickEvent =map['id'];
     return ListTile(
       isThreeLine: isThreeLine,
       leading: leading,
@@ -68,7 +68,7 @@ class ListTileWidgetParser extends WidgetParser {
   String get widgetName => 'ListTile';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as ListTile;
     var contentPadding = realWidget.contentPadding as EdgeInsets?;
     return <String, dynamic>{ 'id':id,

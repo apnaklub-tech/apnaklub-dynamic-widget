@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../widget_parser.dart';
@@ -9,18 +9,25 @@ import '../../widget_parser.dart';
 class OverflowBoxWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'maxWidth', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'minHeight', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'maxWidth', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'minHeight', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     OverflowBox realWidget = widget as OverflowBox;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id,
       'type': widgetName,
       'alignment': exportAlignment(realWidget.alignment as Alignment?),
       'minWidth': realWidget.minWidth,
@@ -33,7 +40,8 @@ class OverflowBoxWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return OverflowBox(
       alignment: map.containsKey('alignment')
           ? parseAlignment(map['alignment'])!

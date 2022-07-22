@@ -32,7 +32,7 @@ class CenterWidgetParser extends WidgetParser {
   String get widgetName => 'Center';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Center;
     return <String, dynamic>{ 'id':id,
       'type': widgetName,

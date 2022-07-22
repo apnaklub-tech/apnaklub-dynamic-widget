@@ -26,7 +26,7 @@ class VisibilityWidgetParser extends WidgetParser {
   String get widgetName => 'Visibility';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
+  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Visibility;
     return <String, dynamic>{
       'id': id,
