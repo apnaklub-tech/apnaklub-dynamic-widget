@@ -21,15 +21,15 @@ class SafeAreaWidgetParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
-    var left = map.containsKey("left") ? map["left"] : true;
-    var right = map.containsKey("right") ? map["right"] : true;
-    var top = map.containsKey("top") ? map["top"] : true;
-    var bottom = map.containsKey("bottom") ? map["bottom"] : true;
-    var edgeInsets = map.containsKey("minimum")
+    var left = map.containsKey('left') ? map['left'] : true;
+    var right = map.containsKey('right') ? map['right'] : true;
+    var top = map.containsKey('top') ? map['top'] : true;
+    var bottom = map.containsKey('bottom') ? map['bottom'] : true;
+    var edgeInsets = map.containsKey('minimum')
         ? parseEdgeInsetsGeometry(map['minimum'])!
         : EdgeInsets.zero;
-    var maintainBottomViewPadding = map.containsKey("maintainBottomViewPadding")
-        ? map["maintainBottomViewPadding"]
+    var maintainBottomViewPadding = map.containsKey('maintainBottomViewPadding')
+        ? map['maintainBottomViewPadding']
         : false;
     return SafeArea(
       left: left,
@@ -39,28 +39,28 @@ class SafeAreaWidgetParser extends WidgetParser {
       minimum: edgeInsets as EdgeInsets,
       maintainBottomViewPadding: maintainBottomViewPadding,
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener)!,
+          map['child'], buildContext, listener)!,
     );
   }
 
   @override
-  String get widgetName => "SafeArea";
+  String get widgetName => 'SafeArea';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SafeArea;
     var minimum = realWidget.minimum;
-    return <String, dynamic>{ "id":id,
-      "type": "SafeArea",
-      "left": realWidget.left,
-      "right": realWidget.right,
-      "top": realWidget.top,
-      "bottom": realWidget.bottom,
-      "minimum": minimum != null
-          ? "${minimum.left},${minimum.top},${minimum.right},${minimum.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': 'SafeArea',
+      'left': realWidget.left,
+      'right': realWidget.right,
+      'top': realWidget.top,
+      'bottom': realWidget.bottom,
+      'minimum': minimum != null
+          ? '${minimum.left},${minimum.top},${minimum.right},${minimum.bottom}'
           : null,
-      "maintainBottomViewPadding": realWidget.maintainBottomViewPadding,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      'maintainBottomViewPadding': realWidget.maintainBottomViewPadding,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

@@ -14,7 +14,7 @@ class EventListener {
   EventListener(
       {Map<int, WidgetModel>? controller,
         Function(String, String)? onTextChange})
-      : this.controller = controller ?? {} {
+      : controller = controller ?? {} {
     this.onTextChange = onTextChange ?? f;
   }
 
@@ -27,7 +27,7 @@ class NonResponseWidgetClickListener implements ClickListener {
 
   @override
   void onClicked(int? event) {
-    log.info("receiver click event: $event");
-    print("receiver click event: $event");
+    log.info('receiver click event: $event');
+    print('receiver click event: $event');
   }
 }

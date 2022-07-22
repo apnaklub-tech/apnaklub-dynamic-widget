@@ -17,27 +17,27 @@ class PaddingWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Padding(
-      padding: map.containsKey("padding")
-          ? parseEdgeInsetsGeometry(map["padding"])!
+      padding: map.containsKey('padding')
+          ? parseEdgeInsetsGeometry(map['padding'])!
           : EdgeInsets.zero,
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener),
+          map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "Padding";
+  String get widgetName => 'Padding';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Padding;
     var padding = realWidget.padding as EdgeInsets;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "padding": padding != null
-          ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'padding': padding != null
+          ? '${padding.left},${padding.top},${padding.right},${padding.bottom}'
           : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

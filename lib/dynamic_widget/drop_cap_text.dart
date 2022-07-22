@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 enum DropCapMode {
   /// default
@@ -24,18 +23,16 @@ class DropCap extends StatelessWidget {
   final Widget? child;
   final double width, height;
 
-  DropCap({
+  const DropCap({
     Key? key,
     this.child,
     required this.width,
     required this.height,
-  })  : assert(width != null),
-        assert(height != null),
-        super(key: key);
+  })  : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(child: child, width: width, height: height);
+    return SizedBox(width: width, height: height, child: child);
   }
 }
 
@@ -55,7 +52,7 @@ class DropCapText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
 
-  DropCapText(
+  const DropCapText(
       {Key? key,
       required this.data,
       this.selectable,
@@ -73,8 +70,7 @@ class DropCapText extends StatelessWidget {
       this.overflow,
       this.maxLines,
       this.dropCapPosition})
-      : assert(data != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +81,11 @@ class DropCapText extends StatelessWidget {
       fontFamily: Theme.of(context).textTheme.bodyText2!.fontFamily,
     ).merge(style);
 
-    if (data == '')
+    if (data == '') {
       return selectable!
           ? SelectableText(data, style: textStyle)
           : Text(data, style: textStyle);
+    }
 
     TextStyle capStyle = TextStyle(
       color: textStyle.color,
@@ -106,8 +103,9 @@ class DropCapText extends StatelessWidget {
     final String dropCapStr =
         (mdData?.plainText ?? data).substring(0, dropCapChars);
 
-    if (mode == DropCapMode.baseline && dropCap == null)
+    if (mode == DropCapMode.baseline && dropCap == null) {
       return _buildBaseline(context, textStyle, capStyle);
+    }
 
     // custom DropCap
     if (dropCap != null) {
@@ -231,7 +229,7 @@ class DropCapText extends StatelessWidget {
                           maxLines: maxLines,
                           textAlign: textAlign,
                           textDirection: textDirection,
-                          scrollPhysics: NeverScrollableScrollPhysics(),
+                          scrollPhysics: const NeverScrollableScrollPhysics(),
                         )
                       : Text.rich(
                           textSpan,
@@ -264,7 +262,7 @@ class DropCapText extends StatelessWidget {
                             fontSizeFactor:
                                 MediaQuery.of(context).textScaleFactor),
                       ),
-                      scrollPhysics: NeverScrollableScrollPhysics(),
+                      scrollPhysics: const NeverScrollableScrollPhysics(),
                       maxLines: maxLines != null && maxLines! > rows
                           ? maxLines! - rows
                           : null,
@@ -307,7 +305,7 @@ class DropCapText extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: mdData.plainText!.substring(0, dropCapChars),
-                  style: capStyle.merge(TextStyle(height: 0)),
+                  style: capStyle.merge(const TextStyle(height: 0)),
                 ),
                 TextSpan(
                   children: mdData.subchars(dropCapChars).toTextSpanList(),
@@ -324,7 +322,7 @@ class DropCapText extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: mdData.plainText!.substring(0, dropCapChars),
-                  style: capStyle.merge(TextStyle(height: 0)),
+                  style: capStyle.merge(const TextStyle(height: 0)),
                 ),
                 TextSpan(
                   children: mdData.subchars(dropCapChars).toTextSpanList(),
@@ -385,7 +383,7 @@ class MarkdownParser {
 
   MarkdownParser(this.data) {
     plainText = '';
-    spans = [MarkdownSpan(text: '', markups: [], style: TextStyle())];
+    spans = [MarkdownSpan(text: '', markups: [], style: const TextStyle())];
 
     bool bold = false;
     bool italic = false;
@@ -399,10 +397,12 @@ class MarkdownParser {
       final List<Markup> markups = [Markup(markup, isOpening)];
 
       if (bold && markup != MARKUP_BOLD) markups.add(Markup(MARKUP_BOLD, true));
-      if (italic && markup != MARKUP_ITALIC)
+      if (italic && markup != MARKUP_ITALIC) {
         markups.add(Markup(MARKUP_ITALIC, true));
-      if (underline && markup != MARKUP_UNDERLINE)
+      }
+      if (underline && markup != MARKUP_UNDERLINE) {
         markups.add(Markup(MARKUP_UNDERLINE, true));
+      }
 
       spans.add(
         MarkdownSpan(
@@ -436,7 +436,7 @@ class MarkdownParser {
         c += MARKUP_UNDERLINE.length - 1;
       } else {
         spans[spans.length - 1].text += data[c];
-        plainText = plainText ?? "" + data[c];
+        plainText = plainText ?? data[c];
       }
     }
   }

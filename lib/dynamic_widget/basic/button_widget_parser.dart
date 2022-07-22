@@ -48,7 +48,7 @@ class RaisedButtonParser extends WidgetParser {
       child: DynamicWidgetBuilder.buildFromMap(
           map['child'], buildContext, listener),
       onPressed: () {
-        listener!.clickListener!.onClicked(clickEvent);
+        listener.clickListener!.onClicked(clickEvent);
       },
     );
 
@@ -63,7 +63,7 @@ class RaisedButtonParser extends WidgetParser {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{ "id":id,
+    return <String, dynamic>{ 'id':id,
       'type': widgetName,
       'color': realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
@@ -134,7 +134,7 @@ class ElevatedButtonParser extends WidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    return <String, dynamic>{ "id":id,
+    return <String, dynamic>{ 'id':id,
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -241,7 +241,7 @@ class TextButtonParser extends WidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    var map = <String, dynamic>{ "id":id,
+    var map = <String, dynamic>{ 'id':id,
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -266,7 +266,7 @@ class TextButtonParser extends WidgetParser {
 
     return TextButton(
       onPressed: () {
-        listener!.clickListener!.onClicked(clickEvent);
+        listener.clickListener!.onClicked(clickEvent);
       },
       style: ButtonStyle(
         foregroundColor: map.containsKey('foregroundColor')

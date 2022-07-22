@@ -1,4 +1,3 @@
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
@@ -57,33 +56,31 @@ class DropCapTextParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "DropCapText";
+  String get widgetName => 'DropCapText';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as DropCapText;
     var dropCapPadding = realWidget.dropCapPadding;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "data": realWidget.data,
-      "selectable": realWidget.selectable,
-      "mode": exportDropCapMod(realWidget.mode),
-      "style": exportTextStyle(realWidget.style),
-      "dropCapStyle": exportTextStyle(realWidget.dropCapStyle),
-      "textAlign": exportTextAlign(realWidget.textAlign),
-      "dropCap": exportDropCap(realWidget.dropCap, buildContext, id),
-      "dropCapPadding": dropCapPadding != null
-          ? "${dropCapPadding.left},${dropCapPadding.top},${dropCapPadding.right},${dropCapPadding.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'data': realWidget.data,
+      'selectable': realWidget.selectable,
+      'mode': exportDropCapMod(realWidget.mode),
+      'style': exportTextStyle(realWidget.style),
+      'dropCapStyle': exportTextStyle(realWidget.dropCapStyle),
+      'textAlign': exportTextAlign(realWidget.textAlign),
+      'dropCap': exportDropCap(realWidget.dropCap, buildContext, id),
+      'dropCapPadding': dropCapPadding != null
+          ? '${dropCapPadding.left},${dropCapPadding.top},${dropCapPadding.right},${dropCapPadding.bottom}'
           : null,
-      "dropCapChars": realWidget.dropCapChars,
-      "forceNoDescent": realWidget.forceNoDescent,
-      "parseInlineMarkdown": realWidget.parseInlineMarkdown != null
-          ? realWidget.parseInlineMarkdown
-          : false,
-      "textDirection": exportTextDirection(realWidget.textDirection),
-      "overflow": exportTextOverflow(realWidget.overflow),
-      "maxLines": realWidget.maxLines,
-      "dropCapPosition": realWidget.dropCapPosition != null
+      'dropCapChars': realWidget.dropCapChars,
+      'forceNoDescent': realWidget.forceNoDescent,
+      'parseInlineMarkdown': realWidget.parseInlineMarkdown ?? false,
+      'textDirection': exportTextDirection(realWidget.textDirection),
+      'overflow': exportTextOverflow(realWidget.overflow),
+      'maxLines': realWidget.maxLines,
+      'dropCapPosition': realWidget.dropCapPosition != null
           ? exportDropCapPosition(realWidget.dropCapPosition)
           : null
     };

@@ -6,7 +6,6 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import '../../widget_parser.dart';
@@ -32,28 +31,28 @@ class ListViewWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
-    if (map.containsKey("scrollDirection") &&
-        "horizontal" == map["scrollDirection"]) {
+    if (map.containsKey('scrollDirection') &&
+        'horizontal' == map['scrollDirection']) {
       scrollDirection = Axis.horizontal;
     }
 
-    var reverse = map.containsKey("reverse") ? map['reverse'] : false;
-    var shrinkWrap = map.containsKey("shrinkWrap") ? map["shrinkWrap"] : false;
+    var reverse = map.containsKey('reverse') ? map['reverse'] : false;
+    var shrinkWrap = map.containsKey('shrinkWrap') ? map['shrinkWrap'] : false;
     var cacheExtent =
-        map.containsKey("cacheExtent") ? map["cacheExtent"]?.toDouble() : 0.0;
+        map.containsKey('cacheExtent') ? map['cacheExtent']?.toDouble() : 0.0;
     var padding = map.containsKey('padding')
         ? parseEdgeInsetsGeometry(map['padding'])
         : null;
     var itemExtent =
-        map.containsKey("itemExtent") ? map["itemExtent"]?.toDouble() : null;
+        map.containsKey('itemExtent') ? map['itemExtent']?.toDouble() : null;
     var children = DynamicWidgetBuilder.buildWidgets(
         map['children'], buildContext, listener);
-    var pageSize = map.containsKey("pageSize") ? map["pageSize"] : 10;
+    var pageSize = map.containsKey('pageSize') ? map['pageSize'] : 10;
     var loadMoreUrl =
-        map.containsKey("loadMoreUrl") ? map["loadMoreUrl"] : null;
-    var isDemo = map.containsKey("isDemo") ? map["isDemo"] : false;
+        map.containsKey('loadMoreUrl') ? map['loadMoreUrl'] : null;
+    var isDemo = map.containsKey('isDemo') ? map['isDemo'] : false;
 
-    var params = new ListViewParams(
+    var params = ListViewParams(
         scrollDirection: scrollDirection,
         reverse: reverse,
         shrinkWrap: shrinkWrap,
@@ -65,40 +64,40 @@ class ListViewWidgetParser extends WidgetParser {
         loadMoreUrl: loadMoreUrl,
         isDemo: isDemo);
 
-    return new ListViewWidget(params, buildContext);
+    return ListViewWidget(params, buildContext);
   }
 
   @override
-  String get widgetName => "ListView";
+  String get widgetName => 'ListView';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as ListViewWidget;
-    String scrollDirection = "vertical";
+    String scrollDirection = 'vertical';
     if (realWidget._params.scrollDirection == Axis.horizontal) {
-      scrollDirection = "horizontal";
+      scrollDirection = 'horizontal';
     }
 
     var padding = realWidget._params.padding as EdgeInsets?;
     var tempChild =
         DynamicWidgetBuilder.export(widget._params.tempChild, buildContext);
-    return <String, dynamic>{ "id":id,
-      "type": "ListView",
-      "scrollDirection": scrollDirection,
-      "reverse": realWidget._params.reverse ?? false,
-      "shrinkWrap": realWidget._params.shrinkWrap ?? false,
-      "cacheExtent": realWidget._params.cacheExtent ?? 0.0,
-      "padding": padding != null
-          ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': 'ListView',
+      'scrollDirection': scrollDirection,
+      'reverse': realWidget._params.reverse ?? false,
+      'shrinkWrap': realWidget._params.shrinkWrap ?? false,
+      'cacheExtent': realWidget._params.cacheExtent ?? 0.0,
+      'padding': padding != null
+          ? '${padding.left},${padding.top},${padding.right},${padding.bottom}'
           : null,
-      "itemExtent": realWidget._params.itemExtent ?? null,
-      "pageSize": realWidget._params.pageSize ?? 10,
-      "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
-      "isDemo": realWidget._params.isDemo ?? false,
-      "children": DynamicWidgetBuilder.exportWidgets(
+      'itemExtent': realWidget._params.itemExtent,
+      'pageSize': realWidget._params.pageSize ?? 10,
+      'loadMoreUrl': realWidget._params.loadMoreUrl,
+      'isDemo': realWidget._params.isDemo ?? false,
+      'children': DynamicWidgetBuilder.exportWidgets(
           realWidget._params.children ?? [], buildContext),
-      "tempChild": tempChild,
-      "dataKey": realWidget._params.dataKey,
+      'tempChild': tempChild,
+      'dataKey': realWidget._params.dataKey,
     };
   }
 
@@ -110,17 +109,17 @@ class ListViewWidget extends StatefulWidget {
   final ListViewParams _params;
   final BuildContext _buildContext;
 
-  ListViewWidget(this._params, this._buildContext);
+  const ListViewWidget(this._params, this._buildContext);
 
   @override
   _ListViewWidgetState createState() => _ListViewWidgetState(_params);
 }
 
 class _ListViewWidgetState extends State<ListViewWidget> {
-  ListViewParams _params;
-  List<Widget?> _items = [];
+  final ListViewParams _params;
+  final List<Widget?> _items = [];
 
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
   bool isPerformingRequest = false;
 
   //If there are no more items, it should not try to load more data while scroll
@@ -173,12 +172,12 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   }
 
   Widget _buildProgressIndicator() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new Center(
-        child: new Opacity(
+      child: Center(
+        child: Opacity(
           opacity: isPerformingRequest ? 1.0 : 0.0,
-          child: new CircularProgressIndicator(),
+          child: const CircularProgressIndicator(),
         ),
       ),
     );
@@ -206,8 +205,8 @@ class _ListViewWidgetState extends State<ListViewWidget> {
 
   fakeRequest() async {
 // 如果对Future不熟悉，可以参考 https://juejin.im/post/5b2c67a351882574a756f2eb
-    return Future.delayed(Duration(seconds: 2), () {
-      return """
+    return Future.delayed(const Duration(seconds: 2), () {
+      return '''
 [
     {
       "type": "AssetImage",
@@ -230,7 +229,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       "name": "assets/vip.png"
     }
 ]          
-      """;
+      ''';
     });
   }
 
@@ -245,7 +244,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
     } on Exception catch (e) {
       print(e);
     }
-    return "";
+    return '';
   }
 }
 

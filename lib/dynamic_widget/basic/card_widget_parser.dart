@@ -42,7 +42,7 @@ class CardParser extends WidgetParser {
           ? exportClipBehavior(widget.clipBehavior!)
           : null;
       final String? strMargin = margin != null
-          ? "${margin.left},${margin.top},${margin.right},${margin.bottom},"
+          ? '${margin.left},${margin.top},${margin.right},${margin.bottom},'
           : null;
       final bool semanticContainer = widget.semanticContainer;
       final Map<String, dynamic>? childMap =
@@ -51,11 +51,12 @@ class CardParser extends WidgetParser {
       if (widget.shape != null && widget.shape is RoundedRectangleBorder) {
         shape = RoundedRectangleBorderParser.export(
             widget.shape as RoundedRectangleBorder);
-      } else
+      } else {
         shape = null;
+      }
 
       final Map<String, dynamic> map = {
-        "type": widgetName,
+        'type': widgetName,
       };
       if (color != null) map['color'] = color;
       if (shadowColor != null) map['shadowColor'] = shadowColor;
@@ -66,9 +67,10 @@ class CardParser extends WidgetParser {
       map['semanticContainer'] = semanticContainer;
       if (childMap != null) map['child'] = childMap;
       if (shape != null) map['shape'] = shape;
-      map["id"] = id;
+      map['id'] = id;
       return map;
     }
+    return null;
   }
 
   @override

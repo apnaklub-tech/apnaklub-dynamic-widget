@@ -2,7 +2,6 @@ library dynamic_widget;
 
 import 'dart:convert';
 
-import 'package:dynamic_widget/utils/dynamic_value_notifier.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/align_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/appbar_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/aspectratio_widget_parser.dart';
@@ -157,18 +156,16 @@ class DynamicWidgetBuilder {
     initDefaultParsersIfNess();
     try {
       var map = jsonDecode(json);
-      if (listener == null) listener = EventListener();
-      listener.clickListener = listener.clickListener == null
-          ? NonResponseWidgetClickListener()
-          : listener.clickListener;
+      listener ??= EventListener();
+      listener.clickListener = listener.clickListener ?? NonResponseWidgetClickListener();
       var widget = buildFromMap(map, buildContext, listener);
       return widget;
     } on FormatException catch (e) {
-      print("DynamicWidgetBuilder.build - Invalid JSON - $e");
-      throw e;
+      print('DynamicWidgetBuilder.build - Invalid JSON - $e');
+      rethrow;
     } catch (e) {
       print(e);
-      throw e;
+      rethrow;
     }
   }
 
@@ -189,7 +186,7 @@ class DynamicWidgetBuilder {
       if (parser != null) {
         return getParsedWidget(parser, map, buildContext, listener);
       }
-      log.warning("Not support parser type: $widgetName");
+      log.warning('Not support parser type: $widgetName');
       return null;
     } catch (e) {
       print('--' * 100);
@@ -211,7 +208,7 @@ class DynamicWidgetBuilder {
     List<Widget> rt = [];
     for (var value in values) {
       assert(value == null || value is Map<String, dynamic>,
-          "Build Widgets: Expecting Map<String, dynamic> but found ${value.runtimeType} at index ${values.indexOf(value)}");
+          'Build Widgets: Expecting Map<String, dynamic> but found ${value.runtimeType} at index ${values.indexOf(value)}');
       var buildFromMap2 = buildFromMap(value, buildContext, listener);
       if (buildFromMap2 != null) {
         rt.add(buildFromMap2);
@@ -255,7 +252,7 @@ class DynamicWidgetBuilder {
       print('--' * 100);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 }

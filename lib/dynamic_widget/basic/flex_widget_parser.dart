@@ -23,8 +23,8 @@ class FlexWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Flex(
-      direction: map.containsKey("direction")
-          ? parseAxis(map["direction"])
+      direction: map.containsKey('direction')
+          ? parseAxis(map['direction'])
           : Axis.horizontal,
       crossAxisAlignment: map.containsKey('crossAxisAlignment')
           ? parseCrossAxisAlignment(map['crossAxisAlignment'])
@@ -50,32 +50,32 @@ class FlexWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "Flex";
+  String get widgetName => 'Flex';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Flex;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "direction":
-          realWidget.direction == Axis.horizontal ? "horizontal" : "vertical",
-      "crossAxisAlignment":
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'direction':
+          realWidget.direction == Axis.horizontal ? 'horizontal' : 'vertical',
+      'crossAxisAlignment':
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
-      "mainAxisAlignment":
+      'mainAxisAlignment':
           exportMainAxisAlignment(realWidget.mainAxisAlignment),
-      "mainAxisSize":
-          realWidget.mainAxisSize == MainAxisSize.max ? "max" : "min",
-      "textBaseline": realWidget.textBaseline == TextBaseline.alphabetic
-          ? "alphabetic"
-          : "ideographic",
-      "textDirection": realWidget.textDirection != null
+      'mainAxisSize':
+          realWidget.mainAxisSize == MainAxisSize.max ? 'max' : 'min',
+      'textBaseline': realWidget.textBaseline == TextBaseline.alphabetic
+          ? 'alphabetic'
+          : 'ideographic',
+      'textDirection': realWidget.textDirection != null
           ? exportTextDirection(realWidget.textDirection)
           : null,
-      "verticalDirection":
+      'verticalDirection':
           realWidget.verticalDirection == VerticalDirection.down
-              ? "down"
-              : "up",
-      "children":
+              ? 'down'
+              : 'up',
+      'children':
           DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }

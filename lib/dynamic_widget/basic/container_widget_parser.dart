@@ -11,23 +11,23 @@ class ContainerWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(
-        map: map, attribute: "alignment", expectedType: TYPE_STRING);
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
     typeAssertionDriver(
-        map: map, attribute: "color", expectedType: TYPE_STRING);
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
     typeAssertionDriver(
-        map: map, attribute: "constraints", expectedType: TYPE_MAP);
+        map: map, attribute: 'constraints', expectedType: TYPE_MAP);
     typeAssertionDriver(
-        map: map, attribute: "margin", expectedType: TYPE_STRING);
+        map: map, attribute: 'margin', expectedType: TYPE_STRING);
     typeAssertionDriver(
-        map: map, attribute: "padding", expectedType: TYPE_STRING);
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
     typeAssertionDriver(
-        map: map, attribute: "child", expectedType: TYPE_STRINGED_MAP);
+        map: map, attribute: 'child', expectedType: TYPE_STRINGED_MAP);
     typeAssertionDriver(
-        map: map, attribute: "decoration", expectedType: TYPE_MAP);
+        map: map, attribute: 'decoration', expectedType: TYPE_MAP);
     typeAssertionDriver(
-        map: map, attribute: "width", expectedType: TYPE_DOUBLE);
+        map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(
-        map: map, attribute: "height", expectedType: TYPE_DOUBLE);
+        map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
   }
 
   @override
@@ -57,7 +57,7 @@ class ContainerWidgetParser extends WidgetParser {
       child: child,
     );
 
-    if (listener != null && clickEvent != null) {
+    if (clickEvent != null) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -70,7 +70,7 @@ class ContainerWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "Container";
+  String get widgetName => 'Container';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
@@ -78,27 +78,27 @@ class ContainerWidgetParser extends WidgetParser {
     var padding = realWidget.padding as EdgeInsets?;
     var margin = realWidget.margin as EdgeInsets?;
     var constraints = realWidget.constraints;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "alignment": realWidget.alignment != null
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'alignment': realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)
           : null,
-      "padding": padding != null
-          ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
+      'padding': padding != null
+          ? '${padding.left},${padding.top},${padding.right},${padding.bottom}'
           : null,
       //* color in decoration overrides the color causing problems
       // "color": realWidget.color != null
       //     ? realWidget.color!.value.toRadixString(16)
       //     : null,
-      "decoration": exportBoxDecoration(realWidget.decoration != null
+      'decoration': exportBoxDecoration(realWidget.decoration != null
           ? realWidget.decoration as BoxDecoration
           : null),
-      "margin": margin != null
-          ? "${margin.left},${margin.top},${margin.right},${margin.bottom}"
+      'margin': margin != null
+          ? '${margin.left},${margin.top},${margin.right},${margin.bottom}'
           : null,
-      "constraints":
+      'constraints':
           constraints != null ? exportConstraints(constraints) : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

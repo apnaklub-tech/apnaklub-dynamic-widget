@@ -25,7 +25,7 @@ class InkwellWidgetParser extends WidgetParser {
         child: DynamicWidgetBuilder.buildFromMap(
             map['child'], buildContext, listener),
         onTap: () {
-          listener!.clickListener!.onClicked(clickEvent);
+          listener.clickListener!.onClicked(clickEvent);
         },
       );
 
@@ -35,20 +35,20 @@ class InkwellWidgetParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "Inkwell";
+  String get widgetName => 'Inkwell';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as InkWell;
 
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

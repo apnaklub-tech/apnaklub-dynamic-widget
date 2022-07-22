@@ -1,4 +1,3 @@
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
@@ -14,25 +13,25 @@ class TextFormFieldWidgetParser extends WidgetParser {
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     try {
-      print("======================== 1");
+      print('======================== 1');
       TextFormField textFormField = widget as TextFormField;
 
-      print("======================== 2");
+      print('======================== 2');
 
       TextField realWidget =
           (textFormField.builder as UnmanagedRestorationScope).child
               as TextField;
-      print("======================== 3");
+      print('======================== 3');
       return {
-        "type": widgetName,
-        "id": id,
-        "decoration": exportInputDecoration(realWidget.decoration),
-        "textAlign": exportTextAlign(realWidget.textAlign),
-        "cursorColor": exportHexColor(realWidget.cursorColor),
+        'type': widgetName,
+        'id': id,
+        'decoration': exportInputDecoration(realWidget.decoration),
+        'textAlign': exportTextAlign(realWidget.textAlign),
+        'cursorColor': exportHexColor(realWidget.cursorColor),
       };
     } catch (e) {
       print(e.toString());
-      throw e;
+      rethrow;
     }
   }
 
@@ -43,11 +42,11 @@ class TextFormFieldWidgetParser extends WidgetParser {
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
 
-    listener?.controller?[id]?.textEditingController = textEditingController;
+    listener.controller[id]?.textEditingController = textEditingController;
     try {
       return TextFormField(
         controller: textEditingController,
-        onChanged: (text) => listener?.onTextChange!(id, text),
+        onChanged: (text) => listener.onTextChange!(id, text),
 
         // Key? key,
         // FocusNode? focusNode,
@@ -116,12 +115,12 @@ class TextFormFieldWidgetParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "TextFormField";
+  String get widgetName => 'TextFormField';
 
   @override
   Type get widgetType => TextFormField;

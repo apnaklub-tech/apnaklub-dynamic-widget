@@ -5,7 +5,6 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import '../../assertions/assert_constants.dart';
@@ -33,16 +32,16 @@ class GridViewWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
-    if (map.containsKey("scrollDirection") &&
-        "horizontal" == map["scrollDirection"]) {
+    if (map.containsKey('scrollDirection') &&
+        'horizontal' == map['scrollDirection']) {
       scrollDirection = Axis.horizontal;
     }
     int? crossAxisCount = map['crossAxisCount'];
-    bool? reverse = map.containsKey("reverse") ? map['reverse'] : false;
+    bool? reverse = map.containsKey('reverse') ? map['reverse'] : false;
     bool? shrinkWrap =
-        map.containsKey("shrinkWrap") ? map["shrinkWrap"] : false;
+        map.containsKey('shrinkWrap') ? map['shrinkWrap'] : false;
     double? cacheExtent =
-        map.containsKey("cacheExtent") ? map["cacheExtent"]?.toDouble() : 0.0;
+        map.containsKey('cacheExtent') ? map['cacheExtent']?.toDouble() : 0.0;
     EdgeInsetsGeometry? padding = map.containsKey('padding')
         ? parseEdgeInsetsGeometry(map['padding'])
         : null;
@@ -58,10 +57,10 @@ class GridViewWidgetParser extends WidgetParser {
     var children = DynamicWidgetBuilder.buildWidgets(
         map['children'], buildContext, listener);
 
-    var pageSize = map.containsKey("pageSize") ? map["pageSize"] : 10;
+    var pageSize = map.containsKey('pageSize') ? map['pageSize'] : 10;
     var loadMoreUrl =
-        map.containsKey("loadMoreUrl") ? map["loadMoreUrl"] : null;
-    var isDemo = map.containsKey("isDemo") ? map["isDemo"] : false;
+        map.containsKey('loadMoreUrl') ? map['loadMoreUrl'] : null;
+    var isDemo = map.containsKey('isDemo') ? map['isDemo'] : false;
 
     GridViewParams params = GridViewParams(
         crossAxisCount: crossAxisCount,
@@ -81,34 +80,34 @@ class GridViewWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "GridView";
+  String get widgetName => 'GridView';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as GridViewWidget;
-    String scrollDirection = "vertical";
+    String scrollDirection = 'vertical';
     if (realWidget._params.scrollDirection == Axis.horizontal) {
-      scrollDirection = "horizontal";
+      scrollDirection = 'horizontal';
     }
 
     var padding = realWidget._params.padding as EdgeInsets?;
-    return <String, dynamic>{ "id":id,
-      "type": "GridView",
-      "scrollDirection": scrollDirection,
-      "crossAxisCount": realWidget._params.crossAxisCount,
-      "reverse": realWidget._params.reverse ?? false,
-      "shrinkWrap": realWidget._params.shrinkWrap ?? false,
-      "cacheExtent": realWidget._params.cacheExtent ?? 0.0,
-      "padding": padding != null
-          ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': 'GridView',
+      'scrollDirection': scrollDirection,
+      'crossAxisCount': realWidget._params.crossAxisCount,
+      'reverse': realWidget._params.reverse ?? false,
+      'shrinkWrap': realWidget._params.shrinkWrap ?? false,
+      'cacheExtent': realWidget._params.cacheExtent ?? 0.0,
+      'padding': padding != null
+          ? '${padding.left},${padding.top},${padding.right},${padding.bottom}'
           : null,
-      "mainAxisSpacing": realWidget._params.mainAxisSpacing ?? 0.0,
-      "crossAxisSpacing": realWidget._params.crossAxisSpacing ?? 0.0,
-      "childAspectRatio": realWidget._params.childAspectRatio ?? 1.0,
-      "pageSize": realWidget._params.pageSize ?? 10,
-      "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
-      "isDemo": realWidget._params.isDemo ?? false,
-      "children": DynamicWidgetBuilder.exportWidgets(
+      'mainAxisSpacing': realWidget._params.mainAxisSpacing ?? 0.0,
+      'crossAxisSpacing': realWidget._params.crossAxisSpacing ?? 0.0,
+      'childAspectRatio': realWidget._params.childAspectRatio ?? 1.0,
+      'pageSize': realWidget._params.pageSize ?? 10,
+      'loadMoreUrl': realWidget._params.loadMoreUrl,
+      'isDemo': realWidget._params.isDemo ?? false,
+      'children': DynamicWidgetBuilder.exportWidgets(
           realWidget._params.children!, buildContext)
     };
   }
@@ -122,17 +121,17 @@ class GridViewWidget extends StatefulWidget {
 
   final BuildContext _buildContext;
 
-  GridViewWidget(this._params, this._buildContext);
+  const GridViewWidget(this._params, this._buildContext);
 
   @override
   _GridViewWidgetState createState() => _GridViewWidgetState(_params);
 }
 
 class _GridViewWidgetState extends State<GridViewWidget> {
-  GridViewParams _params;
-  List<Widget?> _items = [];
+  final GridViewParams _params;
+  final List<Widget?> _items = [];
 
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
   bool isPerformingRequest = false;
 
   //If there are no more items, it should not try to load more data while scroll
@@ -185,18 +184,18 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   }
 
   Widget _buildProgressIndicator() {
-    return new SliverToBoxAdapter(
+    return SliverToBoxAdapter(
       child: Visibility(
+        visible: !loadCompleted,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: new Center(
-            child: new Opacity(
+          child: Center(
+            child: Opacity(
               opacity: isPerformingRequest ? 1.0 : 0.0,
-              child: new CircularProgressIndicator(),
+              child: const CircularProgressIndicator(),
             ),
           ),
         ),
-        visible: !loadCompleted,
       ),
     );
   }
@@ -221,7 +220,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
       ),
     );
 
-    return new CustomScrollView(
+    return CustomScrollView(
       slivers: <Widget>[sliverGrid, footer],
       controller: _scrollController,
       scrollDirection: _params.scrollDirection ?? Axis.vertical,
@@ -233,8 +232,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
 
   fakeRequest() async {
 // 如果对Future不熟悉，可以参考 https://juejin.im/post/5b2c67a351882574a756f2eb
-    return Future.delayed(Duration(seconds: 2), () {
-      return """
+    return Future.delayed(const Duration(seconds: 2), () {
+      return '''
 [
     {
       "type": "AssetImage",
@@ -253,7 +252,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
       "name": "assets/vip.png"
     }
 ]          
-      """;
+      ''';
     });
   }
 
@@ -268,7 +267,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
     } on Exception catch (e) {
       print(e);
     }
-    return "";
+    return '';
   }
 }
 

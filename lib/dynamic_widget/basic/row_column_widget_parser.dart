@@ -50,35 +50,35 @@ class RowWidgetParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "Row";
+  String get widgetName => 'Row';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Row;
-    return <String, dynamic>{ "id":id,
-      "type": "Row",
-      "crossAxisAlignment":
+    return <String, dynamic>{ 'id':id,
+      'type': 'Row',
+      'crossAxisAlignment':
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
-      "mainAxisAlignment":
+      'mainAxisAlignment':
           exportMainAxisAlignment(realWidget.mainAxisAlignment),
-      "mainAxisSize":
-          realWidget.mainAxisSize == MainAxisSize.max ? "max" : "min",
-      "textBaseline": realWidget.textBaseline == TextBaseline.alphabetic
-          ? "alphabetic"
-          : "ideographic",
-      "textDirection": realWidget.textDirection != null
+      'mainAxisSize':
+          realWidget.mainAxisSize == MainAxisSize.max ? 'max' : 'min',
+      'textBaseline': realWidget.textBaseline == TextBaseline.alphabetic
+          ? 'alphabetic'
+          : 'ideographic',
+      'textDirection': realWidget.textDirection != null
           ? exportTextDirection(realWidget.textDirection)
           : null,
-      "verticalDirection":
+      'verticalDirection':
           realWidget.verticalDirection == VerticalDirection.down
-              ? "down"
-              : "up",
-      "children":
+              ? 'down'
+              : 'up',
+      'children':
           DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }
@@ -131,35 +131,35 @@ class ColumnWidgetParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "Column";
+  String get widgetName => 'Column';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Column;
-    return <String, dynamic>{ "id":id,
-      "type": "Column",
-      "crossAxisAlignment":
+    return <String, dynamic>{ 'id':id,
+      'type': 'Column',
+      'crossAxisAlignment':
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
-      "mainAxisAlignment":
+      'mainAxisAlignment':
           exportMainAxisAlignment(realWidget.mainAxisAlignment),
-      "mainAxisSize":
-          realWidget.mainAxisSize == MainAxisSize.max ? "max" : "min",
-      "textBaseline": realWidget.textBaseline == TextBaseline.alphabetic
-          ? "alphabetic"
-          : "ideographic",
-      "textDirection": realWidget.textDirection != null
+      'mainAxisSize':
+          realWidget.mainAxisSize == MainAxisSize.max ? 'max' : 'min',
+      'textBaseline': realWidget.textBaseline == TextBaseline.alphabetic
+          ? 'alphabetic'
+          : 'ideographic',
+      'textDirection': realWidget.textDirection != null
           ? exportTextDirection(realWidget.textDirection)
           : null,
-      "verticalDirection":
+      'verticalDirection':
           realWidget.verticalDirection == VerticalDirection.down
-              ? "down"
-              : "up",
-      "children":
+              ? 'down'
+              : 'up',
+      'children':
           DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext),
     };
   }

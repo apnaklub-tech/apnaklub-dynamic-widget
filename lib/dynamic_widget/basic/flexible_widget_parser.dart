@@ -23,25 +23,25 @@ class FlexibleWidgetParser extends WidgetParser {
         : DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
 
     var flexibleWidget = Flexible(
-      child: child ?? SizedBox.shrink(),
       fit: parseFlexFit(map['fit']),
-      flex: map['flex'] != null? map['flex']:1,
+      flex: map['flex'] ?? 1,
+      child: child ?? const SizedBox.shrink(),
     );
 
     return flexibleWidget;
   }
 
   @override
-  String get widgetName => "Flexible";
+  String get widgetName => 'Flexible';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Flexible;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "flex": realWidget.flex,
-      "fit": exportFlexFit(realWidget.fit),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'flex': realWidget.flex,
+      'fit': exportFlexFit(realWidget.fit),
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

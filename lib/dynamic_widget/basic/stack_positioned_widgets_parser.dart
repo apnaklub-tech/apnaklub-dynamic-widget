@@ -22,32 +22,32 @@ class PositionedWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Positioned(
+      top: map.containsKey('top') ? map['top']?.toDouble() : null,
+      right: map.containsKey('right') ? map['right']?.toDouble() : null,
+      bottom: map.containsKey('bottom') ? map['bottom']?.toDouble() : null,
+      left: map.containsKey('left') ? map['left']?.toDouble() : null,
+      width: map.containsKey('width') ? map['width']?.toDouble() : null,
+      height: map.containsKey('height') ? map['height']?.toDouble() : null,
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener)!,
-      top: map.containsKey("top") ? map["top"]?.toDouble() : null,
-      right: map.containsKey("right") ? map["right"]?.toDouble() : null,
-      bottom: map.containsKey("bottom") ? map["bottom"]?.toDouble() : null,
-      left: map.containsKey("left") ? map["left"]?.toDouble() : null,
-      width: map.containsKey("width") ? map["width"]?.toDouble() : null,
-      height: map.containsKey("height") ? map["height"]?.toDouble() : null,
+          map['child'], buildContext, listener)!,
     );
   }
 
   @override
-  String get widgetName => "Positioned";
+  String get widgetName => 'Positioned';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Positioned;
-    return <String, dynamic>{ "id":id,
-      "type": "Positioned",
-      "top": realWidget.top ?? null,
-      "right": realWidget.right ?? null,
-      "bottom": realWidget.bottom ?? null,
-      "left": realWidget.left ?? null,
-      "width": realWidget.width ?? null,
-      "height": realWidget.height ?? null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': 'Positioned',
+      'top': realWidget.top,
+      'right': realWidget.right,
+      'bottom': realWidget.bottom,
+      'left': realWidget.left,
+      'width': realWidget.width,
+      'height': realWidget.height,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
@@ -58,26 +58,26 @@ class PositionedWidgetParser extends WidgetParser {
 class StackWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: "alignment", expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: "textDirection", expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: "fit", expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: "clipBehavior", expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: "children", expectedType: TYPE_LIST);
+    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'fit', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'clipBehavior', expectedType: TYPE_STRING);
+    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Stack(
-      alignment: map.containsKey("alignment")
-          ? parseAlignment(map["alignment"])!
+      alignment: map.containsKey('alignment')
+          ? parseAlignment(map['alignment'])!
           : AlignmentDirectional.topStart,
-      textDirection: map.containsKey("textDirection")
-          ? parseTextDirection(map["textDirection"])
+      textDirection: map.containsKey('textDirection')
+          ? parseTextDirection(map['textDirection'])
           : null,
-      fit: map.containsKey("fit") ? parseStackFit(map["fit"])! : StackFit.loose,
-      clipBehavior: map.containsKey("clipBehavior")
-          ? parseClip(map["clipBehavior"])!
+      fit: map.containsKey('fit') ? parseStackFit(map['fit'])! : StackFit.loose,
+      clipBehavior: map.containsKey('clipBehavior')
+          ? parseClip(map['clipBehavior'])!
           : Clip.hardEdge,
       children: DynamicWidgetBuilder.buildWidgets(
           map['children'], buildContext, listener),
@@ -85,21 +85,21 @@ class StackWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "Stack";
+  String get widgetName => 'Stack';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Stack;
-    return <String, dynamic>{ "id":id,
-      "type": "Stack",
-      "alignment": realWidget.alignment is AlignmentDirectional
+    return <String, dynamic>{ 'id':id,
+      'type': 'Stack',
+      'alignment': realWidget.alignment is AlignmentDirectional
           ? exportAlignmentDirectional(
               realWidget.alignment as AlignmentDirectional)
           : exportAlignment(realWidget.alignment as Alignment),
-      "textDirection": exportTextDirection(realWidget.textDirection),
-      "fit": exportStackFit(realWidget.fit),
-      "clipBehavior": exportClipBehavior(realWidget.clipBehavior),
-      "children":
+      'textDirection': exportTextDirection(realWidget.textDirection),
+      'fit': exportStackFit(realWidget.fit),
+      'clipBehavior': exportClipBehavior(realWidget.clipBehavior),
+      'children':
           DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
     };
   }

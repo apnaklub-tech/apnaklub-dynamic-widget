@@ -19,12 +19,12 @@ class IndexedStackWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return IndexedStack(
-      index: map.containsKey("index") ? map["index"] : 0,
-      alignment: map.containsKey("alignment")
-          ? parseAlignment(map["alignment"])!
+      index: map.containsKey('index') ? map['index'] : 0,
+      alignment: map.containsKey('alignment')
+          ? parseAlignment(map['alignment'])!
           : AlignmentDirectional.topStart,
-      textDirection: map.containsKey("textDirection")
-          ? parseTextDirection(map["textDirection"])
+      textDirection: map.containsKey('textDirection')
+          ? parseTextDirection(map['textDirection'])
           : null,
       children: DynamicWidgetBuilder.buildWidgets(
           map['children'], buildContext, listener),
@@ -32,21 +32,21 @@ class IndexedStackWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "IndexedStack";
+  String get widgetName => 'IndexedStack';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as IndexedStack;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "index": realWidget.index,
-      "alignment": realWidget.alignment != null
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'index': realWidget.index,
+      'alignment': realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)
           : AlignmentDirectional.topStart,
-      "textDirection": realWidget.textDirection != null
+      'textDirection': realWidget.textDirection != null
           ? exportTextDirection(realWidget.textDirection)
           : null,
-      "children":
+      'children':
           DynamicWidgetBuilder.exportWidgets(realWidget.children, buildContext)
     };
   }

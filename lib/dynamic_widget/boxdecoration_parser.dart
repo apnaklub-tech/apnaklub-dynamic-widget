@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
@@ -24,7 +23,7 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? boxDecoration) {
   typeAssertions.run(map: border, attribute: 'bottom', expectedType: TYPE_MAP);
 
   print(border);
-  BoxDecoration _boxDecoration = BoxDecoration(
+  return BoxDecoration(
       color: parseHexColor(boxDecoration['color']),
       // TODO: Implement image in decoration when needed
       // image: map['image'] == null ? null : NetworkImage(src),
@@ -35,7 +34,6 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? boxDecoration) {
         bottom: parseBorderSide(border['bottom']),
       ),
       borderRadius: parseBorderRadius(boxDecoration['borderRadius']));
-  return _boxDecoration;
 }
 
 Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
@@ -51,19 +49,19 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
   // NetworkImage image = decoration.image as NetworkImage;
   // var right = decoration.border?.;
   Map<String, dynamic> map = {
-    "color": decoration.color != null
+    'color': decoration.color != null
         ? decoration.color!.value.toRadixString(16)
         : null,
     // "image": image.url,
-    "border": decoration.border != null
+    'border': decoration.border != null
         ? {
-            "bottom": bottom != null ? exportBorderSide(bottom) : null,
-            "top": top != null ? exportBorderSide(top) : null,
-            "left": bottom != null ? exportBorderSide(left) : null,
-            "right": bottom != null ? exportBorderSide(right) : null,
+            'bottom': bottom != null ? exportBorderSide(bottom) : null,
+            'top': top != null ? exportBorderSide(top) : null,
+            'left': bottom != null ? exportBorderSide(left) : null,
+            'right': bottom != null ? exportBorderSide(right) : null,
           }
         : null,
-    "borderRadius": exportBorderRadius(decoration.borderRadius as BorderRadius)
+    'borderRadius': exportBorderRadius(decoration.borderRadius as BorderRadius)
   };
 
   return map;

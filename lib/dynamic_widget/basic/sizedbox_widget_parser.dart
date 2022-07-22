@@ -18,19 +18,19 @@ class ExpandedSizedBoxWidgetParser extends WidgetParser {
     try {
       return SizedBox.expand(
         child: DynamicWidgetBuilder.buildFromMap(
-            map["child"], buildContext, listener),
+            map['child'], buildContext, listener),
       );
     } catch (e) {
       print('--' * 100);
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "ExpandedSizedBox";
+  String get widgetName => 'ExpandedSizedBox';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
@@ -54,24 +54,24 @@ class SizedBoxWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return SizedBox(
-      width: map["width"],
-      height: map["height"],
+      width: map['width'],
+      height: map['height'],
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener),
+          map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "SizedBox";
+  String get widgetName => 'SizedBox';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SizedBox;
-    return <String, dynamic>{ "id":id,
-      "type": "SizedBox",
-      "width": realWidget.width,
-      "height": realWidget.height,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': 'SizedBox',
+      'width': realWidget.width,
+      'height': realWidget.height,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

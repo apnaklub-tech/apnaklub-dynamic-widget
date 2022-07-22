@@ -13,7 +13,7 @@ class TypeAssertions {
 
   void assertInt(dynamic v) {
     String msg =
-      "$widgetName:$subWidget: Expecting int as type, but found ${v.runtimeType}";
+      '$widgetName:$subWidget: Expecting int as type, but found ${v.runtimeType}';
 
   bool condition = true;
     try {
@@ -34,7 +34,7 @@ class TypeAssertions {
 
   void assertDouble(dynamic v) {
     String msg =
-        "$widgetName:$subWidget: Expecting double as type, but found ${v.runtimeType}";
+        '$widgetName:$subWidget: Expecting double as type, but found ${v.runtimeType}';
 
     bool condition = true;
     try {
@@ -67,12 +67,12 @@ class TypeAssertions {
       assert(
           false,
           toWarning(
-              "${widgetName}WidgetParser:$subWidget: For $attribute null is not allowed"));
+              '${widgetName}WidgetParser:$subWidget: For $attribute null is not allowed'));
       return;
     }
 
     String msg =
-        "${widgetName}WidgetParser:$subWidget: Expecting $attribute as type of $expectedType but found ${map[attribute].runtimeType}";
+        '${widgetName}WidgetParser:$subWidget: Expecting $attribute as type of $expectedType but found ${map[attribute].runtimeType}';
     bool condition = true;
 
     switch (expectedType) {

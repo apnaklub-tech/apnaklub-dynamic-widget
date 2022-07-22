@@ -5,8 +5,6 @@ import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/utils/dynamic_widget_json_exporter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -72,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   ElevatedButton(
-                    child: Text("Dynamic Widget Json String Export Example"),
+                    child: Text('Dynamic Widget Json String Export Example'),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -92,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               delegate: SliverChildListDelegate([
                 ElevatedButton(
-                  child: Text("Container"),
+                  child: Text('Container'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -102,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Row"),
+                  child: Text('Row'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -111,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Column"),
+                  child: Text('Column'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -120,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Text"),
+                  child: Text('Text'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -129,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SelectableText"),
+                  child: Text('SelectableText'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -139,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("TextSpan"),
+                  child: Text('TextSpan'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -149,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Icon"),
+                  child: Text('Icon'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -158,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("DropCapText"),
+                  child: Text('DropCapText'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -168,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("DropCapText with Image"),
+                  child: Text('DropCapText with Image'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -178,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("RaisedButton"),
+                  child: Text('RaisedButton'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -188,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("ElevatedButton"),
+                  child: Text('ElevatedButton'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -198,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("TextButton"),
+                  child: Text('TextButton'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -208,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Asset Image"),
+                  child: Text('Asset Image'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -218,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Network Image"),
+                  child: Text('Network Image'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -228,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Placeholder"),
+                  child: Text('Placeholder'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -238,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("GridView"),
+                  child: Text('GridView'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -248,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("ListView"),
+                  child: Text('ListView'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -258,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("PageView"),
+                  child: Text('PageView'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -268,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Expanded"),
+                  child: Text('Expanded'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -278,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("ListView Auto load more"),
+                  child: Text('ListView Auto load more'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -288,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("GridView Auto load more"),
+                  child: Text('GridView Auto load more'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -298,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Stack and Positioned"),
+                  child: Text('Stack and Positioned'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -307,7 +305,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("IndexedStack"),
+                  child: Text('IndexedStack'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -317,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SizedBox"),
+                  child: Text('SizedBox'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -327,7 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Opacity"),
+                  child: Text('Opacity'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -336,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Wrap"),
+                  child: Text('Wrap'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -345,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("ClipRRect"),
+                  child: Text('ClipRRect'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -355,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SafeArea"),
+                  child: Text('SafeArea'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -365,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("ListTile"),
+                  child: Text('ListTile'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -375,7 +373,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Scaffold & AppBar"),
+                  child: Text('Scaffold & AppBar'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -385,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("LimitedBox"),
+                  child: Text('LimitedBox'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -395,7 +393,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Offstage"),
+                  child: Text('Offstage'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -405,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("OverflowBox"),
+                  child: Text('OverflowBox'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -415,7 +413,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Divider"),
+                  child: Text('Divider'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -424,7 +422,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("RotatedBox"),
+                  child: Text('RotatedBox'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -434,7 +432,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Card"),
+                  child: Text('Card'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -443,7 +441,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SingleChildScrollView"),
+                  child: Text('SingleChildScrollView'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -483,7 +481,7 @@ class _CodeEditorPageState extends State<CodeEditorPage> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("Code Editor"),
+          title: Text('Code Editor'),
         ),
         body: Column(
           children: <Widget>[
@@ -504,7 +502,7 @@ class _CodeEditorPageState extends State<CodeEditorPage> {
               height: 8,
             ),
             ElevatedButton(
-              child: Text("Preview"),
+              child: Text('Preview'),
               onPressed: () {
                 setState(() {
                   jsonString = controller.text;
@@ -536,7 +534,7 @@ class PreviewPage extends StatelessWidget {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Preview"),
+        title: Text('Preview'),
       ),
       body: Column(
         children: [
@@ -551,7 +549,7 @@ class PreviewPage extends StatelessWidget {
                     ? _exportor = DynamicWidgetJsonExporter(
                         child: snapshot.data,
                       )
-                    : Text("Loading...");
+                    : Text('Loading...');
               },
             ),
           ),
@@ -565,7 +563,7 @@ class PreviewPage extends StatelessWidget {
                         builder: (context) =>
                             CodeEditorPage(exportJsonString)));
             },
-            child: Text("export json code"),
+            child: Text('export json code'),
           )
         ],
       ),
@@ -581,7 +579,7 @@ class PreviewPage extends StatelessWidget {
 class DefaultClickListener implements ClickListener {
   @override
   void onClicked(String? event) {
-    print("Receive click event: " + (event == null ? "" : event));
+    print('Receive click event: ' + (event == null ? '' : event));
   }
 }
 
@@ -599,7 +597,7 @@ class _JSONExporterState extends State<JSONExporter> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("export example"),
+        title: Text('export example'),
       ),
       body: Builder(
         builder: (context) => Container(
@@ -612,9 +610,9 @@ class _JSONExporterState extends State<JSONExporter> {
                   child: Stack(
                     alignment: Alignment.topLeft,
                     children: [
-                      Image.asset("assets/vip.png"),
+                      Image.asset('assets/vip.png'),
                       Positioned(
-                        child: Image.asset("assets/vip.png"),
+                        child: Image.asset('assets/vip.png'),
                         top: 50,
                         left: 50,
                       )
@@ -624,14 +622,14 @@ class _JSONExporterState extends State<JSONExporter> {
               ),
               Container(
                 child: ElevatedButton(
-                  child: Text("Export"),
+                  child: Text('Export'),
                   onPressed: () {
                     var exportor =
                         key.currentWidget as DynamicWidgetJsonExporter;
                     var exportJsonString = exportor.exportJsonString();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
-                            Text("json string was exported to editor page.")));
+                            Text('json string was exported to editor page.')));
                     Future.delayed(Duration(seconds: 1), () {
                       Navigator.push(
                           context,

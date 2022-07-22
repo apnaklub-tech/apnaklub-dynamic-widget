@@ -52,7 +52,7 @@ String exportIconGuessFavorMaterial(IconData? iconData) {
       return entry.key;
     }
   }
-  return "android";
+  return 'android';
 }
 
 // Kinda self explanatory, no?

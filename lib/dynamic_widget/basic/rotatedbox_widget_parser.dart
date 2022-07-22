@@ -16,10 +16,10 @@ class RotatedBoxWidgetParser extends WidgetParser {
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as RotatedBox;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "quarterTurns": realWidget.quarterTurns,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'quarterTurns': realWidget.quarterTurns,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext),
     };
   }
 
@@ -29,12 +29,12 @@ class RotatedBoxWidgetParser extends WidgetParser {
     return RotatedBox(
       quarterTurns: map['quarterTurns'],
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener),
+          map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "RotatedBox";
+  String get widgetName => 'RotatedBox';
 
   @override
   Type get widgetType => RotatedBox;

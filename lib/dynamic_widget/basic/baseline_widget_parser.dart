@@ -17,28 +17,28 @@ class BaselineWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return Baseline(
-      baseline: map["baseline"]?.toDouble(),
-      baselineType: map["baselineType"] == "alphabetic"
+      baseline: map['baseline']?.toDouble(),
+      baselineType: map['baselineType'] == 'alphabetic'
           ? TextBaseline.alphabetic
           : TextBaseline.ideographic,
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener),
+          map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "Baseline";
+  String get widgetName => 'Baseline';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Baseline;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "baseline": realWidget.baseline,
-      "baselineType": realWidget.baselineType == TextBaseline.alphabetic
-          ? "alphabetic"
-          : "ideographic",
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'baseline': realWidget.baseline,
+      'baselineType': realWidget.baselineType == TextBaseline.alphabetic
+          ? 'alphabetic'
+          : 'ideographic',
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

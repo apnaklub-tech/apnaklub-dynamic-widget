@@ -17,15 +17,15 @@ class LimitedBoxWidgetParser extends WidgetParser {
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     LimitedBox realWidget = widget as LimitedBox;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "maxWidth": realWidget.maxWidth == double.infinity
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'maxWidth': realWidget.maxWidth == double.infinity
           ? infinity
           : realWidget.maxWidth,
-      "maxHeight": realWidget.maxHeight == double.infinity
+      'maxHeight': realWidget.maxHeight == double.infinity
           ? infinity
           : realWidget.maxHeight,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 
@@ -33,16 +33,16 @@ class LimitedBoxWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return LimitedBox(
-      maxWidth: map.containsKey("maxWidth") ? map['maxWidth'] : double.infinity,
+      maxWidth: map.containsKey('maxWidth') ? map['maxWidth'] : double.infinity,
       maxHeight:
-          map.containsKey("maxHeight") ? map['maxHeight'] : double.infinity,
+          map.containsKey('maxHeight') ? map['maxHeight'] : double.infinity,
       child: DynamicWidgetBuilder.buildFromMap(
           map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "LimitedBox";
+  String get widgetName => 'LimitedBox';
 
   @override
   Type get widgetType => LimitedBox;

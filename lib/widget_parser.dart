@@ -35,7 +35,7 @@ abstract class WidgetParser {
       EventListener listener) {
     assertionChecks(map);
 
-    int? id = map["id"];
+    int? id = map['id'];
 
     if (id != null) {
       /// wrap widget inside [ValueListenableBuilder] only when their is ID

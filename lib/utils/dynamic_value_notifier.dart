@@ -10,7 +10,7 @@ class DynamicValueNotifier extends ValueNotifier<Map<String, dynamic>> {
       notifyListeners();
       return true;
     } catch (e) {
-      print(toWarning("ERROR: updateValue $e"));
+      print(toWarning('ERROR: updateValue $e'));
       return false;
     }
   }
@@ -25,7 +25,7 @@ class DynamicValueNotifier extends ValueNotifier<Map<String, dynamic>> {
       notifyListeners();
       return true;
     } catch (e) {
-      print(toWarning("ERROR: updateMultiple $e"));
+      print(toWarning('ERROR: updateMultiple $e'));
       return false;
     }
   }
@@ -38,7 +38,7 @@ class DynamicValueNotifier extends ValueNotifier<Map<String, dynamic>> {
       notifyListeners();
       return true;
     } catch (e) {
-      print(toWarning("ERROR: updateMultiple $e"));
+      print(toWarning('ERROR: updateMultiple $e'));
       return false;
     }
   }
@@ -49,7 +49,7 @@ class DynamicValueNotifier extends ValueNotifier<Map<String, dynamic>> {
       notifyListeners();
       return true;
     } catch (e) {
-      print(toWarning("ERROR: updateValue $e"));
+      print(toWarning('ERROR: updateValue $e'));
       return false;
     }
   }
@@ -62,7 +62,7 @@ class DynamicValueNotifier extends ValueNotifier<Map<String, dynamic>> {
       notifyListeners();
       return true;
     } catch (e) {
-      print(toWarning("ERROR: updateValue $e"));
+      print(toWarning('ERROR: updateValue $e'));
       return false;
     }
   }

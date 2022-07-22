@@ -1,9 +1,7 @@
-import 'dart:ui';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:flutter/widgets.dart';
@@ -14,22 +12,22 @@ TextAlign parseTextAlign(String? textAlignString) {
   //left the system decide
   TextAlign textAlign = TextAlign.start;
   switch (textAlignString) {
-    case "left":
+    case 'left':
       textAlign = TextAlign.left;
       break;
-    case "right":
+    case 'right':
       textAlign = TextAlign.right;
       break;
-    case "center":
+    case 'center':
       textAlign = TextAlign.center;
       break;
-    case "justify":
+    case 'justify':
       textAlign = TextAlign.justify;
       break;
-    case "start":
+    case 'start':
       textAlign = TextAlign.start;
       break;
-    case "end":
+    case 'end':
       textAlign = TextAlign.end;
       break;
     default:
@@ -39,24 +37,24 @@ TextAlign parseTextAlign(String? textAlignString) {
 }
 
 String exportTextAlign(TextAlign? textAlign) {
-  String rt = "start";
+  String rt = 'start';
   if (textAlign == TextAlign.left) {
-    rt = "left";
+    rt = 'left';
   }
   if (textAlign == TextAlign.right) {
-    rt = "right";
+    rt = 'right';
   }
   if (textAlign == TextAlign.center) {
-    rt = "center";
+    rt = 'center';
   }
   if (textAlign == TextAlign.justify) {
-    rt = "justify";
+    rt = 'justify';
   }
   if (textAlign == TextAlign.start) {
-    rt = "start";
+    rt = 'start';
   }
   if (textAlign == TextAlign.end) {
-    rt = "end";
+    rt = 'end';
   }
   return rt;
 }
@@ -64,13 +62,13 @@ String exportTextAlign(TextAlign? textAlign) {
 TextOverflow? parseTextOverflow(String? textOverflowString) {
   TextOverflow? textOverflow;
   switch (textOverflowString) {
-    case "ellipsis":
+    case 'ellipsis':
       textOverflow = TextOverflow.ellipsis;
       break;
-    case "clip":
+    case 'clip':
       textOverflow = TextOverflow.clip;
       break;
-    case "fade":
+    case 'fade':
       textOverflow = TextOverflow.fade;
       break;
     default:
@@ -83,13 +81,13 @@ String? exportTextOverflow(TextOverflow? textOverflow) {
   if (textOverflow == null) {
     return null;
   }
-  String rt = "ellipsis";
+  String rt = 'ellipsis';
   if (textOverflow == TextOverflow.clip) {
-    rt = "clip";
+    rt = 'clip';
   }
 
   if (textOverflow == TextOverflow.fade) {
-    rt = "fade";
+    rt = 'fade';
   }
   return rt;
 }
@@ -97,16 +95,16 @@ String? exportTextOverflow(TextOverflow? textOverflow) {
 TextDecoration parseTextDecoration(String? textDecorationString) {
   TextDecoration textDecoration = TextDecoration.none;
   switch (textDecorationString) {
-    case "lineThrough":
+    case 'lineThrough':
       textDecoration = TextDecoration.lineThrough;
       break;
-    case "overline":
+    case 'overline':
       textDecoration = TextDecoration.overline;
       break;
-    case "underline":
+    case 'underline':
       textDecoration = TextDecoration.underline;
       break;
-    case "none":
+    case 'none':
     default:
       textDecoration = TextDecoration.none;
   }
@@ -114,17 +112,17 @@ TextDecoration parseTextDecoration(String? textDecorationString) {
 }
 
 String exportTextDecoration(TextDecoration? decoration) {
-  var rt = "none";
+  var rt = 'none';
   if (decoration == TextDecoration.lineThrough) {
-    rt = "lineThrough";
+    rt = 'lineThrough';
   }
 
   if (decoration == TextDecoration.overline) {
-    rt = "overline";
+    rt = 'overline';
   }
 
   if (decoration == TextDecoration.underline) {
-    rt = "underline";
+    rt = 'underline';
   }
 
   return rt;
@@ -146,9 +144,9 @@ TextDirection parseTextDirection(String? textDirectionString) {
 }
 
 String exportTextDirection(TextDirection? textDirection) {
-  String rt = "ltr";
+  String rt = 'ltr';
   if (textDirection == TextDirection.rtl) {
-    rt = "rtl";
+    rt = 'rtl';
   }
   return rt;
 }
@@ -223,33 +221,33 @@ FontWeight parseFontWeight(String? textFontWeight) {
 }
 
 String exportFontWeight(FontWeight? fontWeight) {
-  String rt = "normal";
+  String rt = 'normal';
   if (fontWeight == FontWeight.w100) {
-    rt = "w100";
+    rt = 'w100';
   }
   if (fontWeight == FontWeight.w200) {
-    rt = "w200";
+    rt = 'w200';
   }
   if (fontWeight == FontWeight.w300) {
-    rt = "w300";
+    rt = 'w300';
   }
   if (fontWeight == FontWeight.w400) {
-    rt = "w400";
+    rt = 'w400';
   }
   if (fontWeight == FontWeight.w500) {
-    rt = "w500";
+    rt = 'w500';
   }
   if (fontWeight == FontWeight.w600) {
-    rt = "w600";
+    rt = 'w600';
   }
   if (fontWeight == FontWeight.w700) {
-    rt = "w700";
+    rt = 'w700';
   }
   if (fontWeight == FontWeight.w800) {
-    rt = "w800";
+    rt = 'w800';
   }
   if (fontWeight == FontWeight.w900) {
-    rt = "w900";
+    rt = 'w900';
   }
   return rt;
 }
@@ -258,9 +256,9 @@ Color? parseHexColor(String? hexColorString) {
   if (hexColorString == null) {
     return null;
   }
-  hexColorString = hexColorString.toUpperCase().replaceAll("#", "");
+  hexColorString = hexColorString.toUpperCase().replaceAll('#', '');
   if (hexColorString.length == 6) {
-    hexColorString = "FF" + hexColorString;
+    hexColorString = 'FF$hexColorString';
   }
   int colorInt = int.parse(hexColorString, radix: 16);
   return Color(colorInt);
@@ -314,15 +312,15 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
   }
 
   return <String, dynamic>{
-    "color": textStyle.color != null
+    'color': textStyle.color != null
         ? textStyle.color!.value.toRadixString(16)
         : null,
     //"debugLabel": textStyle.debugLabel.toString(),
-    "decoration": exportTextDecoration(textStyle.decoration),
-    "fontSize": textStyle.fontSize,
-    "fontFamily": textStyle.fontFamily,
-    "fontStyle": FontStyle.italic == textStyle.fontStyle ? "italic" : "normal",
-    "fontWeight": exportFontWeight(textStyle.fontWeight),
+    'decoration': exportTextDecoration(textStyle.decoration),
+    'fontSize': textStyle.fontSize,
+    'fontFamily': textStyle.fontFamily,
+    'fontStyle': FontStyle.italic == textStyle.fontStyle ? 'italic' : 'normal',
+    'fontWeight': exportFontWeight(textStyle.fontWeight),
   };
 }
 
@@ -369,7 +367,7 @@ BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
   double minHeight = 0.0;
   double maxHeight = double.infinity;
 
-  var typeAssertions = TypeAssertions("BoxConstraints");
+  var typeAssertions = TypeAssertions('BoxConstraints');
   if (map != null) {
 
     typeAssertions.run(map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
@@ -424,9 +422,9 @@ EdgeInsetsGeometry? parseEdgeInsetsGeometry(String? edgeInsetsGeometryString) {
       edgeInsetsGeometryString.trim() == '') {
     return null;
   }
-  var values = edgeInsetsGeometryString.split(",");
+  var values = edgeInsetsGeometryString.split(',');
 
-  var typeAssertions = TypeAssertions("EdgeInsetsGeometry");
+  var typeAssertions = TypeAssertions('EdgeInsetsGeometry');
   for(var value in values) {
     typeAssertions.assertDouble(value);
   }
@@ -440,7 +438,7 @@ EdgeInsetsGeometry? parseEdgeInsetsGeometry(String? edgeInsetsGeometryString) {
 String? exportEdgeInsetsGeometry(EdgeInsets? edgeInsetsGeometry) {
   //left,top,right,bottom
   return edgeInsetsGeometry != null
-      ? "${edgeInsetsGeometry.left},${edgeInsetsGeometry.top},${edgeInsetsGeometry.right},${edgeInsetsGeometry.bottom}"
+      ? '${edgeInsetsGeometry.left},${edgeInsetsGeometry.top},${edgeInsetsGeometry.right},${edgeInsetsGeometry.bottom}'
       : null;
 }
 
@@ -461,21 +459,21 @@ CrossAxisAlignment parseCrossAxisAlignment(String? crossAxisAlignmentString) {
 }
 
 String exportCrossAxisAlignment(CrossAxisAlignment crossAxisAlignment) {
-  String rt = "center";
+  String rt = 'center';
   if (crossAxisAlignment == CrossAxisAlignment.start) {
-    rt = "start";
+    rt = 'start';
   }
   if (crossAxisAlignment == CrossAxisAlignment.end) {
-    rt = "end";
+    rt = 'end';
   }
   if (crossAxisAlignment == CrossAxisAlignment.center) {
-    rt = "center";
+    rt = 'center';
   }
   if (crossAxisAlignment == CrossAxisAlignment.stretch) {
-    rt = "stretch";
+    rt = 'stretch';
   }
   if (crossAxisAlignment == CrossAxisAlignment.baseline) {
-    rt = "baseline";
+    rt = 'baseline';
   }
 
   return rt;
@@ -500,17 +498,17 @@ MainAxisAlignment parseMainAxisAlignment(String? mainAxisAlignmentString) {
 }
 
 String exportMainAxisAlignment(MainAxisAlignment mainAxisAlignment) {
-  String rt = "start";
+  String rt = 'start';
   if (mainAxisAlignment == MainAxisAlignment.end) {
-    rt = "end";
+    rt = 'end';
   } else if (mainAxisAlignment == MainAxisAlignment.center) {
-    rt = "center";
+    rt = 'center';
   } else if (mainAxisAlignment == MainAxisAlignment.spaceBetween) {
-    rt = "spaceBetween";
+    rt = 'spaceBetween';
   } else if (mainAxisAlignment == MainAxisAlignment.spaceAround) {
-    rt = "spaceAround";
+    rt = 'spaceAround';
   } else if (mainAxisAlignment == MainAxisAlignment.spaceEvenly) {
-    rt = "spaceEvenly";
+    rt = 'spaceEvenly';
   }
   return rt;
 }
@@ -532,100 +530,100 @@ String? exportBlendMode(BlendMode? blendMode) {
   if (blendMode == null) {
     return null;
   }
-  String rt = "srcIn";
+  String rt = 'srcIn';
   if (blendMode == BlendMode.clear) {
-    rt = "clear";
+    rt = 'clear';
   }
   if (blendMode == BlendMode.src) {
-    rt = "src";
+    rt = 'src';
   }
   if (blendMode == BlendMode.dst) {
-    rt = "dst";
+    rt = 'dst';
   }
   if (blendMode == BlendMode.srcOver) {
-    rt = "srcOver";
+    rt = 'srcOver';
   }
   if (blendMode == BlendMode.dstOver) {
-    rt = "dstOver";
+    rt = 'dstOver';
   }
   if (blendMode == BlendMode.srcIn) {
-    rt = "srcIn";
+    rt = 'srcIn';
   }
   if (blendMode == BlendMode.dstIn) {
-    rt = "dstIn";
+    rt = 'dstIn';
   }
   if (blendMode == BlendMode.srcOut) {
-    rt = "srcOut";
+    rt = 'srcOut';
   }
   if (blendMode == BlendMode.dstOut) {
-    rt = "dstOut";
+    rt = 'dstOut';
   }
   if (blendMode == BlendMode.srcATop) {
-    rt = "srcATop";
+    rt = 'srcATop';
   }
   if (blendMode == BlendMode.dstATop) {
-    rt = "dstATop";
+    rt = 'dstATop';
   }
   if (blendMode == BlendMode.xor) {
-    rt = "xor";
+    rt = 'xor';
   }
   if (blendMode == BlendMode.plus) {
-    rt = "plus";
+    rt = 'plus';
   }
   if (blendMode == BlendMode.modulate) {
-    rt = "modulate";
+    rt = 'modulate';
   }
   if (blendMode == BlendMode.screen) {
-    rt = "screen";
+    rt = 'screen';
   }
   if (blendMode == BlendMode.overlay) {
-    rt = "overlay";
+    rt = 'overlay';
   }
   if (blendMode == BlendMode.darken) {
-    rt = "darken";
+    rt = 'darken';
   }
   if (blendMode == BlendMode.lighten) {
-    rt = "lighten";
+    rt = 'lighten';
   }
   if (blendMode == BlendMode.colorDodge) {
-    rt = "colorDodge";
+    rt = 'colorDodge';
   }
   if (blendMode == BlendMode.colorBurn) {
-    rt = "colorBurn";
+    rt = 'colorBurn';
   }
   if (blendMode == BlendMode.hardLight) {
-    rt = "hardLight";
+    rt = 'hardLight';
   }
   if (blendMode == BlendMode.softLight) {
-    rt = "softLight";
+    rt = 'softLight';
   }
   if (blendMode == BlendMode.difference) {
-    rt = "difference";
+    rt = 'difference';
   }
   if (blendMode == BlendMode.exclusion) {
-    rt = "exclusion";
+    rt = 'exclusion';
   }
   if (blendMode == BlendMode.multiply) {
-    rt = "multiply";
+    rt = 'multiply';
   }
   if (blendMode == BlendMode.hue) {
-    rt = "hue";
+    rt = 'hue';
   }
   if (blendMode == BlendMode.saturation) {
-    rt = "saturation";
+    rt = 'saturation';
   }
   if (blendMode == BlendMode.color) {
-    rt = "color";
+    rt = 'color';
   }
   if (blendMode == BlendMode.luminosity) {
-    rt = "luminosity";
+    rt = 'luminosity';
   }
 
   return rt;
 }
 
 BlendMode? parseBlendMode(String? blendModeString) {
-  if (blendModeString == null || blendModeString.trim().length == 0) {
+  if (blendModeString == null || blendModeString.trim().isEmpty) {
     return null;
   }
 
@@ -720,24 +718,24 @@ BoxFit? parseBoxFit(String? boxFitString) {
 }
 
 String exportBoxFit(BoxFit? boxFit) {
-  String rt = "contain";
+  String rt = 'contain';
   if (boxFit == BoxFit.fill) {
-    rt = "fill";
+    rt = 'fill';
   }
   if (boxFit == BoxFit.cover) {
-    rt = "cover";
+    rt = 'cover';
   }
   if (boxFit == BoxFit.fitWidth) {
-    rt = "fitWidth";
+    rt = 'fitWidth';
   }
   if (boxFit == BoxFit.fitHeight) {
-    rt = "fitHeight";
+    rt = 'fitHeight';
   }
   if (boxFit == BoxFit.none) {
-    rt = "none";
+    rt = 'none';
   }
   if (boxFit == BoxFit.scaleDown) {
-    rt = "scaleDown";
+    rt = 'scaleDown';
   }
   return rt;
 }
@@ -763,15 +761,15 @@ ImageRepeat? parseImageRepeat(String? imageRepeatString) {
 }
 
 String exportImageRepeat(ImageRepeat imageRepeat) {
-  String rt = "noRepeat";
+  String rt = 'noRepeat';
   if (imageRepeat == ImageRepeat.repeat) {
-    rt = "repeat";
+    rt = 'repeat';
   }
   if (imageRepeat == ImageRepeat.repeatX) {
-    rt = "repeatX";
+    rt = 'repeatX';
   }
   if (imageRepeat == ImageRepeat.repeatY) {
-    rt = "repeatY";
+    rt = 'repeatY';
   }
   return rt;
 }
@@ -781,16 +779,16 @@ Rect? parseRect(String? fromLTRBString) {
     return null;
   }
   var strings = fromLTRBString.split(',');
-  var typeAssertions = TypeAssertions("Rect");
-  strings.forEach((element) {
+  var typeAssertions = TypeAssertions('Rect');
+  for (var element in strings) {
     typeAssertions.assertDouble(element);
-  });
+  }
   return Rect.fromLTRB(double.parse(strings[0]), double.parse(strings[1]),
       double.parse(strings[2]), double.parse(strings[3]));
 }
 
 String exportRect(Rect rect) {
-  return "${rect.left},${rect.top},${rect.right},${rect.bottom}";
+  return '${rect.left},${rect.top},${rect.right},${rect.bottom}';
 }
 
 FilterQuality? parseFilterQuality(String? filterQualityString) {
@@ -812,18 +810,18 @@ FilterQuality? parseFilterQuality(String? filterQualityString) {
 }
 
 String exportFilterQuality(FilterQuality filterQuality) {
-  String rt = "low";
+  String rt = 'low';
   if (filterQuality == FilterQuality.none) {
-    rt = "none";
+    rt = 'none';
   }
   if (filterQuality == FilterQuality.low) {
-    rt = "low";
+    rt = 'low';
   }
   if (filterQuality == FilterQuality.medium) {
-    rt = "medium";
+    rt = 'medium';
   }
   if (filterQuality == FilterQuality.high) {
-    rt = "high";
+    rt = 'high';
   }
   return rt;
 }
@@ -834,18 +832,10 @@ String? getLoadMoreUrl(String? url, int currentNo, int? pageSize) {
   }
 
   url = url.trim();
-  if (url.contains("?")) {
-    url = url +
-        "&startNo=" +
-        currentNo.toString() +
-        "&pageSize=" +
-        pageSize.toString();
+  if (url.contains('?')) {
+    url = '$url&startNo=$currentNo&pageSize=$pageSize';
   } else {
-    url = url +
-        "?startNo=" +
-        currentNo.toString() +
-        "&pageSize=" +
-        pageSize.toString();
+    url = '$url?startNo=$currentNo&pageSize=$pageSize';
   }
   return url;
 }
@@ -866,11 +856,11 @@ StackFit? parseStackFit(String? value) {
 }
 
 String exportStackFit(StackFit stackFit) {
-  String rt = "loose";
+  String rt = 'loose';
   if (stackFit == StackFit.expand) {
-    rt = "expand";
+    rt = 'expand';
   } else if (stackFit == StackFit.passthrough) {
-    rt = "passthrough";
+    rt = 'passthrough';
   }
   return rt;
 }
@@ -895,15 +885,15 @@ Clip? parseClip(String? value) {
 }
 
 String exportClip(Clip clip) {
-  String rt = "hardEdge";
+  String rt = 'hardEdge';
   if (clip == Clip.none) {
-    rt = "none";
+    rt = 'none';
   } else if (clip == Clip.hardEdge) {
-    rt = "hardEdge";
+    rt = 'hardEdge';
   } else if (clip == Clip.antiAlias) {
-    rt = "antiAlias";
+    rt = 'antiAlias';
   } else if (clip == Clip.antiAliasWithSaveLayer) {
-    rt = "antiAliasWithSaveLayer";
+    rt = 'antiAliasWithSaveLayer';
   }
   return rt;
 }
@@ -914,9 +904,9 @@ Axis parseAxis(String? axisString) {
   }
 
   switch (axisString) {
-    case "horizontal":
+    case 'horizontal':
       return Axis.horizontal;
-    case "vertical":
+    case 'vertical':
       return Axis.vertical;
   }
   return Axis.horizontal;
@@ -929,34 +919,34 @@ WrapAlignment parseWrapAlignment(String? wrapAlignmentString) {
   }
 
   switch (wrapAlignmentString) {
-    case "start":
+    case 'start':
       return WrapAlignment.start;
-    case "end":
+    case 'end':
       return WrapAlignment.end;
-    case "center":
+    case 'center':
       return WrapAlignment.center;
-    case "spaceBetween":
+    case 'spaceBetween':
       return WrapAlignment.spaceBetween;
-    case "spaceAround":
+    case 'spaceAround':
       return WrapAlignment.spaceAround;
-    case "spaceEvenly":
+    case 'spaceEvenly':
       return WrapAlignment.spaceEvenly;
   }
   return WrapAlignment.start;
 }
 
 String exportWrapAlignment(WrapAlignment wrapAlignment) {
-  String rt = "start";
+  String rt = 'start';
   if (wrapAlignment == WrapAlignment.end) {
-    rt = "end";
+    rt = 'end';
   } else if (wrapAlignment == WrapAlignment.center) {
-    rt = "center";
+    rt = 'center';
   } else if (wrapAlignment == WrapAlignment.spaceBetween) {
-    rt = "spaceBetween";
+    rt = 'spaceBetween';
   } else if (wrapAlignment == WrapAlignment.spaceAround) {
-    rt = "spaceAround";
+    rt = 'spaceAround';
   } else if (wrapAlignment == WrapAlignment.spaceEvenly) {
-    rt = "spaceEvenly";
+    rt = 'spaceEvenly';
   }
   return rt;
 }
@@ -968,11 +958,11 @@ WrapCrossAlignment parseWrapCrossAlignment(String? wrapCrossAlignmentString) {
   }
 
   switch (wrapCrossAlignmentString) {
-    case "start":
+    case 'start':
       return WrapCrossAlignment.start;
-    case "end":
+    case 'end':
       return WrapCrossAlignment.end;
-    case "center":
+    case 'center':
       return WrapCrossAlignment.center;
   }
 
@@ -980,11 +970,11 @@ WrapCrossAlignment parseWrapCrossAlignment(String? wrapCrossAlignmentString) {
 }
 
 String exportWrapCrossAlignment(WrapCrossAlignment wrapCrossAlignment) {
-  String rt = "start";
+  String rt = 'start';
   if (wrapCrossAlignment == WrapCrossAlignment.end) {
-    rt = "end";
+    rt = 'end';
   } else if (wrapCrossAlignment == WrapCrossAlignment.center) {
-    rt = "center";
+    rt = 'center';
   }
   return rt;
 }
@@ -994,13 +984,13 @@ Clip parseClipBehavior(String? clipBehaviorString) {
     return Clip.antiAlias;
   }
   switch (clipBehaviorString) {
-    case "antiAlias":
+    case 'antiAlias':
       return Clip.antiAlias;
-    case "none":
+    case 'none':
       return Clip.none;
-    case "hardEdge":
+    case 'hardEdge':
       return Clip.hardEdge;
-    case "antiAliasWithSaveLayer":
+    case 'antiAliasWithSaveLayer':
       return Clip.antiAliasWithSaveLayer;
   }
   return Clip.antiAlias;
@@ -1008,18 +998,18 @@ Clip parseClipBehavior(String? clipBehaviorString) {
 
 String exportClipBehavior(Clip clip) {
   if (clip == Clip.antiAliasWithSaveLayer) {
-    return "antiAliasWithSaveLayer";
+    return 'antiAliasWithSaveLayer';
   }
 
   if (clip == Clip.hardEdge) {
-    return "hardEdge";
+    return 'hardEdge';
   }
 
   if (clip == Clip.none) {
-    return "none";
+    return 'none';
   }
 
-  return "antiAlias";
+  return 'antiAlias';
 }
 
 TrimMode parseTrimMode(String? trimMode) {
@@ -1066,15 +1056,15 @@ String? exportDropCapMod(DropCapMode? mode) {
 
   switch (mode) {
     case DropCapMode.inside:
-      return "inside";
+      return 'inside';
     case DropCapMode.baseline:
-      return "baseline";
+      return 'baseline';
     case DropCapMode.aside:
-      return "aside";
+      return 'aside';
     case DropCapMode.upwards:
-      return "upwards";
+      return 'upwards';
     default:
-      return "inside";
+      return 'inside';
   }
 }
 
@@ -1094,9 +1084,9 @@ DropCapPosition? parseDropCapPosition(String? value) {
 }
 
 String exportDropCapPosition(DropCapPosition? dropCapPosition) {
-  String rt = "start";
+  String rt = 'start';
   if (dropCapPosition == DropCapPosition.end) {
-    rt = "end";
+    rt = 'end';
   }
   return rt;
 }
@@ -1110,7 +1100,7 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
     width: map['width']?.toDouble(),
     height: map['height']?.toDouble(),
     child:
-        DynamicWidgetBuilder.buildFromMap(map["child"], buildContext, listener),
+        DynamicWidgetBuilder.buildFromMap(map['child'], buildContext, listener),
   );
 }
 
@@ -1120,92 +1110,92 @@ Map<String, dynamic>? exportDropCap(
     return null;
   }
   return <String, dynamic>{
-    "width": dropCap.width,
-    "height": dropCap.height,
-    "child": DynamicWidgetBuilder.export(dropCap.child, buildContext),
+    'width': dropCap.width,
+    'height': dropCap.height,
+    'child': DynamicWidgetBuilder.export(dropCap.child, buildContext),
   };
 }
 
 String exportAlignmentDirectional(AlignmentDirectional alignmentDirectional) {
   if (alignmentDirectional == AlignmentDirectional.bottomCenter) {
-    return "bottomCenter";
+    return 'bottomCenter';
   }
 
   if (alignmentDirectional == AlignmentDirectional.center) {
-    return "center";
+    return 'center';
   }
 
   if (alignmentDirectional == AlignmentDirectional.bottomEnd) {
-    return "bottomEnd";
+    return 'bottomEnd';
   }
 
   if (alignmentDirectional == AlignmentDirectional.bottomStart) {
-    return "bottomStart";
+    return 'bottomStart';
   }
 
   if (alignmentDirectional == AlignmentDirectional.centerEnd) {
-    return "centerEnd";
+    return 'centerEnd';
   }
 
   if (alignmentDirectional == AlignmentDirectional.centerStart) {
-    return "centerStart";
+    return 'centerStart';
   }
 
   if (alignmentDirectional == AlignmentDirectional.bottomCenter) {
-    return "bottomCenter";
+    return 'bottomCenter';
   }
 
   if (alignmentDirectional == AlignmentDirectional.topCenter) {
-    return "topCenter";
+    return 'topCenter';
   }
 
   if (alignmentDirectional == AlignmentDirectional.topEnd) {
-    return "topEnd";
+    return 'topEnd';
   }
 
   if (alignmentDirectional == AlignmentDirectional.topStart) {
-    return "topStart";
+    return 'topStart';
   }
 
-  return "topStart";
+  return 'topStart';
 }
 
 String exportAlignment(Alignment? alignment) {
   if (alignment == null) {
-    return "center";
+    return 'center';
   }
   if (alignment == Alignment.center) {
-    return "center";
+    return 'center';
   }
   if (alignment == Alignment.bottomRight) {
-    return "bottomRight";
+    return 'bottomRight';
   }
   if (alignment == Alignment.bottomCenter) {
-    return "bottomCenter";
+    return 'bottomCenter';
   }
   if (alignment == Alignment.bottomLeft) {
-    return "bottomLeft";
+    return 'bottomLeft';
   }
   if (alignment == Alignment.centerLeft) {
-    return "centerLeft";
+    return 'centerLeft';
   }
   if (alignment == Alignment.centerRight) {
-    return "centerRight";
+    return 'centerRight';
   }
   if (alignment == Alignment.topCenter) {
-    return "topCenter";
+    return 'topCenter';
   }
   if (alignment == Alignment.topLeft) {
-    return "topLeft";
+    return 'topLeft';
   }
   if (alignment == Alignment.topRight) {
-    return "topRight";
+    return 'topRight';
   }
   if (alignment == Alignment.bottomRight) {
-    return "bottomRight";
+    return 'bottomRight';
   }
 
-  return "center";
+  return 'center';
 }
 
 Map<String, dynamic> exportConstraints(BoxConstraints constraints) {
@@ -1227,9 +1217,9 @@ Map<String, dynamic>? exportBorderSide(BorderSide borderSide) {
     return null;
   }
   return <String, dynamic>{
-    "color": borderSide.color.value.toRadixString(16),
-    "width": borderSide.width,
-    "style": borderSide.style.index,
+    'color': borderSide.color.value.toRadixString(16),
+    'width': borderSide.width,
+    'style': borderSide.style.index,
   };
 }
 
@@ -1237,7 +1227,7 @@ BorderSide parseBorderSide(Map<String, dynamic>? map) {
   if (map == null) return BorderSide.none;
   if (!map.containsKey('color')) return BorderSide.none;
 
-  var typeAssertions = TypeAssertions("BorderSide");
+  var typeAssertions = TypeAssertions('BorderSide');
   typeAssertions.run(map: map, attribute: 'color', expectedType: TYPE_STRING);
   typeAssertions.run(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
   typeAssertions.run(map: map, attribute: 'style', expectedType: TYPE_INT);
@@ -1251,7 +1241,7 @@ BorderSide parseBorderSide(Map<String, dynamic>? map) {
 
 /// BorderRadius
 String exportBorderRadius(BorderRadius radius) {
-  return "${exportRadius(radius.topLeft)},${exportRadius(radius.topRight)},${exportRadius(radius.bottomRight)},${exportRadius(radius.bottomLeft)}";
+  return '${exportRadius(radius.topLeft)},${exportRadius(radius.topRight)},${exportRadius(radius.bottomRight)},${exportRadius(radius.bottomLeft)}';
 }
 
 BorderRadius parseBorderRadius(String radius) {
@@ -1270,7 +1260,7 @@ BorderRadius parseBorderRadius(String radius) {
 
 /// Radius
 String exportRadius(Radius radius) {
-  return "${radius.x}:${radius.y}";
+  return '${radius.x}:${radius.y}';
 }
 
 Radius parseRadius(String radius) {

@@ -16,22 +16,22 @@ class AspectRatioWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     return AspectRatio(
-      aspectRatio: map["aspectRatio"]?.toDouble(),
+      aspectRatio: map['aspectRatio']?.toDouble(),
       child: DynamicWidgetBuilder.buildFromMap(
-          map["child"], buildContext, listener),
+          map['child'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "AspectRatio";
+  String get widgetName => 'AspectRatio';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as AspectRatio;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "aspectRatio": realWidget.aspectRatio,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'aspectRatio': realWidget.aspectRatio,
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
     };
   }
 

@@ -19,22 +19,22 @@ class SingleChildScrollViewParser extends WidgetParser {
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as SingleChildScrollView;
-    String scrollDirection = "vertical";
+    String scrollDirection = 'vertical';
     if (realWidget.scrollDirection == Axis.horizontal) {
-      scrollDirection = "horizontal";
+      scrollDirection = 'horizontal';
     }
 
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "scrollDirection": scrollDirection,
-      "reverse": realWidget.reverse,
-      "padding": padding != null
-          ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'scrollDirection': scrollDirection,
+      'reverse': realWidget.reverse,
+      'padding': padding != null
+          ? '${padding.left},${padding.top},${padding.right},${padding.bottom}'
           : null,
-      "clipBehavior":exportClip(realWidget.clipBehavior),
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
+      'clipBehavior':exportClip(realWidget.clipBehavior),
+      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext),
     };
   }
 
@@ -42,8 +42,8 @@ class SingleChildScrollViewParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
-    if (map.containsKey("scrollDirection") &&
-        "horizontal" == map["scrollDirection"]) {
+    if (map.containsKey('scrollDirection') &&
+        'horizontal' == map['scrollDirection']) {
       scrollDirection = Axis.horizontal;
     }
 
@@ -54,8 +54,8 @@ class SingleChildScrollViewParser extends WidgetParser {
       return SingleChildScrollView(
       reverse: map.containsKey('reverse') ? map['reverse'] : false,
       clipBehavior: parseClipBehavior(clipBehaviorString),
-      padding: map.containsKey("padding")
-          ? parseEdgeInsetsGeometry(map["padding"])
+      padding: map.containsKey('padding')
+          ? parseEdgeInsetsGeometry(map['padding'])
           : EdgeInsets.zero,
       scrollDirection: scrollDirection,
       child: child
@@ -64,7 +64,7 @@ class SingleChildScrollViewParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
@@ -78,7 +78,7 @@ class SingleChildScrollViewParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "SingleChildScrollView";
+  String get widgetName => 'SingleChildScrollView';
 
   @override
   Type get widgetType => SingleChildScrollView;

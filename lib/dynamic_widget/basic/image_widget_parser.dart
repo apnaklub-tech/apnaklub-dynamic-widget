@@ -1,7 +1,5 @@
-import 'dart:ui';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/widgets.dart';
@@ -37,7 +35,7 @@ class AssetImageWidgetParser extends WidgetParser {
     bool excludeFromSemantics = map.containsKey('excludeFromSemantics')
         ? map['excludeFromSemantics']
         : false;
-    double? scale = map.containsKey("scale") ? map['scale']?.toDouble() : null;
+    double? scale = map.containsKey('scale') ? map['scale']?.toDouble() : null;
     double? width = map.containsKey('width') ? map['width']?.toDouble() : null;
     double? height =
         map.containsKey('height') ? map['height']?.toDouble() : null;
@@ -84,7 +82,7 @@ class AssetImageWidgetParser extends WidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null)) {
+    if ((clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -96,7 +94,7 @@ class AssetImageWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "AssetImage";
+  String get widgetName => 'AssetImage';
 
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext, int id) {
@@ -109,32 +107,32 @@ class AssetImageWidgetParser extends WidgetParser {
         var t = realWidget.image as ResizeImage;
         assetImage = t.imageProvider as AssetImage;
       }
-      return <String, dynamic>{ "id":id,
-        "type": widgetName,
-        "name": assetImage.assetName,
-        "semanticLabel": realWidget.semanticLabel,
-        "excludeFromSemantics": realWidget.excludeFromSemantics,
-        "width": realWidget.width,
-        "height": realWidget.height,
-        "color": realWidget.color != null
+      return <String, dynamic>{ 'id':id,
+        'type': widgetName,
+        'name': assetImage.assetName,
+        'semanticLabel': realWidget.semanticLabel,
+        'excludeFromSemantics': realWidget.excludeFromSemantics,
+        'width': realWidget.width,
+        'height': realWidget.height,
+        'color': realWidget.color != null
             ? realWidget.color!.value.toRadixString(16)
             : null,
-        "colorBlendMode": realWidget.colorBlendMode != null
+        'colorBlendMode': realWidget.colorBlendMode != null
             ? exportBlendMode(realWidget.colorBlendMode)
             : null,
-        "fit": realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
-        "alignment": realWidget.alignment != null
+        'fit': realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
+        'alignment': realWidget.alignment != null
             ? exportAlignment(realWidget.alignment as Alignment?)
             : null,
-        "repeat": realWidget.repeat != null
+        'repeat': realWidget.repeat != null
             ? exportImageRepeat(realWidget.repeat)
             : null,
-        "centerSlice": realWidget.centerSlice != null
+        'centerSlice': realWidget.centerSlice != null
             ? exportRect(realWidget.centerSlice!)
             : null,
-        "matchTextDirection": realWidget.matchTextDirection,
-        "gaplessPlayback": realWidget.gaplessPlayback,
-        "filterQuality": realWidget.filterQuality != null
+        'matchTextDirection': realWidget.matchTextDirection,
+        'gaplessPlayback': realWidget.gaplessPlayback,
+        'filterQuality': realWidget.filterQuality != null
             ? exportFilterQuality(realWidget.filterQuality)
             : null
       };
@@ -149,33 +147,33 @@ class AssetImageWidgetParser extends WidgetParser {
         var t = realWidget.image as ResizeImage;
         exactAssetImage = t.imageProvider as ExactAssetImage;
       }
-      return <String, dynamic>{ "id":id,
-      "type": widgetName,
-        "name": exactAssetImage.assetName,
-        "semanticLabel": realWidget.semanticLabel,
-        "excludeFromSemantics": realWidget.excludeFromSemantics,
-        "scale": exactAssetImage.scale,
-        "width": realWidget.width,
-        "height": realWidget.height,
-        "color": realWidget.color != null
+      return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+        'name': exactAssetImage.assetName,
+        'semanticLabel': realWidget.semanticLabel,
+        'excludeFromSemantics': realWidget.excludeFromSemantics,
+        'scale': exactAssetImage.scale,
+        'width': realWidget.width,
+        'height': realWidget.height,
+        'color': realWidget.color != null
             ? realWidget.color!.value.toRadixString(16)
             : null,
-        "colorBlendMode": realWidget.colorBlendMode != null
+        'colorBlendMode': realWidget.colorBlendMode != null
             ? exportBlendMode(realWidget.colorBlendMode)
             : null,
-        "fit": realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
-        "alignment": realWidget.alignment != null
+        'fit': realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
+        'alignment': realWidget.alignment != null
             ? exportAlignment(realWidget.alignment as Alignment?)
             : null,
-        "repeat": realWidget.repeat != null
+        'repeat': realWidget.repeat != null
             ? exportImageRepeat(realWidget.repeat)
             : null,
-        "centerSlice": realWidget.centerSlice != null
+        'centerSlice': realWidget.centerSlice != null
             ? exportRect(realWidget.centerSlice!)
             : null,
-        "matchTextDirection": realWidget.matchTextDirection,
-        "gaplessPlayback": realWidget.gaplessPlayback,
-        "filterQuality": realWidget.filterQuality != null
+        'matchTextDirection': realWidget.matchTextDirection,
+        'gaplessPlayback': realWidget.gaplessPlayback,
+        'filterQuality': realWidget.filterQuality != null
             ? exportFilterQuality(realWidget.filterQuality)
             : null
       };
@@ -248,7 +246,7 @@ class NetworkImageWidgetParser extends WidgetParser {
     bool excludeFromSemantics = map.containsKey('excludeFromSemantics')
         ? map['excludeFromSemantics']
         : false;
-    double scale = map.containsKey("scale") ? map['scale']?.toDouble() : 1.0;
+    double scale = map.containsKey('scale') ? map['scale']?.toDouble() : 1.0;
     double? width = map.containsKey('width') ? map['width']?.toDouble() : null;
     double? height =
         map.containsKey('height') ? map['height']?.toDouble() : null;
@@ -295,7 +293,7 @@ class NetworkImageWidgetParser extends WidgetParser {
       filterQuality: filterQuality,
     );
 
-    if (listener != null && (clickEvent != null)) {
+    if ((clickEvent != null)) {
       return GestureDetector(
         onTap: () {
           listener.clickListener!.onClicked(clickEvent);
@@ -307,7 +305,7 @@ class NetworkImageWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "NetworkImage";
+  String get widgetName => 'NetworkImage';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
@@ -319,32 +317,32 @@ class NetworkImageWidgetParser extends WidgetParser {
       var t = realWidget.image as ResizeImage;
       networkImage = t.imageProvider as NetworkImage;
     }
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "src": networkImage.url,
-      "semanticLabel": realWidget.semanticLabel,
-      "excludeFromSemantics": realWidget.excludeFromSemantics,
-      "width": realWidget.width,
-      "height": realWidget.height,
-      "color": realWidget.color != null
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'src': networkImage.url,
+      'semanticLabel': realWidget.semanticLabel,
+      'excludeFromSemantics': realWidget.excludeFromSemantics,
+      'width': realWidget.width,
+      'height': realWidget.height,
+      'color': realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
           : null,
-      "colorBlendMode": realWidget.colorBlendMode != null
+      'colorBlendMode': realWidget.colorBlendMode != null
           ? exportBlendMode(realWidget.colorBlendMode)
           : null,
-      "fit": realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
-      "alignment": realWidget.alignment != null
+      'fit': realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
+      'alignment': realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)
           : null,
-      "repeat": realWidget.repeat != null
+      'repeat': realWidget.repeat != null
           ? exportImageRepeat(realWidget.repeat)
           : null,
-      "centerSlice": realWidget.centerSlice != null
+      'centerSlice': realWidget.centerSlice != null
           ? exportRect(realWidget.centerSlice!)
           : null,
-      "matchTextDirection": realWidget.matchTextDirection,
-      "gaplessPlayback": realWidget.gaplessPlayback,
-      "filterQuality": realWidget.filterQuality != null
+      'matchTextDirection': realWidget.matchTextDirection,
+      'gaplessPlayback': realWidget.gaplessPlayback,
+      'filterQuality': realWidget.filterQuality != null
           ? exportFilterQuality(realWidget.filterQuality)
           : null
     };

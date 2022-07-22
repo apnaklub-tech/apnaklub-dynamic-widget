@@ -1,5 +1,4 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/material.dart';
@@ -51,11 +50,11 @@ class TextFieldWidgetParser extends WidgetParser {
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     TextField realWidget = widget as TextField;
     return {
-      "type": widgetName,
-      "id": id,
-      "inputDecoration": exportInputDecoration(realWidget.decoration),
-      "textAlign": exportTextAlign(realWidget.textAlign),
-      "cursorColor": exportHexColor(realWidget.cursorColor),
+      'type': widgetName,
+      'id': id,
+      'inputDecoration': exportInputDecoration(realWidget.decoration),
+      'textAlign': exportTextAlign(realWidget.textAlign),
+      'cursorColor': exportHexColor(realWidget.cursorColor),
     };
   }
 
@@ -65,10 +64,10 @@ class TextFieldWidgetParser extends WidgetParser {
     String id = map['id'];
     Map<String, dynamic>? inputDecoration = map['inputDecoration'];
     TextEditingController textEditingController = TextEditingController();
-    listener?.controller?[id]?.textEditingController = textEditingController;
+    listener.controller[id]?.textEditingController = textEditingController;
     return TextField(
       controller: textEditingController,
-      onChanged: (text) => listener?.onTextChange!= null? listener?.onTextChange!(id, text) : null,
+      onChanged: (text) => listener.onTextChange!= null? listener.onTextChange!(id, text) : null,
 
       // Key? key,
       // FocusNode? focusNode,
@@ -135,7 +134,7 @@ class TextFieldWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "TextField";
+  String get widgetName => 'TextField';
 
   @override
   Type get widgetType => TextField;

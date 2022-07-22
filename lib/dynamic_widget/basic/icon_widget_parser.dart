@@ -1,5 +1,4 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/icons_helper.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
@@ -24,7 +23,7 @@ class IconWidgetParser extends WidgetParser {
       map.containsKey('data')
           ? getIconUsingPrefix(name: map['data'])
           : Icons.android,
-      size: map.containsKey("size") ? map['size']?.toDouble() : null,
+      size: map.containsKey('size') ? map['size']?.toDouble() : null,
       color: map.containsKey('color') ? parseHexColor(map['color']) : null,
       semanticLabel:
           map.containsKey('semanticLabel') ? map['semanticLabel'] : null,
@@ -35,20 +34,20 @@ class IconWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "Icon";
+  String get widgetName => 'Icon';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Icon;
-    return <String, dynamic>{ "id":id,
-      "type": widgetName,
-      "data": exportIconGuessFavorMaterial(realWidget.icon),
-      "size": realWidget.size,
-      "color": realWidget.color != null
+    return <String, dynamic>{ 'id':id,
+      'type': widgetName,
+      'data': exportIconGuessFavorMaterial(realWidget.icon),
+      'size': realWidget.size,
+      'color': realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
           : null,
-      "semanticLabel": realWidget.semanticLabel,
-      "textDirection": realWidget.textDirection != null
+      'semanticLabel': realWidget.semanticLabel,
+      'textDirection': realWidget.textDirection != null
           ? exportTextDirection(realWidget.textDirection)
           : null,
     };

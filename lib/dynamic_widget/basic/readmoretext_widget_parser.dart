@@ -1,6 +1,5 @@
 import 'package:dynamic_widget/apnaklub_widgets/readmoretext.dart';
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
@@ -63,7 +62,7 @@ class ReadMoreTextParser extends WidgetParser {
     String trimExpandedText = map['trimExpandedText'] ?? 'show less';
     String trimCollapsedText = map['trimCollapsedText'] ?? 'read more';
     Color? colorClickableText =
-        parseHexColor(map['colorClickableText']) ?? null;
+        parseHexColor(map['colorClickableText']);
     int trimLength = map['trimLength'] ?? 240;
     int trimLines = map['trimLines'] ?? 2;
 

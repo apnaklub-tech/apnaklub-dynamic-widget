@@ -18,37 +18,37 @@ class PageViewWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     var scrollDirection = Axis.vertical;
-    if (map.containsKey("scrollDirection") &&
-        "horizontal" == map["scrollDirection"]) {
+    if (map.containsKey('scrollDirection') &&
+        'horizontal' == map['scrollDirection']) {
       scrollDirection = Axis.horizontal;
     }
     return PageView(
       scrollDirection: scrollDirection,
-      reverse: map.containsKey("reverse") ? map["reverse"] : false,
+      reverse: map.containsKey('reverse') ? map['reverse'] : false,
       pageSnapping:
-          map.containsKey("pageSnapping") ? map["pageSnapping"] : true,
+          map.containsKey('pageSnapping') ? map['pageSnapping'] : true,
       children: DynamicWidgetBuilder.buildWidgets(
           map['children'], buildContext, listener),
     );
   }
 
   @override
-  String get widgetName => "PageView";
+  String get widgetName => 'PageView';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as PageView;
-    String scrollDirection = "vertical";
+    String scrollDirection = 'vertical';
     if (realWidget.scrollDirection == Axis.horizontal) {
-      scrollDirection = "horizontal";
+      scrollDirection = 'horizontal';
     }
     var children = realWidget.childrenDelegate as SliverChildListDelegate;
-    return <String, dynamic>{ "id":id,
-      "type": "PageView",
-      "scrollDirection": scrollDirection,
-      "reverse": realWidget.reverse,
-      "pageSnapping": realWidget.pageSnapping,
-      "children":
+    return <String, dynamic>{ 'id':id,
+      'type': 'PageView',
+      'scrollDirection': scrollDirection,
+      'reverse': realWidget.reverse,
+      'pageSnapping': realWidget.pageSnapping,
+      'children':
           DynamicWidgetBuilder.exportWidgets(children.children, buildContext)
     };
   }

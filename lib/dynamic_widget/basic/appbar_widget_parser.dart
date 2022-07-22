@@ -20,20 +20,20 @@ class AppBarWidgetParser extends WidgetParser {
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as AppBar;
     return <String, dynamic>{
-      "id":id,
-      "type": widgetName,
-      "title": realWidget.title == null
+      'id':id,
+      'type': widgetName,
+      'title': realWidget.title == null
           ? null
           : DynamicWidgetBuilder.export(realWidget.title, buildContext),
-      "leading": realWidget.leading == null
+      'leading': realWidget.leading == null
           ? null
           : DynamicWidgetBuilder.export(realWidget.leading, buildContext),
-      "actions": realWidget.actions == null
+      'actions': realWidget.actions == null
           ? null
           : DynamicWidgetBuilder.exportWidgets(
               realWidget.actions!, buildContext),
-      "centerTitle": realWidget.centerTitle,
-      "backgroundColor": realWidget.backgroundColor == null
+      'centerTitle': realWidget.centerTitle,
+      'backgroundColor': realWidget.backgroundColor == null
           ? null
           : realWidget.backgroundColor!.value.toRadixString(16),
     };
@@ -43,22 +43,22 @@ class AppBarWidgetParser extends WidgetParser {
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
       EventListener listener, {Widget? child}) {
     var appBarWidget = AppBar(
-      title: map.containsKey("title")
+      title: map.containsKey('title')
           ? DynamicWidgetBuilder.buildFromMap(
-              map["title"], buildContext, listener)
+              map['title'], buildContext, listener)
           : null,
-      leading: map.containsKey("leading")
+      leading: map.containsKey('leading')
           ? DynamicWidgetBuilder.buildFromMap(
-              map["leading"], buildContext, listener)
+              map['leading'], buildContext, listener)
           : null,
-      actions: map.containsKey("actions")
+      actions: map.containsKey('actions')
           ? DynamicWidgetBuilder.buildWidgets(
-              map["actions"], buildContext, listener) as List<Widget>?
+              map['actions'], buildContext, listener)
           : null,
       centerTitle:
-          map.containsKey("centerTitle") ? map["centerTitle"] as bool? : false,
-      backgroundColor: map.containsKey("backgroundColor")
-          ? parseHexColor(map["backgroundColor"])
+          map.containsKey('centerTitle') ? map['centerTitle'] as bool? : false,
+      backgroundColor: map.containsKey('backgroundColor')
+          ? parseHexColor(map['backgroundColor'])
           : null,
     );
 
@@ -66,7 +66,7 @@ class AppBarWidgetParser extends WidgetParser {
   }
 
   @override
-  String get widgetName => "AppBar";
+  String get widgetName => 'AppBar';
 
   @override
   Type get widgetType => AppBar;

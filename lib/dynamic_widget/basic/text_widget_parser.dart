@@ -1,6 +1,5 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
-import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
 import 'package:flutter/gestures.dart';
@@ -34,9 +33,9 @@ class TextWidgetParser extends WidgetParser {
     bool? softWrap = map['softWrap'];
     String? textDirectionString = map['textDirection'];
     double? textScaleFactor = map['textScaleFactor']?.toDouble();
-    var textSpan;
+    TextSpan? textSpan;
     var textSpanParser = TextSpanParser();
-    if (map.containsKey("textSpan")) {
+    if (map.containsKey('textSpan')) {
       textSpan = textSpanParser.parse(map['textSpan'], listener);
     }
 
@@ -71,46 +70,46 @@ class TextWidgetParser extends WidgetParser {
       print(map);
       print(e.toString());
       print('--' * 100);
-      throw e;
+      rethrow;
     }
   }
 
   @override
-  String get widgetName => "Text";
+  String get widgetName => 'Text';
 
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext, int id) {
     var realWidget = widget as Text;
     if (realWidget.textSpan == null) {
-      return <String, dynamic>{ "id":id,
-      "type": "Text",
-        "data": realWidget.data,
-        "textAlign": realWidget.textAlign != null
+      return <String, dynamic>{ 'id':id,
+      'type': 'Text',
+        'data': realWidget.data,
+        'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
-            : "start",
-        "overflow": exportTextOverflow(realWidget.overflow),
-        "maxLines": realWidget.maxLines,
-        "semanticsLabel": realWidget.semanticsLabel,
-        "softWrap": realWidget.softWrap,
-        "textDirection": exportTextDirection(realWidget.textDirection),
-        "style": exportTextStyle(realWidget.style),
-        "textScaleFactor": realWidget.textScaleFactor
+            : 'start',
+        'overflow': exportTextOverflow(realWidget.overflow),
+        'maxLines': realWidget.maxLines,
+        'semanticsLabel': realWidget.semanticsLabel,
+        'softWrap': realWidget.softWrap,
+        'textDirection': exportTextDirection(realWidget.textDirection),
+        'style': exportTextStyle(realWidget.style),
+        'textScaleFactor': realWidget.textScaleFactor
       };
     } else {
       var parser = TextSpanParser();
-      return <String, dynamic>{ "id":id,
-      "type": "Text",
-        "textSpan": parser.export(realWidget.textSpan as TextSpan),
-        "textAlign": realWidget.textAlign != null
+      return <String, dynamic>{ 'id':id,
+      'type': 'Text',
+        'textSpan': parser.export(realWidget.textSpan as TextSpan),
+        'textAlign': realWidget.textAlign != null
             ? exportTextAlign(realWidget.textAlign)
-            : "start",
-        "overflow": exportTextOverflow(realWidget.overflow),
-        "maxLines": realWidget.maxLines,
-        "semanticsLabel": realWidget.semanticsLabel,
-        "softWrap": realWidget.softWrap,
-        "textDirection": exportTextDirection(realWidget.textDirection),
-        "style": exportTextStyle(realWidget.style),
-        "textScaleFactor": realWidget.textScaleFactor
+            : 'start',
+        'overflow': exportTextOverflow(realWidget.overflow),
+        'maxLines': realWidget.maxLines,
+        'semanticsLabel': realWidget.semanticsLabel,
+        'softWrap': realWidget.softWrap,
+        'textDirection': exportTextDirection(realWidget.textDirection),
+        'style': exportTextStyle(realWidget.style),
+        'textScaleFactor': realWidget.textScaleFactor
       };
     }
   }
@@ -135,9 +134,9 @@ class TextSpanParser {
         style: parseTextStyle(map['style']),
         recognizer: TapGestureRecognizer()
           ..onTap = () {
-            listener!.clickListener!.onClicked(clickEvent);
+            listener.clickListener!.onClicked(clickEvent);
           },
-        children: []);
+        children: const []);
 
     if (map.containsKey('children')) {
       parseChildren(textSpan, map['children'], listener);
@@ -148,9 +147,9 @@ class TextSpanParser {
 
   Map<String, dynamic> export(TextSpan textSpan) {
     return <String, dynamic>{
-      "text": textSpan.text,
-      "style": exportTextStyle(textSpan.style),
-      "children": exportChildren(textSpan)
+      'text': textSpan.text,
+      'style': exportTextStyle(textSpan.style),
+      'children': exportChildren(textSpan)
     };
   }
 
