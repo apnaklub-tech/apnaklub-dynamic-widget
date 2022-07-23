@@ -8,12 +8,14 @@ import '../../widget_parser.dart';
 class VisibilityWidgetParser extends WidgetParser {
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     bool? visible = map['visible'];
     Map<String, dynamic>? childMap = map['child'];
-    
-    Widget? child = DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
-    
+
+    Widget? child =
+        DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
+
     // Assert child as not null.
 
     return Visibility(
@@ -26,10 +28,11 @@ class VisibilityWidgetParser extends WidgetParser {
   String get widgetName => 'Visibility';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Visibility;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': widgetName,
       'visible': realWidget.visible,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
@@ -38,10 +41,14 @@ class VisibilityWidgetParser extends WidgetParser {
 
   @override
   Type get widgetType => Visibility;
-  
+
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'visible', expectedType: TYPE_BOOL, allowNull: false);
+    typeAssertionDriver(
+        map: map,
+        attribute: 'visible',
+        expectedType: TYPE_BOOL,
+        allowNull: false);
   }
 }

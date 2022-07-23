@@ -69,7 +69,7 @@ class RowWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Row;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': 'Row',
       'crossAxisAlignment':
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),
@@ -159,7 +159,7 @@ class ColumnWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Column;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': 'Column',
       'crossAxisAlignment':
           exportCrossAxisAlignment(realWidget.crossAxisAlignment),

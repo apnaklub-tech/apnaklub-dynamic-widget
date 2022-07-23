@@ -1,8 +1,8 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/boxdecoration_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
@@ -32,7 +32,8 @@ class ContainerWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     Alignment? alignment = parseAlignment(map['alignment']);
     Color? color = parseHexColor(map['color']);
     BoxConstraints? constraints = parseBoxConstraints(map['constraints']);
@@ -44,7 +45,7 @@ class ContainerWidgetParser extends WidgetParser {
         ? null
         : DynamicWidgetBuilder.buildFromMap(childMap, buildContext, listener);
 
-    String? clickEvent =map['id'];
+    String? clickEvent = map['id'];
     var containerWidget = Container(
       alignment: alignment,
       padding: padding,
@@ -73,12 +74,14 @@ class ContainerWidgetParser extends WidgetParser {
   String get widgetName => 'Container';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Container;
     var padding = realWidget.padding as EdgeInsets?;
     var margin = realWidget.margin as EdgeInsets?;
     var constraints = realWidget.constraints;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'alignment': realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)

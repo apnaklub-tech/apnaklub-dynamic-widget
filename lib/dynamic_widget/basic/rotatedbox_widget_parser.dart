@@ -18,7 +18,7 @@ class RotatedBoxWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as RotatedBox;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': widgetName,
       'quarterTurns': realWidget.quarterTurns,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext),

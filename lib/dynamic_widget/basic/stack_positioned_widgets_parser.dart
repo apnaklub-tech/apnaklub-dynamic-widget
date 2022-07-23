@@ -46,7 +46,7 @@ class PositionedWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Positioned;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': 'Positioned',
       'top': realWidget.top,
       'right': realWidget.right,
@@ -104,7 +104,7 @@ class StackWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Stack;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': 'Stack',
       'alignment': realWidget.alignment is AlignmentDirectional
           ? exportAlignmentDirectional(

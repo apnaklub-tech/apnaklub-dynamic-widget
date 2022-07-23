@@ -27,7 +27,7 @@ class OverflowBoxWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     OverflowBox realWidget = widget as OverflowBox;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': widgetName,
       'alignment': exportAlignment(realWidget.alignment as Alignment?),
       'minWidth': realWidget.minWidth,

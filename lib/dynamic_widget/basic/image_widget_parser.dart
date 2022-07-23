@@ -1,7 +1,6 @@
-
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
@@ -10,25 +9,39 @@ class AssetImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'name', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'excludeFromSemantics', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'scale', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'colorBlendMode', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'excludeFromSemantics', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'scale', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'colorBlendMode', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'fit', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'repeat', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'centerSlice', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'matchTextDirection', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'gaplessPlayback', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'filterQuality', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'repeat', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'centerSlice', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'matchTextDirection', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'gaplessPlayback', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'filterQuality', expectedType: TYPE_STRING);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     String name = map['name'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -62,7 +75,7 @@ class AssetImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =map['id'];
+    String? clickEvent = map['id'];
 
     var widget = Image.asset(
       name,
@@ -97,7 +110,8 @@ class AssetImageWidgetParser extends WidgetParser {
   String get widgetName => 'AssetImage';
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic>? export(
+      Widget? widget, BuildContext buildContext, int id) {
     if (_isMatchAssetImageType(widget)) {
       var realWidget = widget as Image;
       late AssetImage assetImage;
@@ -107,7 +121,8 @@ class AssetImageWidgetParser extends WidgetParser {
         var t = realWidget.image as ResizeImage;
         assetImage = t.imageProvider as AssetImage;
       }
-      return <String, dynamic>{ 'id':id,
+      return <String, dynamic>{
+        'id': id.toString(),
         'type': widgetName,
         'name': assetImage.assetName,
         'semanticLabel': realWidget.semanticLabel,
@@ -147,8 +162,9 @@ class AssetImageWidgetParser extends WidgetParser {
         var t = realWidget.image as ResizeImage;
         exactAssetImage = t.imageProvider as ExactAssetImage;
       }
-      return <String, dynamic>{ 'id':id,
-      'type': widgetName,
+      return <String, dynamic>{
+        'id': id.toString(),
+        'type': widgetName,
         'name': exactAssetImage.assetName,
         'semanticLabel': realWidget.semanticLabel,
         'excludeFromSemantics': realWidget.excludeFromSemantics,
@@ -220,26 +236,39 @@ class NetworkImageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'src', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'excludeFromSemantics', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'scale', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'colorBlendMode', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'excludeFromSemantics', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'scale', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'width', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'colorBlendMode', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'fit', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'repeat', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'centerSlice', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'matchTextDirection', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'gaplessPlayback', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'filterQuality', expectedType: TYPE_STRING);
-
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'repeat', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'centerSlice', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'matchTextDirection', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'gaplessPlayback', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'filterQuality', expectedType: TYPE_STRING);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     String src = map['src'];
     String? semanticLabel =
         map.containsKey('semanticLabel') ? map['semanticLabel'] : null;
@@ -273,7 +302,7 @@ class NetworkImageWidgetParser extends WidgetParser {
         ? parseFilterQuality(map['filterQuality'])!
         : FilterQuality.low;
 
-    String? clickEvent =map['id'];
+    String? clickEvent = map['id'];
 
     var widget = Image.network(
       src,
@@ -308,7 +337,8 @@ class NetworkImageWidgetParser extends WidgetParser {
   String get widgetName => 'NetworkImage';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Image;
     late NetworkImage networkImage;
     if (realWidget.image is NetworkImage) {
@@ -317,7 +347,8 @@ class NetworkImageWidgetParser extends WidgetParser {
       var t = realWidget.image as ResizeImage;
       networkImage = t.imageProvider as NetworkImage;
     }
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'src': networkImage.url,
       'semanticLabel': realWidget.semanticLabel,

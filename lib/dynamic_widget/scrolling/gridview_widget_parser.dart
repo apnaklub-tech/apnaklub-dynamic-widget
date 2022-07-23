@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,24 +13,37 @@ import '../../widget_parser.dart';
 class GridViewWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'crossAxisCount', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'reverse', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'shrinkWrap', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'cacheExtent', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'mainAxisSpacing', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'crossAxisSpacing', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'childAspectRatio', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'pageSize', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'loadMoreUrl', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'crossAxisCount', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'reverse', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'shrinkWrap', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'cacheExtent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'mainAxisSpacing', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'crossAxisSpacing', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'childAspectRatio', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'pageSize', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'loadMoreUrl', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'isDemo', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
+    typeAssertionDriver(
+        map: map, attribute: 'children', expectedType: TYPE_LIST);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey('scrollDirection') &&
         'horizontal' == map['scrollDirection']) {
@@ -83,7 +96,8 @@ class GridViewWidgetParser extends WidgetParser {
   String get widgetName => 'GridView';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as GridViewWidget;
     String scrollDirection = 'vertical';
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -91,7 +105,8 @@ class GridViewWidgetParser extends WidgetParser {
     }
 
     var padding = realWidget._params.padding as EdgeInsets?;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': 'GridView',
       'scrollDirection': scrollDirection,
       'crossAxisCount': realWidget._params.crossAxisCount,

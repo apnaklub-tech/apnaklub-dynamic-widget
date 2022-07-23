@@ -92,7 +92,7 @@ class TextWidgetParser extends WidgetParser {
     var realWidget = widget as Text;
     if (realWidget.textSpan == null) {
       return <String, dynamic>{
-        'id': id,
+        'id': id.toString(),
         'type': 'Text',
         'data': realWidget.data,
         'textAlign': realWidget.textAlign != null
@@ -109,7 +109,7 @@ class TextWidgetParser extends WidgetParser {
     } else {
       var parser = TextSpanParser();
       return <String, dynamic>{
-        'id': id,
+        'id': id.toString(),
         'type': 'Text',
         'textSpan': parser.export(realWidget.textSpan as TextSpan),
         'textAlign': realWidget.textAlign != null

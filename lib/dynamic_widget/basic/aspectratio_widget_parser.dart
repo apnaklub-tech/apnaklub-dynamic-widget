@@ -8,13 +8,15 @@ import '../../widget_parser.dart';
 class AspectRatioWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'aspectRatio', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'aspectRatio', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return AspectRatio(
       aspectRatio: map['aspectRatio']?.toDouble(),
       child: DynamicWidgetBuilder.buildFromMap(
@@ -26,9 +28,11 @@ class AspectRatioWidgetParser extends WidgetParser {
   String get widgetName => 'AspectRatio';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as AspectRatio;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'aspectRatio': realWidget.aspectRatio,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)

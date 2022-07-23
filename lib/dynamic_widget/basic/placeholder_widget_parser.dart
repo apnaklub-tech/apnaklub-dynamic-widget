@@ -45,7 +45,7 @@ class PlaceholderWidgetParser extends WidgetParser {
       Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Placeholder;
     return <String, dynamic>{
-      'id': id,
+      'id': id.toString(),
       'type': widgetName,
       'color': realWidget.color != null
           ? realWidget.color.value.toRadixString(16)

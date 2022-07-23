@@ -14,7 +14,8 @@ class ExpandedWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Expanded(
       flex: map.containsKey('flex') ? map['flex'] : 1,
       child: DynamicWidgetBuilder.buildFromMap(
@@ -26,9 +27,11 @@ class ExpandedWidgetParser extends WidgetParser {
   String get widgetName => 'Expanded';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Expanded;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'flex': realWidget.flex,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)

@@ -25,7 +25,7 @@ class TextFormFieldWidgetParser extends WidgetParser {
       print('======================== 3');
       return {
         'type': widgetName,
-        'id': id,
+        'id': id.toString(),
         'decoration': exportInputDecoration(realWidget.decoration),
         'textAlign': exportTextAlign(realWidget.textAlign),
         'cursorColor': exportHexColor(realWidget.cursorColor),

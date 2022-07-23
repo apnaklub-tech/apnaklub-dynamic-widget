@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
@@ -13,14 +13,19 @@ class SafeAreaWidgetParser extends WidgetParser {
     typeAssertionDriver(map: map, attribute: 'right', expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'top', expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'bottom', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'minimum', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'maintainBottomViewPadding', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'minimum', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map,
+        attribute: 'maintainBottomViewPadding',
+        expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     var left = map.containsKey('left') ? map['left'] : true;
     var right = map.containsKey('right') ? map['right'] : true;
     var top = map.containsKey('top') ? map['top'] : true;
@@ -47,10 +52,12 @@ class SafeAreaWidgetParser extends WidgetParser {
   String get widgetName => 'SafeArea';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as SafeArea;
     var minimum = realWidget.minimum;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': 'SafeArea',
       'left': realWidget.left,
       'right': realWidget.right,

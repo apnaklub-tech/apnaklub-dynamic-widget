@@ -86,7 +86,7 @@ class TextFieldWidgetParser extends WidgetParser {
     TextField realWidget = widget as TextField;
     return {
       'type': widgetName,
-      'id': id,
+      'id': id.toString(),
       'inputDecoration': exportInputDecoration(realWidget.decoration),
       'textAlign': exportTextAlign(realWidget.textAlign),
       'cursorColor': exportHexColor(realWidget.cursorColor),

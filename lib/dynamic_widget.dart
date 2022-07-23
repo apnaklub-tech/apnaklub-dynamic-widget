@@ -36,6 +36,7 @@ import 'package:dynamic_widget/dynamic_widget/basic/stack_positioned_widgets_par
 import 'package:dynamic_widget/dynamic_widget/basic/textFormField_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/text_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/textfield_widget_parser.dart';
+import 'package:dynamic_widget/dynamic_widget/basic/valueListenableBuilder_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/visibility_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/basic/wrap_widget_parser.dart';
 import 'package:dynamic_widget/dynamic_widget/scrolling/gridview_widget_parser.dart';
@@ -128,6 +129,8 @@ class DynamicWidgetBuilder {
     TextFieldWidgetParser(),
     TextFormFieldWidgetParser(),
     VisibilityWidgetParser(),
+    ValueListenableBuilderIntWidgetParser(),
+    ValueListenableBuilderStringWidgetParser(),
   ];
 
   static final _widgetNameParserMap = <String, WidgetParser>{};
@@ -156,7 +159,8 @@ class DynamicWidgetBuilder {
     initDefaultParsersIfNess();
     try {
       var map = jsonDecode(json);
-      listener.clickListener = listener.clickListener ?? NonResponseWidgetClickListener();
+      listener.clickListener =
+          listener.clickListener ?? NonResponseWidgetClickListener();
       var widget = buildFromMap(map, buildContext, listener);
       return widget;
     } on FormatException catch (e) {
@@ -179,13 +183,11 @@ class DynamicWidgetBuilder {
       if (widgetName == null) {
         return null;
       }
-      print('--' * 100);
       var parser = _widgetNameParserMap[widgetName];
-      print(parser);
       if (parser != null) {
         return getParsedWidget(parser, map, buildContext, listener);
       }
-      log.warning('Not support parser type: $widgetName');
+      print('Not support parser type: $widgetName');
       return null;
     } catch (e) {
       print('--' * 100);
@@ -201,8 +203,8 @@ class DynamicWidgetBuilder {
     return parser.parse(map, buildContext, listener);
   }
 
-  static List<Widget> buildWidgets(List<dynamic> values,
-      BuildContext buildContext, EventListener listener) {
+  static List<Widget> buildWidgets(
+      List<dynamic> values, BuildContext buildContext, EventListener listener) {
     initDefaultParsersIfNess();
     List<Widget> rt = [];
     for (var value in values) {
@@ -224,7 +226,7 @@ class DynamicWidgetBuilder {
       mID++;
       return parser.export(widget, buildContext, mID);
     }
-    log.warning(
+    print(
         "Can't find NewWidgetParser for Type ${widget.runtimeType} to export.");
     return null;
   }

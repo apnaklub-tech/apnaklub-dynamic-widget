@@ -67,7 +67,7 @@ class SelectableTextWidgetParser extends WidgetParser {
     var realWidget = widget as SelectableText;
     if (realWidget.textSpan == null) {
       return <String, dynamic>{
-        'id': id,
+        'id': id.toString(),
         'type': 'SelectableText',
         'data': realWidget.data,
         'textAlign': realWidget.textAlign != null
@@ -80,7 +80,7 @@ class SelectableTextWidgetParser extends WidgetParser {
     } else {
       var parser = SelectableTextSpanParser();
       return <String, dynamic>{
-        'id': id,
+        'id': id.toString(),
         'type': 'SelectableText',
         'textSpan': parser.export(realWidget.textSpan!),
         'textAlign': realWidget.textAlign != null

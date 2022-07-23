@@ -8,14 +8,17 @@ import '../../widget_parser.dart';
 class CenterWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'widthFactor', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'heightFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'widthFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'heightFactor', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Center(
       widthFactor: map.containsKey('widthFactor')
           ? map['widthFactor']?.toDouble()
@@ -32,9 +35,11 @@ class CenterWidgetParser extends WidgetParser {
   String get widgetName => 'Center';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Center;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'widthFactor': realWidget.widthFactor,
       'heightFactor': realWidget.heightFactor,

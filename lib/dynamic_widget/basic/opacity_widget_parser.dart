@@ -8,14 +8,17 @@ import '../../widget_parser.dart';
 class OpacityWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'opacity', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'alwaysIncludeSemantics', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'opacity', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'alwaysIncludeSemantics', expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Opacity(
       opacity: map['opacity']?.toDouble(),
       alwaysIncludeSemantics: map.containsKey('alwaysIncludeSemantics')
@@ -30,9 +33,11 @@ class OpacityWidgetParser extends WidgetParser {
   String get widgetName => 'Opacity';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Opacity;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'opacity': realWidget.opacity,
       'alwaysIncludeSemantics': realWidget.alwaysIncludeSemantics,

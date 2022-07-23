@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,23 +13,35 @@ import '../../widget_parser.dart';
 class ListViewWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'reverse', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'shrinkWrap', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'cacheExtent', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'itemExtent', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'pageSize', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'loadMoreUrl', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'scrollDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'reverse', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'shrinkWrap', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'cacheExtent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'itemExtent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'pageSize', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'loadMoreUrl', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'isDemo', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
-    typeAssertionDriver(map: map, attribute: 'tempChild', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'dataKey', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'children', expectedType: TYPE_LIST);
+    typeAssertionDriver(
+        map: map, attribute: 'tempChild', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'dataKey', expectedType: TYPE_STRING);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     var scrollDirection = Axis.vertical;
     if (map.containsKey('scrollDirection') &&
         'horizontal' == map['scrollDirection']) {
@@ -71,7 +83,8 @@ class ListViewWidgetParser extends WidgetParser {
   String get widgetName => 'ListView';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = 'vertical';
     if (realWidget._params.scrollDirection == Axis.horizontal) {
@@ -81,7 +94,8 @@ class ListViewWidgetParser extends WidgetParser {
     var padding = realWidget._params.padding as EdgeInsets?;
     var tempChild =
         DynamicWidgetBuilder.export(widget._params.tempChild, buildContext);
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': 'ListView',
       'scrollDirection': scrollDirection,
       'reverse': realWidget._params.reverse ?? false,

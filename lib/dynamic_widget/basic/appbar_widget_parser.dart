@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget_parser.dart';
@@ -11,16 +11,20 @@ class AppBarWidgetParser extends WidgetParser {
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'title', expectedType: TYPE_MAP);
     typeAssertionDriver(map: map, attribute: 'leading', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'actions', expectedType: TYPE_LIST);
-    typeAssertionDriver(map: map, attribute: 'centerTitle', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'actions', expectedType: TYPE_LIST);
+    typeAssertionDriver(
+        map: map, attribute: 'centerTitle', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as AppBar;
     return <String, dynamic>{
-      'id':id,
+      'id': id.toString(),
       'type': widgetName,
       'title': realWidget.title == null
           ? null
@@ -41,7 +45,8 @@ class AppBarWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     var appBarWidget = AppBar(
       title: map.containsKey('title')
           ? DynamicWidgetBuilder.buildFromMap(

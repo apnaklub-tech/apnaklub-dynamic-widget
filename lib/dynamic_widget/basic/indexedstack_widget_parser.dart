@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
@@ -10,14 +10,18 @@ class IndexedStackWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'index', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'children', expectedType: TYPE_LIST);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'children', expectedType: TYPE_LIST);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return IndexedStack(
       index: map.containsKey('index') ? map['index'] : 0,
       alignment: map.containsKey('alignment')
@@ -35,9 +39,11 @@ class IndexedStackWidgetParser extends WidgetParser {
   String get widgetName => 'IndexedStack';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as IndexedStack;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'index': realWidget.index,
       'alignment': realWidget.alignment != null

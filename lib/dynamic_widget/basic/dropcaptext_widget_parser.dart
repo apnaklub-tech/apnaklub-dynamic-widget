@@ -1,6 +1,6 @@
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget_parser.dart';
@@ -11,10 +11,10 @@ class DropCapTextParser extends WidgetParser {
     // TODO: implement assertionChecks
   }
 
-
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return DropCapText(
       data: map.containsKey('data') ? map['data'] : null,
       selectable: map.containsKey('selectable') ? map['selectable'] : false,
@@ -59,10 +59,12 @@ class DropCapTextParser extends WidgetParser {
   String get widgetName => 'DropCapText';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as DropCapText;
     var dropCapPadding = realWidget.dropCapPadding;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'data': realWidget.data,
       'selectable': realWidget.selectable,

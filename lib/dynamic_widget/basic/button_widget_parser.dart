@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget_parser.dart';
@@ -9,21 +9,30 @@ import '../../widget_parser.dart';
 class RaisedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'disabledColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'disabledElevation', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'disabledTextColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'splashColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'disabledColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'disabledElevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'disabledTextColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'splashColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textColor', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
-    String? clickEvent =map['id'];
+      EventListener listener,
+      {Widget? child}) {
+    String? clickEvent = map['id'];
     var raisedButton = RaisedButton(
       color: map.containsKey('color') ? parseHexColor(map['color']) : null,
       disabledColor: map.containsKey('disabledColor')
@@ -59,11 +68,13 @@ class RaisedButtonParser extends WidgetParser {
   String get widgetName => 'RaisedButton';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as RaisedButton;
     var padding = realWidget.padding as EdgeInsets?;
 
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'color': realWidget.color != null
           ? realWidget.color!.value.toRadixString(16)
@@ -96,14 +107,22 @@ class RaisedButtonParser extends WidgetParser {
 class ElevatedButtonParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
@@ -134,7 +153,8 @@ class ElevatedButtonParser extends WidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -153,8 +173,9 @@ class ElevatedButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
-    String? clickEvent =map['id'];
+      EventListener listener,
+      {Widget? child}) {
+    String? clickEvent = map['id'];
 
     return ElevatedButton(
       onPressed: () {
@@ -199,18 +220,24 @@ class ElevatedButtonParser extends WidgetParser {
 }
 
 class TextButtonParser extends WidgetParser {
-
-
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'padding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'foregroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'backgroundColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'overlayColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'shadowColor', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'elevation', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'padding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
@@ -241,7 +268,8 @@ class TextButtonParser extends WidgetParser {
     var textStyle2 = realWidget.style?.textStyle != null
         ? realWidget.style?.textStyle?.resolve(MaterialState.values.toSet())
         : null;
-    var map = <String, dynamic>{ 'id':id,
+    var map = <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'foregroundColor': color != null ? color.value.toRadixString(16) : null,
       'backgroundColor': backgroundColor != null
@@ -261,8 +289,9 @@ class TextButtonParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
-    String? clickEvent =map['id'];
+      EventListener listener,
+      {Widget? child}) {
+    String? clickEvent = map['id'];
 
     return TextButton(
       onPressed: () {

@@ -8,14 +8,17 @@ import '../../widget_parser.dart';
 class OffstageWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'offstage', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'offstage', expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     Offstage realWidget = widget as Offstage;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'offstage': realWidget.offstage,
       'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
@@ -24,7 +27,8 @@ class OffstageWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Offstage(
       offstage: map.containsKey('offstage') ? map['offstage'] : true,
       child: DynamicWidgetBuilder.buildFromMap(

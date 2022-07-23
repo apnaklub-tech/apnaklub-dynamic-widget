@@ -8,17 +8,24 @@ import '../utils.dart';
 class DividerWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'thickness', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'indent', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'endIndent', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'height', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'thickness', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'indent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'endIndent', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic>? export(
+      Widget? widget, BuildContext buildContext, int id) {
     Divider realWidget = widget as Divider;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'height': realWidget.height,
       'thickness': realWidget.thickness,
@@ -32,7 +39,8 @@ class DividerWidgetParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Divider(
       height: map['height'],
       thickness: map['thickness'],

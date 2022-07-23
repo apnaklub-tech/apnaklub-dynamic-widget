@@ -10,28 +10,42 @@ class ReadMoreTextParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'trimExpandedText', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'trimCollapsedText', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'colorClickableText', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'trimLength', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'trimLines', expectedType: TYPE_INT);
-    typeAssertionDriver(map: map, attribute: 'trimMode', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'trimExpandedText', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'trimCollapsedText', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'colorClickableText', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'trimLength', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'trimLines', expectedType: TYPE_INT);
+    typeAssertionDriver(
+        map: map, attribute: 'trimMode', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textAlign', expectedType: TYPE_STRING);
     //typeAssertionDriver(map: map, attribute: 'delimiterStyle', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'moreStyle', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'lessStyle', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'locale', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textScaleFactor', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'semanticsLabel', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'moreStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'lessStyle', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'locale', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textScaleFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'semanticsLabel', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'style', expectedType: TYPE_MAP);
   }
 
   @override
-  Map<String, dynamic>? export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic>? export(
+      Widget? widget, BuildContext buildContext, int id) {
     var readMoreText = widget as ReadMoreText;
     return {
-      'id':id,
+      'id': id.toString(),
       'type': widgetName,
       'data': readMoreText.data,
       'trimExpandedText': readMoreText.trimExpandedText,
@@ -54,15 +68,15 @@ class ReadMoreTextParser extends WidgetParser {
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     // delimiter not implemented
     // delimiter = _kEllipsis + ' ', is default
 
     String data = map['data'] ?? '';
     String trimExpandedText = map['trimExpandedText'] ?? 'show less';
     String trimCollapsedText = map['trimCollapsedText'] ?? 'read more';
-    Color? colorClickableText =
-        parseHexColor(map['colorClickableText']);
+    Color? colorClickableText = parseHexColor(map['colorClickableText']);
     int trimLength = map['trimLength'] ?? 240;
     int trimLines = map['trimLines'] ?? 2;
 

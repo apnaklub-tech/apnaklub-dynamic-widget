@@ -1,6 +1,6 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../assertions/assert_constants.dart';
@@ -9,15 +9,19 @@ import '../../widget_parser.dart';
 class AlignWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'alignment', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'widthFactor', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'heightFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'alignment', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'widthFactor', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'heightFactor', expectedType: TYPE_DOUBLE);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Align(
       alignment: map.containsKey('alignment')
           ? parseAlignment(map['alignment'])!
@@ -37,10 +41,11 @@ class AlignWidgetParser extends WidgetParser {
   String get widgetName => 'Align';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Align;
     Map<String, dynamic> json = {
-      'id': id,
+      'id': id.toString(),
       'type': widgetName,
       'alignment': exportAlignment(realWidget.alignment as Alignment?),
       'widthFactor': realWidget.widthFactor,

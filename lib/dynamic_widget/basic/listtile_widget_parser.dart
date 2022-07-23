@@ -9,20 +9,27 @@ import '../utils.dart';
 class ListTileWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'isThreeLine', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'isThreeLine', expectedType: TYPE_BOOL);
     typeAssertionDriver(map: map, attribute: 'leading', expectedType: TYPE_MAP);
     typeAssertionDriver(map: map, attribute: 'title', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'subtitle', expectedType: TYPE_MAP);
-    typeAssertionDriver(map: map, attribute: 'trailing', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'subtitle', expectedType: TYPE_MAP);
+    typeAssertionDriver(
+        map: map, attribute: 'trailing', expectedType: TYPE_MAP);
     typeAssertionDriver(map: map, attribute: 'dense', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'contentPadding', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'enabled', expectedType: TYPE_BOOL);
-    typeAssertionDriver(map: map, attribute: 'selected', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'contentPadding', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'enabled', expectedType: TYPE_BOOL);
+    typeAssertionDriver(
+        map: map, attribute: 'selected', expectedType: TYPE_BOOL);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     bool isThreeLine =
         map.containsKey('isThreeLine') ? map['isThreeLine'] : false;
     EdgeInsetsGeometry? contentPadding = map.containsKey('contentPadding')
@@ -47,7 +54,7 @@ class ListTileWidgetParser extends WidgetParser {
         ? DynamicWidgetBuilder.buildFromMap(
             map['trailing'], buildContext, listener)
         : null;
-    String? clickEvent =map['id'];
+    String? clickEvent = map['id'];
     return ListTile(
       isThreeLine: isThreeLine,
       leading: leading,
@@ -68,10 +75,12 @@ class ListTileWidgetParser extends WidgetParser {
   String get widgetName => 'ListTile';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as ListTile;
     var contentPadding = realWidget.contentPadding as EdgeInsets?;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'isThreeLine': realWidget.isThreeLine,
       'leading': realWidget.leading != null

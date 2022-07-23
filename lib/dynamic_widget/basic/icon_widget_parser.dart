@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
-import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:dynamic_widget/dynamic_widget/icons_helper.dart';
 import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget_parser.dart';
@@ -11,14 +11,18 @@ class IconWidgetParser extends WidgetParser {
   void assertionChecks(Map<String, dynamic> map) {
     typeAssertionDriver(map: map, attribute: 'data', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'size', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'color', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
-    typeAssertionDriver(map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'color', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'semanticLabel', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'textDirection', expectedType: TYPE_STRING);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Icon(
       map.containsKey('data')
           ? getIconUsingPrefix(name: map['data'])
@@ -37,9 +41,11 @@ class IconWidgetParser extends WidgetParser {
   String get widgetName => 'Icon';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Icon;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'data': exportIconGuessFavorMaterial(realWidget.icon),
       'size': realWidget.size,

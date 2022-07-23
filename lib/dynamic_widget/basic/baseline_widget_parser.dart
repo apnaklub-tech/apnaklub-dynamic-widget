@@ -8,14 +8,17 @@ import '../../widget_parser.dart';
 class BaselineWidgetParser extends WidgetParser {
   @override
   void assertionChecks(Map<String, dynamic> map) {
-    typeAssertionDriver(map: map, attribute: 'baseline', expectedType: TYPE_DOUBLE);
-    typeAssertionDriver(map: map, attribute: 'baselineType', expectedType: TYPE_STRING);
+    typeAssertionDriver(
+        map: map, attribute: 'baseline', expectedType: TYPE_DOUBLE);
+    typeAssertionDriver(
+        map: map, attribute: 'baselineType', expectedType: TYPE_STRING);
     typeAssertionDriver(map: map, attribute: 'child', expectedType: TYPE_MAP);
   }
 
   @override
   Widget build(Map<String, dynamic> map, BuildContext buildContext,
-      EventListener listener, {Widget? child}) {
+      EventListener listener,
+      {Widget? child}) {
     return Baseline(
       baseline: map['baseline']?.toDouble(),
       baselineType: map['baselineType'] == 'alphabetic'
@@ -30,9 +33,11 @@ class BaselineWidgetParser extends WidgetParser {
   String get widgetName => 'Baseline';
 
   @override
-  Map<String, dynamic> export(Widget? widget, BuildContext buildContext, int id) {
+  Map<String, dynamic> export(
+      Widget? widget, BuildContext buildContext, int id) {
     var realWidget = widget as Baseline;
-    return <String, dynamic>{ 'id':id,
+    return <String, dynamic>{
+      'id': id.toString(),
       'type': widgetName,
       'baseline': realWidget.baseline,
       'baselineType': realWidget.baselineType == TextBaseline.alphabetic
