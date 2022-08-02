@@ -1,7 +1,6 @@
-
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
-import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 /// BoxDecoration currently only supports network image
@@ -11,9 +10,12 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? boxDecoration) {
   }
 
   var typeAssertions = TypeAssertions('BoxDecoration');
-  typeAssertions.run(map: boxDecoration, attribute: 'border', expectedType: TYPE_MAP);
-  typeAssertions.run(map: boxDecoration, attribute: 'color', expectedType: TYPE_STRING);
-  typeAssertions.run(map: boxDecoration, attribute: 'borderRadius', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: boxDecoration, attribute: 'border', expectedType: TYPE_MAP);
+  typeAssertions.run(
+      map: boxDecoration, attribute: 'color', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: boxDecoration, attribute: 'borderRadius', expectedType: TYPE_STRING);
 
   var border = boxDecoration['border'];
 
@@ -45,6 +47,12 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
   BorderSide? top = decoration.border?.top;
   BorderSide? left = border?.left;
   BorderSide? right = border?.right;
+  BorderRadius? borderradius;
+  if (decoration.borderRadius == null) {
+    borderradius = null;
+  } else {
+    borderradius = decoration.borderRadius as BorderRadius;
+  }
   // TODO: Implement Image when needed
   // NetworkImage image = decoration.image as NetworkImage;
   // var right = decoration.border?.;
@@ -61,7 +69,7 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? decoration) {
             'right': right != null ? exportBorderSide(right) : null,
           }
         : null,
-    'borderRadius': exportBorderRadius(decoration.borderRadius as BorderRadius)
+    'borderRadius': exportBorderRadius(borderradius)
   };
 
   return map;

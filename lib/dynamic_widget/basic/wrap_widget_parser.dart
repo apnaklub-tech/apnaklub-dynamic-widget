@@ -1,5 +1,5 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
-import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/utils.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 

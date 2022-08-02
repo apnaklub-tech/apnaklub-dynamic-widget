@@ -1,7 +1,7 @@
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/boxdecoration_parser.dart';
-import 'package:dynamic_widget/dynamic_widget/utils.dart';
+import 'package:dynamic_widget/utils/utils.dart';
 import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
@@ -21,7 +21,7 @@ class ContainerWidgetParser extends WidgetParser {
     typeAssertionDriver(
         map: map, attribute: 'padding', expectedType: TYPE_STRING);
     typeAssertionDriver(
-        map: map, attribute: 'child', expectedType: TYPE_STRINGED_MAP);
+        map: map, attribute: 'child', expectedType: TYPE_STRINGED_MAP, allowNull: true);
     typeAssertionDriver(
         map: map, attribute: 'decoration', expectedType: TYPE_MAP);
     typeAssertionDriver(
@@ -101,7 +101,7 @@ class ContainerWidgetParser extends WidgetParser {
           : null,
       'constraints':
           constraints != null ? exportConstraints(constraints) : null,
-      'child': DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      'child': realWidget.child != null ? DynamicWidgetBuilder.export(realWidget.child, buildContext): null
     };
   }
 

@@ -4,7 +4,7 @@ import 'package:dynamic_widget/utils/event_listener.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../widget_parser.dart';
-import '../utils.dart';
+import '../../utils/utils.dart';
 
 class ReadMoreTextParser extends WidgetParser {
   @override

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../dynamic_widget.dart';
 import '../../widget_parser.dart';
-import '../utils.dart';
+import '../../utils/utils.dart';
 
 class ListTileWidgetParser extends WidgetParser {
   @override

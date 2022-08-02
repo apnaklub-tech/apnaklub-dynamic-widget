@@ -1,3 +1,4 @@
+import 'dart:ffi';
 
 import 'package:dynamic_widget/assertions/assert_constants.dart';
 import 'package:dynamic_widget/assertions/type_assertions.dart';
@@ -278,12 +279,18 @@ TextStyle? parseTextStyle(Map<String, dynamic>? map) {
 
   var typeAssertions = TypeAssertions('TextStyle');
   typeAssertions.run(map: map, attribute: 'color', expectedType: TYPE_STRING);
-  typeAssertions.run(map: map, attribute: 'debugLabel', expectedType: TYPE_STRING);
-  typeAssertions.run(map: map, attribute: 'decoration', expectedType: TYPE_STRING);
-  typeAssertions.run(map: map, attribute: 'fontFamily', expectedType: TYPE_STRING);
-  typeAssertions.run(map: map, attribute: 'fontSize', expectedType: TYPE_DOUBLE);
-  typeAssertions.run(map: map, attribute: 'fontWeight', expectedType: TYPE_STRING);
-  typeAssertions.run(map: map, attribute: 'fontStyle', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: map, attribute: 'debugLabel', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: map, attribute: 'decoration', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: map, attribute: 'fontFamily', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: map, attribute: 'fontSize', expectedType: TYPE_DOUBLE);
+  typeAssertions.run(
+      map: map, attribute: 'fontWeight', expectedType: TYPE_STRING);
+  typeAssertions.run(
+      map: map, attribute: 'fontStyle', expectedType: TYPE_STRING);
 
   //TODO: more properties need to be implemented, such as decorationColor, decorationStyle, wordSpacing and so on.
   String? color = map['color'];
@@ -361,7 +368,6 @@ Alignment? parseAlignment(String? alignmentString) {
 const double infinity = 9999999999;
 
 BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
-
   double minWidth = 0.0;
   double maxWidth = double.infinity;
   double minHeight = 0.0;
@@ -369,11 +375,14 @@ BoxConstraints parseBoxConstraints(Map<String, dynamic>? map) {
 
   var typeAssertions = TypeAssertions('BoxConstraints');
   if (map != null) {
-
-    typeAssertions.run(map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
-    typeAssertions.run(map: map, attribute: 'maxWidth', expectedType: TYPE_DOUBLE);
-    typeAssertions.run(map: map, attribute: 'minHeight', expectedType: TYPE_DOUBLE);
-    typeAssertions.run(map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(
+        map: map, attribute: 'minWidth', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(
+        map: map, attribute: 'maxWidth', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(
+        map: map, attribute: 'minHeight', expectedType: TYPE_DOUBLE);
+    typeAssertions.run(
+        map: map, attribute: 'maxHeight', expectedType: TYPE_DOUBLE);
 
     if (map.containsKey('minWidth') && map['minWidth'] != null) {
       double minWidthValue = double.parse(map['minWidth'].toString());
@@ -425,7 +434,7 @@ EdgeInsetsGeometry? parseEdgeInsetsGeometry(String? edgeInsetsGeometryString) {
   var values = edgeInsetsGeometryString.split(',');
 
   var typeAssertions = TypeAssertions('EdgeInsetsGeometry');
-  for(var value in values) {
+  for (var value in values) {
     typeAssertions.assertDouble(value);
   }
   return EdgeInsets.only(
@@ -1240,7 +1249,10 @@ BorderSide parseBorderSide(Map<String, dynamic>? map) {
 }
 
 /// BorderRadius
-String exportBorderRadius(BorderRadius radius) {
+String exportBorderRadius(BorderRadius? radius) {
+  if (radius == null) {
+    return '0,0,0,0';
+  }
   return '${exportRadius(radius.topLeft)},${exportRadius(radius.topRight)},${exportRadius(radius.bottomRight)},${exportRadius(radius.bottomLeft)}';
 }
 
@@ -1280,3 +1292,27 @@ Radius parseRadius(String radius) {
 String toWarning(String s) {
   return '\x1B[31m$s\x1B[0m';
 }
+
+// double parseSize(dynamic size) {
+//   if(size.runtimeType == Double){
+//     if (condition) {
+      
+//     } else {
+      
+//     }
+
+//   return double.infinity;
+//   }
+// }
+
+// double exportSize(dynamic size) {
+//   if(size.runtimeType == Double){
+//     if (condition) {
+      
+//     } else {
+      
+//     }
+
+//   return double.infinity;
+//   }
+// }
